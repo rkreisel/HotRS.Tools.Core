@@ -1,6 +1,6 @@
 {
   "profiles": {
-    "RK.HotRS.ToolsCore": {
+    "HotRS.Tools.Core": {
       "commandName": "Project"
     }
   }

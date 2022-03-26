@@ -6,7 +6,7 @@ using System.Text;
 using System.Xml;
 using System.Xml.Serialization;
 
-namespace RK.HotRS.ToolsCore.Utilities
+namespace HotRS.Tools.Core.Utilities
 {
 	[ExcludeFromCodeCoverage]
 	public static class XmlConverter
@@ -19,18 +19,14 @@ namespace RK.HotRS.ToolsCore.Utilities
 			}
 			try
 			{
-				using (StringWriter stringWriter = new System.IO.StringWriter())
-				{
-					var serializer = new XmlSerializer(typeof(T));
-					serializer.Serialize(stringWriter, dataObject);
-					return stringWriter.ToString();
-				}
-			}
-#pragma warning disable CA1031 // Do not catch general exception types
+                using StringWriter stringWriter = new System.IO.StringWriter();
+                var serializer = new XmlSerializer(typeof(T));
+                serializer.Serialize(stringWriter, dataObject);
+                return stringWriter.ToString();
+            }
             catch (Exception ex)
-#pragma warning restore CA1031 // Do not catch general exception types
             {
-				return ex.ToString();
+                return ex.ToString();
 			}
 		}
 
@@ -43,18 +39,14 @@ namespace RK.HotRS.ToolsCore.Utilities
 			}
 			try
 			{
-				//using (var stringReader = new StringReader(xml))
-				using (var stringReader = XmlReader.Create(xml))
-				{
-					var serializer = new XmlSerializer(typeof(T));
-					return (T)serializer.Deserialize(stringReader);
-				}
-			}
-#pragma warning disable CA1031 // Do not catch general exception types
+                //using (var stringReader = new StringReader(xml))
+                using var stringReader = XmlReader.Create(xml);
+                var serializer = new XmlSerializer(typeof(T));
+                return (T)serializer.Deserialize(stringReader);
+            }
             catch
-#pragma warning restore CA1031 // Do not catch general exception types
-            {				
-				return new T();
+            {
+                return new T();
 			}
 		}
 	}

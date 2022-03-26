@@ -4,7 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace RK.HotRS.ToolsCore.Utilities.JSON
+namespace HotRS.Tools.Core.Utilities.JSON
 {
     public class ObfuscatingConverter : JsonConverter<string>
     {

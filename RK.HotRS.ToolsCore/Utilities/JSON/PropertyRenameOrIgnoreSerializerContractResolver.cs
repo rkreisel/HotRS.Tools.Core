@@ -6,7 +6,7 @@ using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 using System.Reflection;
 
-namespace RK.HotRS.ToolsCore.Utilities.JSON
+namespace HotRS.Tools.Core.Utilities.JSON
 {
 	/// <summary>
 	/// Dynamically rename or ignore properties when serializing to JSON

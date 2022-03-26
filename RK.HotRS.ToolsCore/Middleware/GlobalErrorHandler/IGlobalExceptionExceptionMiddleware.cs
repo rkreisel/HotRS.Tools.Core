@@ -1,18 +1,14 @@
-﻿using System.Threading.Tasks;
-using Microsoft.AspNetCore.Http;
+﻿namespace HotRS.Tools.Core.Middleware.GlobalErrorHandler;
 
-namespace RK.HotRS.ToolsCore.Middleware.GlobalErrorHandler
+/// <summary>
+/// 
+/// </summary>
+public interface IGlobalExceptionExceptionMiddleware
 {
 	/// <summary>
 	/// 
 	/// </summary>
-	public interface IGlobalExceptionExceptionMiddleware
-	{
-		/// <summary>
-		/// 
-		/// </summary>
-		/// <param name="context"></param>
-		/// <returns></returns>
-		Task Invoke(HttpContext context);
-	}
+	/// <param name="context"></param>
+	/// <returns></returns>
+	Task Invoke(HttpContext context);
 }

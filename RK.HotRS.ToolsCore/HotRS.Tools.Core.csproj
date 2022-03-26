@@ -1,0 +1,64 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+	<PropertyGroup>
+		<TargetFramework>net6.0</TargetFramework>		
+		<GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+		<Version>1.0.0</Version>
+		<Authors>Randy Kreisel</Authors>
+		<Company>House on the Rock Software</Company>
+		<Description>Various tools,extensions, etc. for .Net Core Upgraded to core 6</Description>
+		<Copyright>Randy Kreisel 2022</Copyright>
+		<PackageTags>Core, extension, file upload, azure, helper, global exception handler json</PackageTags>
+		<PackageReleaseNotes>Added extension methods to test private methods</PackageReleaseNotes>
+		<PackageLicenseUrl></PackageLicenseUrl>
+	</PropertyGroup>
+
+	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+		<TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+		<WarningsAsErrors />
+		<DocumentationFile>HotRS.HotRS.Tools.Core.xml</DocumentationFile>
+		<NoWarn>1701;1702;CS1591;CA2254</NoWarn>
+		<OutputPath>bin\Debug\</OutputPath>
+	</PropertyGroup>
+	
+	<PropertyGroup>
+		<PackageLicenseExpression>MIT</PackageLicenseExpression>
+		<NeutralLanguage>EN</NeutralLanguage>
+	</PropertyGroup>
+	
+	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
+	  <NoWarn>1701;1702;CS1591;CA2254</NoWarn>
+	</PropertyGroup>
+	
+	<ItemGroup>
+	  <Compile Remove="Extensions\LinqExtensions.cs" />
+	</ItemGroup>
+	
+	<ItemGroup>
+	  <None Include="..\.editorconfig" Link=".editorconfig" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<PackageReference Include="coverlet.collector" Version="3.1.2" />
+		<PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="6.0.0" />
+		<PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
+		<PackageReference Include="Swashbuckle.AspNetCore.Swagger" Version="6.3.0" />
+		<PackageReference Include="Swashbuckle.AspNetCore.SwaggerGen" Version="6.3.0" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <Compile Update="Properties\Resources.Designer.cs">
+	    <DesignTime>True</DesignTime>
+	    <AutoGen>True</AutoGen>
+	    <DependentUpon>Resources.resx</DependentUpon>
+	  </Compile>
+	</ItemGroup>
+
+	<ItemGroup>
+	  <EmbeddedResource Update="Properties\Resources.resx">
+	    <Generator>ResXFileCodeGenerator</Generator>
+	    <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+	  </EmbeddedResource>
+	</ItemGroup>
+
+</Project>

@@ -1,65 +1,29 @@
-﻿using System;
-using System.IO;
-using System.Runtime.Serialization.Formatters.Binary;
+﻿namespace HotRS.Tools.Core.Extensions;
 
-namespace RK.HotRS.ToolsCore.Extensions
+/// <summary>
+/// Extensions to Object
+/// </summary>
+public static class ObjectExtensions
 {
-	/// <summary>
-	/// Extensions to Object
-	/// </summary>
-	public static class ObjectExtensions
+    [Obsolete("Use the new built-in ArgumentNullException.ThrowIfNull(o, paramName); instead")]
+    public static void CheckForNull(this object o, string paramName)
     {
-		/// <summary>
-		/// Converts an object to a byte array.
-		/// </summary>
-		/// <param name="source"></param>
-		/// <returns></returns>
-		public static byte[] ToByteArray(this object source)
-		{
-			if (source == null)
-			{
-				return null;
-			}
-			var bf = new BinaryFormatter();
-			using (var ms = new MemoryStream())
-			{
-				bf.Serialize(ms, source);
-				return ms.ToArray();
-			}
-		}
+        ArgumentNullException.ThrowIfNull(o, paramName);
+    }
 
-		/// <summary>
-		/// Convert a byte array back to an object of type T
-		/// </summary>
-		/// <typeparam name="T"></typeparam>
-		/// <param name="data"></param>
-		/// <returns></returns>
-		public static T FromByteArray<T>(this byte[] data)
-		{
-			if (data == null)
-				return default;
-			var bf = new BinaryFormatter();
-			using (var ms = new MemoryStream(data))
-			{
-				var obj = bf.Deserialize(ms);
-				return (T)obj;
-			}
-		}
-
-		public static void CheckForNull(this object o, string paramName)
-		{
-			if (o == null)
-			{
-				throw new ArgumentNullException(paramName);
-			}
-		}
-		public static void CheckForNull<T>(this object o, string paramName, string message = "") where T : Exception
-		{
-			if (o == null)
-			{
-				var formattedMessage = string.IsNullOrWhiteSpace(message) ? paramName : $"{paramName} - {message}";
-				throw (T)Activator.CreateInstance(typeof(T), new object[] { $"{formattedMessage}" });
-			}
-		}
-	}
+    /// <summary>
+    /// Checks the parameter for null and allows the developer to throw a custom exception of T with a custom message
+    /// </summary>
+    /// <typeparam name="T">The type of exception to throw</typeparam>
+    /// <param name="o">The parameter to test</param>
+    /// <param name="paramName">The name of the parameter</param>
+    /// <param name="message">The message to post</param>
+    public static void CheckForNull<T>(this object o, string paramName, string message = "") where T : Exception
+    {
+        if (o == null)
+        {
+            var formattedMessage = string.IsNullOrWhiteSpace(message) ? paramName : $"{paramName} - {message}";
+            throw (T)Activator.CreateInstance(typeof(T), new object[] { $"{formattedMessage}" });
+        }
+    }
 }

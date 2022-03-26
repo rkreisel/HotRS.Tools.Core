@@ -3,7 +3,7 @@ using Newtonsoft.Json.Serialization;
 using System.Collections.Generic;
 using System.Reflection;
 
-namespace RK.HotRS.ToolsCore.Utilities.JSON
+namespace HotRS.Tools.Core.Utilities.JSON
 {
     /// <summary>
     /// Provides a property resolver to hide the vale of the target property.

@@ -203,169 +203,6 @@
             any [Description] attribute (or the base enum value if there is no [Desciption] attribute).</param>
             <returns>A generic List of strings.</returns>
         </member>
-        <member name="T:HotRS.Tools.Core.Extensions.EPPlusExtensions">
-            <summary>
-            Provides extensions to the EPPlus package.
-            </summary>
-        </member>
-        <member name="M:HotRS.Tools.Core.Extensions.EPPlusExtensions.GetValidByteArray(OfficeOpenXml.ExcelPackage,System.String)">
-            <summary>
-            Ensures the byte array is a valid Excel file.
-            This extension address a bug in EPPlus wherein a file, written from an EPPlus package object
-            throws errors when opened in Excel. (but the file has no discernable errors)
-            </summary>
-            <param name="package">An EPPlus package object</param>
-            <param name="workingPath">A directory path where the code will temporarily write the file.</param>
-            <returns>A byte array version of the Excel content.</returns>
-        </member>
-        <member name="M:HotRS.Tools.Core.Extensions.EPPlusExtensions.LastPopulatedColumnInRow(OfficeOpenXml.ExcelWorksheet,System.Int32)">
-            <summary>
-            Returns the column number of the last populated column in a row.
-            Note: For performance reasons, the row is searched from left to 
-            right and returns when it encounters the first empty cell. 
-            </summary>
-            <param name="sheet"></param>
-            <param name="searchRow"></param>
-            <returns></returns>
-        </member>
-        <member name="M:HotRS.Tools.Core.Extensions.EPPlusExtensions.FirstEmptyRow(OfficeOpenXml.ExcelWorksheet,System.Int32)">
-            <summary>
-            Returns the row number of the first row where all columns are empty.
-            Note: For performance reasons the worksheet is searched top to bottom
-            beginning at the row specified in <paramref name="beginWithRow"/> and
-            returns when the searched row has no columns that are populated.
-            Note: The columns searched are limited to the "used" columns as defined
-            by the Worksheet.Dimensions.Column value;
-            </summary>
-            <param name="sheet"></param>
-            <param name="beginWithRow"></param>
-            <returns></returns>
-        </member>
-        <member name="M:HotRS.Tools.Core.Extensions.EPPlusExtensions.FirstRowWithEmptyColumn(OfficeOpenXml.ExcelWorksheet,System.Int32)">
-            <summary>		
-            Returns the row number of the first row where at least one column is empty.
-            Note: For performance reasons the worksheet is searched top to bottom
-            beginning at the row specified in <paramref name="beginWithRow"/> and
-            returns when the searched row has any empty column.
-            Note: The columns searched are limited to the "used" columns as defined
-            by the Worksheet.Dimensions.Column value;
-            </summary>
-            <param name="sheet"></param>
-            <param name="beginWithRow"></param>
-            <returns></returns>
-        </member>
-        <member name="M:HotRS.Tools.Core.Extensions.EPPlusExtensions.RowHasData(OfficeOpenXml.ExcelWorksheet,System.Int32,System.Int32,System.Boolean)">
-            <summary>
-            
-            </summary>
-            <param name="sheet">The Worksheet to be searched</param>
-            <param name="row">The Row in the Worksheet to be searched.</param>
-            <param name="maxCols">The maximum number of columns to search. Defaults to 100, can go to 16384.
-            Consider using "sheet.Dimension.Columns" to reduce the nummber of columns searched.</param>
-            <param name="blankSameAsNull">Consider an empty string as a null (ie the column is empty). Defaults = true.</param>
-            <returns></returns>
-        </member>
-        <member name="M:HotRS.Tools.Core.Extensions.EPPlusExtensions.FirstDataRow(OfficeOpenXml.ExcelWorksheet,System.Int32,System.Int32,System.Int32,System.Boolean)">
-            <summary>
-            Returns the index of the first row with data
-            </summary>
-            <param name="sheet">The Worksheet to be searched</param>
-            <param name="startRow">Start evaluating rows with this one.</param>
-            <param name="stopRow"> Stop evaluating rows after this row.Defaults to 5, can go to 1,048,576.</param>
-            <param name="maxCols"> The maximum number of columns to search. Defaults to 100, can go to 16384.
-            Consider using "sheet.Dimension.Columns" to reduce the nummber of columns searched.</param>
-            <param name="blankSameAsNull">Consider an empty string as a null (ie the column is empty). Defaults = true.</param>
-            <returns>The index of the first row that has data.</returns>
-        </member>
-        <member name="M:HotRS.Tools.Core.Extensions.ExcelExtensions.ToDataSet(OfficeOpenXml.ExcelPackage)">
-            <summary>
-            
-            </summary>
-            <param name="package"></param>
-            <returns></returns>
-        </member>
-        <member name="M:HotRS.Tools.Core.Extensions.ExcelExtensions.ToDataTable(OfficeOpenXml.ExcelPackage)">
-            <summary>
-            
-            </summary>
-            <param name="package"></param>
-            <returns></returns>
-        </member>
-        <member name="M:HotRS.Tools.Core.Extensions.ExcelExtensions.ToDataTableEx(OfficeOpenXml.ExcelPackage,System.String,System.String,System.Boolean,System.Boolean)">
-            <summary>
-            
-            </summary>
-            <param name="package">An EP Plus "package".</param>
-            <param name="sheetName">By default, this method assumes the target table data is in the first worksheet in the workbook. Specify any other sheet by name here, to process it instead.</param>
-            <param name="rangeName">The name of an existing range in the workbook/worksheet</param>
-            <param name="includeBlankRows">Blank rows are excluded by default. Change this to true if you want them.</param>
-            <param name="transformHeaders">Convert headers to lowercase and removed spaces and convert tick marks (') to ('')</param>
-            <returns></returns>
-        </member>
-        <member name="M:HotRS.Tools.Core.Extensions.ExcelExtensions.ToList``1(OfficeOpenXml.ExcelWorksheet,System.Collections.Generic.Dictionary{System.String,System.String})">
-            <summary>
-            
-            </summary>
-            <param name="worksheet"></param>
-            <param name="map"></param>
-            <typeparam name="T"></typeparam>
-            <returns></returns>
-            <exception cref="T:System.ArgumentException"></exception>
-        </member>
-        <member name="M:HotRS.Tools.Core.Extensions.ExcelExtensions.ListToExcel``1(OfficeOpenXml.ExcelWorksheet,System.Collections.Generic.IList{``0},System.Boolean)">
-            <summary>
-            
-            </summary>
-            <param name="workSheet"></param>
-            <param name="contentList"></param>
-            <param name="addHeadingAsPerList"></param>
-            <typeparam name="T"></typeparam>
-            <returns></returns>
-        </member>
-        <member name="M:HotRS.Tools.Core.Extensions.ExcelExtensions.ToList``1(OfficeOpenXml.ExcelWorksheet,System.Collections.Specialized.OrderedDictionary)">
-            <summary>
-            
-            </summary>
-            <param name="worksheet"></param>
-            <param name="map"></param>
-            <typeparam name="T"></typeparam>
-            <returns></returns>
-            <exception cref="T:System.ArgumentException"></exception>
-            <exception cref="T:System.ComponentModel.DataAnnotations.ValidationException"></exception>
-        </member>
-        <member name="M:HotRS.Tools.Core.Extensions.ExcelExtensions.HasExpectedColumns(OfficeOpenXml.ExcelWorksheet,System.Collections.Generic.Dictionary{System.String,System.String})">
-            <summary>
-            
-            </summary>
-            <param name="worksheet"></param>
-            <param name="map"></param>
-            <returns></returns>
-            <exception cref="T:System.ComponentModel.DataAnnotations.ValidationException"></exception>
-        </member>
-        <member name="M:HotRS.Tools.Core.Extensions.ExcelExtensions.SetNamedRangeValue(OfficeOpenXml.ExcelWorkbook,System.String,System.String,System.Boolean)">
-            <summary>
-            Sets the value of a single cell named range
-            </summary>
-            <param name="workbook">An ExcelWorkbook object</param>
-            <param name="targetName">The name of the cell (single cell named ranges only) to update.</param>
-            <param name="newValue">The new value</param>
-            <param name="throwExceptionIfMissing">Default is false.</param>
-            <returns></returns>
-        </member>
-        <member name="M:HotRS.Tools.Core.Extensions.ExcelExtensions.GetNamedRange(OfficeOpenXml.ExcelWorkbook,System.String)">
-            <summary>
-            Return an ExcelNamedRange object if it exists or null if not.
-            This extension method avoid the KeyNotFoundException if the requested named range is missing.
-            </summary>
-            <param name="workbook">An excelWorkbook object</param>
-            <param name="rangeName">The name of the range to return.</param>
-            <returns></returns>
-        </member>
-        <member name="T:HotRS.Tools.Core.Extensions.ExcelMap">
-            <summary>
-            
-            </summary>
-        </member>
         <member name="T:HotRS.Tools.Core.Extensions.ExceptionExtensions">
             <summary>
             Extension Methods for Exceptions
@@ -410,20 +247,14 @@
             Extensions to Object
             </summary>
         </member>
-        <member name="M:HotRS.Tools.Core.Extensions.ObjectExtensions.ToByteArray(System.Object)">
+        <member name="M:HotRS.Tools.Core.Extensions.ObjectExtensions.CheckForNull``1(System.Object,System.String,System.String)">
             <summary>
-            Converts an object to a byte array.
+            Checks the parameter for null and allows the developer to throw a custom exception of T with a custom message
             </summary>
-            <param name="source"></param>
-            <returns></returns>
-        </member>
-        <member name="M:HotRS.Tools.Core.Extensions.ObjectExtensions.FromByteArray``1(System.Byte[])">
-            <summary>
-            Convert a byte array back to an object of type T
-            </summary>
-            <typeparam name="T"></typeparam>
-            <param name="data"></param>
-            <returns></returns>
+            <typeparam name="T">The type of exception to throw</typeparam>
+            <param name="o">The parameter to test</param>
+            <param name="paramName">The name of the parameter</param>
+            <param name="message">The message to post</param>
         </member>
         <member name="T:HotRS.Tools.Core.Extensions.StringExtensions">
             <summary>
@@ -476,38 +307,6 @@
             <param name="prefix">The string to prepend to the strings extracted from the list. (This is string will be used in the string parameter of s String.Join() command.)</param>
             <returns>A string with each value of the list formatted and appended to the original string.</returns>
         </member>
-        <member name="T:HotRS.Tools.Core.Extensions.PrivateMethodTestHelper">
-            <summary>
-            A class to implement a helper for unit testing private methods
-            </summary>
-        </member>
-        <member name="M:HotRS.Tools.Core.Extensions.PrivateMethodTestHelper.GetPrivateMethod``1(``0,System.String)">
-            <summary>
-            Allows unit testing of a private method.
-            </summary>
-            <typeparam name="T">A Type</typeparam>
-            <param name="source">An instance of a class</param>
-            <param name="methodName">The method name to find.</param>
-            Usage:
-            var class2Test = // a instance of the class
-            var privateMethod = GetPrivateMethod(class2Test, "method2test");
-            var result = privateMethod.Invoke(class2Test, new object[] { /* array of objects matching the method signature of the method to test – or null if none*/ });
-            <returns>A MethodInfo object that can be used to execute a private method.</returns>
-        </member>
-        <member name="M:HotRS.Tools.Core.Extensions.PrivateMethodTestHelper.GetPrivateMethodAsync``1(``0,System.String)">
-            <summary>
-            Allows unit testing of a private async method.
-            </summary>
-            <typeparam name="T">A Type</typeparam>
-            <param name="source">An instance of a class</param>
-            <param name="methodName">The method name to find.</param>
-            Usage:
-            var class2Test = // a instance of the class
-            var privateMethod = GetPrivateMethod(class2Test, "method2test");
-            var result = privateMethod.Invoke(class2Test,  });
-            var result = (dynamic) Task.Run(() => privateMethod.Invoke(this.SystemUnderTest, new object[] { /* array of objects matching the method signature of the method to test – or null if none*/)).Result;
-            <returns>A MethodInfo object that can be used to execute an async private method.</returns>
-        </member>
         <member name="T:HotRS.Tools.Core.Extensions.ValidationErrorExtensions">
             <summary>
             Extensions to the list of ValidationResults returned from Validate()
@@ -522,208 +321,6 @@
             <param name="useLineFeed">rue or False</param>
             <param name="includeMemberNames">Adds teh values of MemberNames from the error object.</param>
             <returns>A formatted string of error messages.</returns>
-        </member>
-        <member name="T:HotRS.Tools.Core.Helpers.Azure.AzureBlobStorageHelper">
-            <summary>
-            A set of helper methods for managing Azure blob storage
-            </summary>
-        </member>
-        <member name="M:HotRS.Tools.Core.Helpers.Azure.AzureBlobStorageHelper.GetDownloadableFileFromStorage(System.String,System.String,System.String,System.String,System.String)">
-            <summary>
-            This gets a file with all the needed information to create a FileResult stream in the controller.  
-            That is: the file memory stream, the file mime type, the file name.
-            </summary>
-            <param name="accountName">Name of the storage account.</param>
-            <param name="accountKey">The key on the storage account.</param>
-            <param name="containerName">The container the file exist in.</param>
-            <param name="fileName">The file name.</param>
-            <param name="filePath">The path to the file.</param>
-            <returns>The file memory stream, the file mime type, the file name packaged in a FileDownload object.</returns>
-        </member>
-        <member name="M:HotRS.Tools.Core.Helpers.Azure.AzureBlobStorageHelper.UploadFileToStorage(System.String,System.String,System.String,System.IO.Stream,System.String,System.String,System.Boolean)">
-            <summary>
-            
-            </summary>
-            <param name="accountName">Name of the storage account.</param>
-            <param name="accountKey">The key on the storage account.</param>
-            <param name="containerName">The container the file exist in.</param>
-            <param name="fileStream">A Stream containing the file to store.</param>
-            <param name="fileName">A name for the file.</param>
-            <param name="filePath">The optional path in which to store the file.</param>
-            <param name="returnEmptyStringOnFailure">True or False</param>
-            <returns>The unique key for the stored blob.</returns>
-        </member>
-        <member name="M:HotRS.Tools.Core.Helpers.Azure.AzureBlobStorageHelper.AddToBlobStorage(System.String,System.String,System.String,System.String,System.String,System.String)">
-            <summary>
-            This method accepts a string and places it into Blob storage
-            </summary>
-            <param name="accountName">The name of the storage account used.</param>
-            <param name="accountKey">The key on the storage account.</param>
-            <param name="containerName">The container to use.</param>
-            <param name="content">The value in insert.</param>
-            <param name="fileName">The name of the "file" to add.</param>
-            <param name="filePath">The optional additional "path" for the "file".</param>
-            <returns>The unique key of he blob that was stored.</returns>
-        </member>
-        <member name="M:HotRS.Tools.Core.Helpers.Azure.AzureBlobStorageHelper.GetFromBlobStorage(System.String,System.String,System.String,System.String,System.String)">
-            <summary>
-            This method pulls a string from blob storage
-            </summary>
-            <param name="accountName">The name of the storage account used.</param>
-            <param name="accountKey">The key on the storage account.</param>
-            <param name="containerName">The container to use.</param>
-            <param name="blobKey">The key identifying the blob to pull.</param>
-            <param name="filePath">The hierarchical location where the object should be found. (Optional: defaults to an empy string.)</param>
-            <returns>A string</returns>
-        </member>
-        <member name="M:HotRS.Tools.Core.Helpers.Azure.AzureBlobStorageHelper.DeleteFromBlobStorage(System.String,System.String,System.String,System.String,System.String)">
-            <summary>
-            Deletes a blob from storage
-            </summary>
-            <param name="accountName">The name of the storage account used.</param>
-            <param name="accountKey">The key on the storage account.</param>
-            <param name="containerName">The container to use.</param>
-            <param name="blobKey">The key identifying the blob to delete.</param>
-            <param name="filePath">The hierarchical location where the object should be found. (Optional: defaults to an empy string.</param>
-            <returns></returns>
-        </member>
-        <member name="M:HotRS.Tools.Core.Helpers.Azure.AzureBlobStorageHelper.DeleteFileFromStorage(System.String,System.String,System.String,System.String,System.String)">
-            <summary>
-            Delete a file from storage
-            </summary>
-            <param name="accountName">The name of the storage account used.</param>
-            <param name="accountKey">The key on the storage account.</param>
-            <param name="containerName">The container to use.</param>
-            <param name="fileName"></param>
-            <param name="filePath"></param>
-            <returns>The key of the deleted blob.</returns>
-        </member>
-        <member name="M:HotRS.Tools.Core.Helpers.Azure.AzureBlobStorageHelper.FileExistsInStorage(System.String,System.String,System.String,System.String,System.String)">
-            <summary>
-            Determines if a file exists in blob storage
-            </summary>
-            <param name="accountName">The name of the storage account used.</param>
-            <param name="accountKey">The key on the storage account.</param>
-            <param name="containerName">The container to use.</param>
-            <param name="fileName"></param>
-            <param name="filePath"></param>
-            <returns>True or False</returns>
-        </member>
-        <member name="T:HotRS.Tools.Core.Helpers.Azure.FileDownload">
-            <summary>
-            POCO object describing a file to download
-            </summary>
-        </member>
-        <member name="P:HotRS.Tools.Core.Helpers.Azure.FileDownload.MemoryStream">
-            <summary>
-            The file content as a MemoryStream
-            </summary>
-        </member>
-        <member name="P:HotRS.Tools.Core.Helpers.Azure.FileDownload.MimeType">
-            <summary>
-            The THML mime type
-            </summary>
-        </member>
-        <member name="P:HotRS.Tools.Core.Helpers.Azure.FileDownload.FileName">
-            <summary>
-            The name of the file
-            </summary>
-        </member>
-        <member name="P:HotRS.Tools.Core.Helpers.Azure.FileDownload.FileExtension">
-            <summary>
-            The exension of the file
-            </summary>
-        </member>
-        <member name="P:HotRS.Tools.Core.Helpers.Azure.FileDownload.FullFileName">
-            <summary>
-            A calculated method to return the full filename
-            </summary>
-        </member>
-        <member name="T:HotRS.Tools.Core.Helpers.Azure.IAzureBlobStorageHelper">
-            <summary>
-            An interface for the Azure Blob Storage Helper (to enable mocking in unit tests)
-            </summary>
-        </member>
-        <member name="M:HotRS.Tools.Core.Helpers.Azure.IAzureBlobStorageHelper.GetDownloadableFileFromStorage(System.String,System.String,System.String,System.String,System.String)">
-            <summary>
-            Retrieves a file from storage
-            </summary>
-            <param name="accountName">The name of the blob storage account</param>
-            <param name="accountKey">he key for the blob storage account</param>
-            <param name="containerName">The name for the container in which to place the content</param>
-            <param name="fileName">The name of the item which will be retrieved from storage</param>
-            <param name="filePath">An optional "sub folder" in which the content should be found</param>
-            <returns></returns>
-        </member>
-        <member name="M:HotRS.Tools.Core.Helpers.Azure.IAzureBlobStorageHelper.UploadFileToStorage(System.String,System.String,System.String,System.IO.Stream,System.String,System.String,System.Boolean)">
-            <summary>
-            Places a file into storage
-            </summary>
-            <param name="accountName">The name of the blob storage account</param>
-            <param name="accountKey">he key for the blob storage account</param>
-            <param name="containerName">The name for the container in which to place the content</param>
-            <param name="fileStream">The content to be stored</param>
-            <param name="fileName">The name of the item which will be placed into storage</param>
-            <param name="filePath">An optional "sub folder" in which to place he content</param>
-            <param name="returnEmptyStringOnFailure">Optional (default = true). If true an empty string is returned if an exception is encountered. 
-            Otherwise, the exception is rethrown. </param>
-            <returns></returns>
-        </member>
-        <member name="M:HotRS.Tools.Core.Helpers.Azure.IAzureBlobStorageHelper.AddToBlobStorage(System.String,System.String,System.String,System.String,System.String,System.String)">
-            <summary>
-            Adds a generic object to Blob storage
-            </summary>
-            <param name="accountName">The name of the blob storage account</param>
-            <param name="accountKey">he key for the blob storage account</param>
-            <param name="containerName">The name for the container in which to place the content</param>
-            <param name="content">The conent to add</param>
-            <param name="fileName">The name of the item which will be placed into storage</param>
-            <param name="filePath">An optional "sub folder" in which to place he content</param>
-            <returns></returns>
-        </member>
-        <member name="M:HotRS.Tools.Core.Helpers.Azure.IAzureBlobStorageHelper.GetFromBlobStorage(System.String,System.String,System.String,System.String,System.String)">
-            <summary>
-            Retrieves a blob from storage.
-            </summary>
-            <param name="accountName">The name of the blob storage account</param>
-            <param name="accountKey">he key for the blob storage account</param>
-            <param name="containerName">The name for the container in which to place the content</param>
-            <param name="blobKey">The key of the blob to retreive"</param>
-            <param name="filePath">The hierarchical location where the object should be found. (Optional: defaults to an empy string.</param>
-            <returns>An object</returns>
-        </member>
-        <member name="M:HotRS.Tools.Core.Helpers.Azure.IAzureBlobStorageHelper.DeleteFromBlobStorage(System.String,System.String,System.String,System.String,System.String)">
-            <summary>
-            Removes a blob from storage
-            </summary>
-            <param name="accountName">The name of the blob storage account</param>
-            <param name="accountKey">he key for the blob storage account</param>
-            <param name="containerName">The name for the container in which to place the content</param>
-            <param name="blobKey">The key of the object to delete</param>
-            <param name="filePath">The hierarchical location where the object should be found. (Optional: defaults to an empy string.</param>
-            <returns></returns>
-        </member>
-        <member name="M:HotRS.Tools.Core.Helpers.Azure.IAzureBlobStorageHelper.DeleteFileFromStorage(System.String,System.String,System.String,System.String,System.String)">
-            <summary>
-            Delete a file from storage
-            </summary>
-            <param name="accountName">The name of the storage account used.</param>
-            <param name="accountKey">The key on the storage account.</param>
-            <param name="containerName">The container to use.</param>
-            <param name="fileName"></param>
-            <param name="filePath"></param>
-            <returns>The key of the deleted blob.</returns>
-        </member>
-        <member name="M:HotRS.Tools.Core.Helpers.Azure.IAzureBlobStorageHelper.FileExistsInStorage(System.String,System.String,System.String,System.String,System.String)">
-            <summary>
-            Determines if a file exists in blob storage
-            </summary>
-            <param name="accountName">The name of the storage account used.</param>
-            <param name="accountKey">The key on the storage account.</param>
-            <param name="containerName">The container to use.</param>
-            <param name="fileName"></param>
-            <param name="filePath"></param>
-            <returns>True or False</returns>
         </member>
         <member name="T:HotRS.Tools.Core.Helpers.FileUpload.FileUploadHelper">
             <summary>
@@ -1267,35 +864,6 @@
             </summary>
             <param name="path"></param>
         </member>
-        <member name="T:HotRS.Tools.Core.Helpers.Misc.EFCodeFirstHelpers">
-            <summary>
-            EF Core Code First Helper methods
-            </summary>
-        </member>
-        <member name="M:HotRS.Tools.Core.Helpers.Misc.EFCodeFirstHelpers.RunCustomSql(System.Reflection.Assembly,Microsoft.EntityFrameworkCore.DbContext,System.String,System.Boolean)">
-            <summary>
-            Locates a sql file that is embedded in the assembly and executes it.
-            </summary>
-            <param name="containingAssembly">The assembly in which the sql can be found.</param>
-            <param name="context">A DbContext</param>
-            <param name="resourceName">The name of the resource. This will follow he pattern
-            assembyname.folder(s).filename</param>
-            <param name="ignoreErrors">If set to true exceptions will not abort the process. This 
-            is useful in cases where you do not care if the sql fails. For instance dropping a table 
-            when it does not exist in the first place.</param>
-        </member>
-        <member name="M:HotRS.Tools.Core.Helpers.Misc.EFCodeFirstHelpers.RunCustomSql(System.Reflection.Assembly,Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder,System.String,System.Boolean)">
-            <summary>
-            Locates a sql file that is embedded in the assembly and executes it.
-            </summary>
-            <param name="containingAssembly">The assembly in which the sql can be found.</param>
-            <param name="builder">A MigrationContext</param>
-            <param name="resourceName">The name of the resource. This will follow he pattern
-            assembyname.folder(s).filename</param>
-            <param name="ignoreErrors">If set to true exceptions will not abort the process. This 
-            is useful in cases where you do not care if the sql fails. For instance dropping a table 
-            when it does not exist in the first place.</param>
-        </member>
         <member name="T:HotRS.Tools.Core.Helpers.Misc.ReflectionHelpers">
             <summary>
             Miscellaneous Reflection helpers and extensions
@@ -1314,18 +882,42 @@
              <param name="columnNumber"></param>
              <returns></returns>
         </member>
-        <member name="M:HotRS.Tools.Core.Helpers.Office.ExcelHelpers.SetRange(OfficeOpenXml.ExcelNamedRange,System.Int64)">
-             <summary>
-            
-             </summary>
-             <param name="range"></param>
-             <param name="length"></param>
-             <returns></returns>
-        </member>
         <member name="T:HotRS.Tools.Core.Helpers.Office.OfficeProperty">
             <summary>
             Class to hold Office Property values extracted from the xml
             </summary>
+        </member>
+        <member name="T:HotRS.Tools.Core.Helpers.Testing.PrivateMethodTestHelper">
+            <summary>
+            A class to implement a helper for unit testing private methods
+            </summary>
+        </member>
+        <member name="M:HotRS.Tools.Core.Helpers.Testing.PrivateMethodTestHelper.GetPrivateMethod``1(``0,System.String)">
+            <summary>
+            Allows unit testing of a private method.
+            </summary>
+            <typeparam name="T">A Type</typeparam>
+            <param name="source">An instance of a class</param>
+            <param name="methodName">The method name to find.</param>
+            Usage:
+            var class2Test = // a instance of the class
+            var privateMethod = GetPrivateMethod(class2Test, "method2test");
+            var result = privateMethod.Invoke(class2Test, new object[] { /* array of objects matching the method signature of the method to test – or null if none*/ });
+            <returns>A MethodInfo object that can be used to execute a private method.</returns>
+        </member>
+        <member name="M:HotRS.Tools.Core.Helpers.Testing.PrivateMethodTestHelper.GetPrivateMethodAsync``1(``0,System.String)">
+            <summary>
+            Allows unit testing of a private async method.
+            </summary>
+            <typeparam name="T">A Type</typeparam>
+            <param name="source">An instance of a class</param>
+            <param name="methodName">The method name to find.</param>
+            Usage:
+            var class2Test = // a instance of the class
+            var privateMethod = GetPrivateMethod(class2Test, "method2test");
+            var result = privateMethod.Invoke(class2Test,  });
+            var result = (dynamic) Task.Run(() => privateMethod.Invoke(this.SystemUnderTest, new object[] { /* array of objects matching the method signature of the method to test – or null if none*/)).Result;
+            <returns>A MethodInfo object that can be used to execute an async private method.</returns>
         </member>
         <member name="T:HotRS.Tools.Core.Middleware.GlobalErrorHandler.GlobalExceptionMiddleware">
             <summary>

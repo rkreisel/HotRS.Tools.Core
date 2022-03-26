@@ -1,51 +1,97 @@
-﻿using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.Configuration.CommandLine;
-using Microsoft.Extensions.Configuration.EnvironmentVariables;
-using Microsoft.Extensions.Configuration.Json;
-using System;
-using System.Collections.Generic;
-using System.Diagnostics.CodeAnalysis;
-using System.Linq;
-using System.Reflection;
+﻿namespace HotRS.Tools.Core.Extensions;
 
-namespace RK.HotRS.ToolsCore.Extensions
+/// <summary>
+/// Three extension methods to manage a populated Configuration instance.
+/// </summary>
+[System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
+public static class ConfigurationExtensions
 {
     /// <summary>
-    /// Three extension methods to manage a populated Configuration instance.
+    /// Deletes duplicate references to config files
     /// </summary>
-    [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
-    public static class ConfigurationExtensions
+    /// <param name="source">A populated IConfiguration instance</param>
+    /// <param name="keepWhich">An enum to tell the method which instance of config file to keep. Default = first</param>
+    public static void CleanUpJSONConfigs(this IConfiguration source, KeepWhich keepWhich = KeepWhich.First)
     {
-        /// <summary>
-        /// Deletes duplicate references to config files
-        /// </summary>
-        /// <param name="source">A populated IConfiguration instance</param>
-        /// <param name="keepWhich">An enum to tell the method which instance of config file to keep. Default = first</param>
-        public static void CleanUpJSONConfigs(this IConfiguration source, KeepWhich keepWhich = KeepWhich.First)
+        ArgumentNullException.ThrowIfNull(source, nameof(source));
+        var configProviders = source.GetType().GetProperty("Providers").GetValue(source) as List<IConfigurationProvider>;
+        var itemsToSkip = new List<int>();
+
+        for (int ndx = 0; ndx < configProviders.Count; ndx++)
         {
-            source.CheckForNull(nameof(source));
-            var configProviders = source.GetType().GetProperty("Providers").GetValue(source) as List<IConfigurationProvider>;
-            var itemsToSkip = new List<int>();
-
-            for (int ndx = 0; ndx < configProviders.Count; ndx++)
+            if (configProviders[ndx] is ChainedConfigurationProvider)
             {
-                if (configProviders[ndx] is ChainedConfigurationProvider)
+                throw new NotImplementedException(Properties.Resources.CANNOTHANDLECHAINEDCONFIGURATIONS);
+            }
+            else
+            {
+                if (configProviders[ndx].GetType().GetProperty("Source") != null)
                 {
-                    throw new NotImplementedException(Properties.Resources.CANNOTHANDLECHAINEDCONFIGURATIONS);
-                }
-                else
-                {
-                    if (configProviders[ndx].GetType().GetProperty("Source") != null)
-                    {
-                        var cfp = (JsonConfigurationProvider)configProviders[ndx];
+                    var cfp = (JsonConfigurationProvider)configProviders[ndx];
 
+                    var matches = new List<int>();
+                    for (int srchndx = 0; srchndx < configProviders.Count; srchndx++)
+                    {
+                        if (configProviders[srchndx].GetType().GetProperty("Source") != null)
+                        {
+                            var tmp = (JsonConfigurationProvider)configProviders[srchndx];
+                            if (tmp.Source.Path.Equals(cfp.Source.Path, StringComparison.InvariantCultureIgnoreCase))
+                            {
+                                matches.Add(srchndx);
+                            }
+                        }
+                    }
+                    if (matches.Count > 1)
+                    {
+                        var itemToKeep = keepWhich == KeepWhich.First ? matches.First() : matches.Last();
+                        foreach (var match in matches)
+                        {
+                            if (match != itemToKeep)
+                            {
+                                itemsToSkip.Add(match);
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        itemsToSkip = itemsToSkip.Distinct().OrderBy(i => i).ToList();
+        for (var loopNdx = itemsToSkip.Count - 1; loopNdx >= 0; loopNdx--)
+        {
+            configProviders.Remove(configProviders[itemsToSkip[loopNdx]]);
+        }
+    }
+
+    /// <summary>
+    /// Deletes instances of config sources that are found in the list of items.
+    /// </summary>
+    /// <param name="source">A populated IConfiguration instance</param>
+    /// <param name="items">A list of items to remove from the config sources.</param>
+    public static void CleanUpJSONConfigs(this IConfiguration source, IList<ConfigItem> items)
+    {
+        ArgumentNullException.ThrowIfNull(source, nameof(source));
+        ArgumentNullException.ThrowIfNull(items,nameof(items));
+
+        var configProviders = source.GetType().GetProperty("Providers").GetValue(source) as List<IConfigurationProvider>;
+        var itemsToSkip = new List<int>();
+        for (int ndx = 0; ndx < configProviders.Count; ndx++)
+        {
+            if (configProviders[ndx].GetType().GetProperty("Source") != null)
+            {
+                var cfp = (JsonConfigurationProvider)configProviders[ndx];
+                //this is one to check
+                foreach (var item in items)
+                {
+                    if (cfp.Source.Path.Equals(item.Path, StringComparison.InvariantCultureIgnoreCase))
+                    {
+                        //collect a list of matches
                         var matches = new List<int>();
                         for (int srchndx = 0; srchndx < configProviders.Count; srchndx++)
                         {
                             if (configProviders[srchndx].GetType().GetProperty("Source") != null)
                             {
                                 var tmp = (JsonConfigurationProvider)configProviders[srchndx];
-                                if (tmp.Source.Path.Equals(cfp.Source.Path, StringComparison.InvariantCultureIgnoreCase))
+                                if (tmp.Source.Path.Equals(item.Path, StringComparison.InvariantCultureIgnoreCase))
                                 {
                                     matches.Add(srchndx);
                                 }
@@ -53,7 +99,7 @@ namespace RK.HotRS.ToolsCore.Extensions
                         }
                         if (matches.Count > 1)
                         {
-                            var itemToKeep = keepWhich == KeepWhich.First ? matches.First() : matches.Last();
+                            var itemToKeep = item.KeepWhich == KeepWhich.First ? matches.First() : matches.Last();
                             foreach (var match in matches)
                             {
                                 if (match != itemToKeep)
@@ -65,136 +111,67 @@ namespace RK.HotRS.ToolsCore.Extensions
                     }
                 }
             }
-            itemsToSkip = itemsToSkip.Distinct().OrderBy(i => i).ToList();
-            for (var loopNdx = itemsToSkip.Count - 1; loopNdx >= 0; loopNdx--)
-            {
-                configProviders.Remove(configProviders[itemsToSkip[loopNdx]]);
-            }
         }
-
-        /// <summary>
-        /// Deletes instances of config sources that are found in the list of items.
-        /// </summary>
-        /// <param name="source">A populated IConfiguration instance</param>
-        /// <param name="items">A list of items to remove from the config sources.</param>
-        public static void CleanUpJSONConfigs(this IConfiguration source, IList<ConfigItem> items)
+        itemsToSkip = itemsToSkip.Distinct().ToList();
+        for (var loopNdx = itemsToSkip.Count - 1; loopNdx >= 0; loopNdx--)
         {
-            source.CheckForNull(nameof(source));
-            items.CheckForNull(nameof(items));
-
-            var configProviders = source.GetType().GetProperty("Providers").GetValue(source) as List<IConfigurationProvider>;
-            var itemsToSkip = new List<int>();
-            for (int ndx = 0; ndx < configProviders.Count; ndx++)
+            configProviders.Remove(configProviders[itemsToSkip[loopNdx]]);
+        }
+    }
+    /// <summary>
+    /// If present in the set of configuration sources, user secrets is moved to the end,  
+    /// thus overriding any other configurations (including those from the YAML files).
+    /// </summary>
+    /// <param name="source"></param>
+    public static void PreferUserSecrets(this IConfiguration source)
+    {
+        ArgumentNullException.ThrowIfNull(source, nameof(source));
+        var configProviders = source.GetType().GetProperty("Providers").GetValue(source) as List<IConfigurationProvider>;
+        JsonConfigurationProvider cfp = null;
+        int secretsIndex = -1;
+        for (int ndx = 0; ndx < configProviders.Count; ndx++)
+        {
+            var item = configProviders[ndx].GetType().GetProperty("Source");
+            if (item != null)
             {
-                if (configProviders[ndx].GetType().GetProperty("Source") != null)
+                var tmp = (JsonConfigurationProvider)configProviders[ndx];
+                var sourceName = tmp.Source.Path;
+                if (sourceName.Equals("secrets.json", StringComparison.OrdinalIgnoreCase))
                 {
-                    var cfp = (JsonConfigurationProvider)configProviders[ndx];
-                    //this is one to check
-                    foreach (var item in items)
-                    {
-                        if (cfp.Source.Path.Equals(item.Path, StringComparison.InvariantCultureIgnoreCase))
-                        {
-                            //collect a list of matches
-                            var matches = new List<int>();
-                            for (int srchndx = 0; srchndx < configProviders.Count; srchndx++)
-                            {
-                                if (configProviders[srchndx].GetType().GetProperty("Source") != null)
-                                {
-                                    var tmp = (JsonConfigurationProvider)configProviders[srchndx];
-                                    if (tmp.Source.Path.Equals(item.Path, StringComparison.InvariantCultureIgnoreCase))
-                                    {
-                                        matches.Add(srchndx);
-                                    }
-                                }
-                            }
-                            if (matches.Count > 1)
-                            {
-                                var itemToKeep = item.KeepWhich == KeepWhich.First ? matches.First() : matches.Last();
-                                foreach (var match in matches)
-                                {
-                                    if (match != itemToKeep)
-                                    {
-                                        itemsToSkip.Add(match);
-                                    }
-                                }
-                            }
-                        }
-                    }
+                    cfp = (JsonConfigurationProvider)configProviders[ndx];
+                    secretsIndex = ndx;
+                    break;
                 }
             }
-            itemsToSkip = itemsToSkip.Distinct().ToList();
-            for (var loopNdx = itemsToSkip.Count - 1; loopNdx >= 0; loopNdx--)
-            {
-                configProviders.Remove(configProviders[itemsToSkip[loopNdx]]);
-            }
         }
-        /// <summary>
-        /// If present in the set of configuration sources, user secrets is moved to the end,  
-        /// thus overriding any other configurations (including those from the YAML files).
-        /// </summary>
-        /// <param name="source"></param>
-        public static void PreferUserSecrets(this IConfiguration source)
+        if (secretsIndex >= 0)
         {
-            source.CheckForNull(nameof(source));
-            var configProviders = source.GetType().GetProperty("Providers").GetValue(source) as List<IConfigurationProvider>;
-            JsonConfigurationProvider cfp = null;
-            int secretsIndex = -1;
-            for (int ndx = 0; ndx < configProviders.Count; ndx++)
-            {
-                var item = configProviders[ndx].GetType().GetProperty("Source");
-                if (item != null)
-                {
-                    var tmp = (JsonConfigurationProvider)configProviders[ndx];
-                    var sourceName = tmp.Source.Path;
-                    if (sourceName.Equals("secrets.json", StringComparison.OrdinalIgnoreCase))
-                    {
-                        cfp = (JsonConfigurationProvider)configProviders[ndx];
-                        secretsIndex = ndx;
-                        break;
-                    }
-                }
-            }
-            if (secretsIndex >= 0)
-            {
-                configProviders.Add(cfp);
-                configProviders.Remove(configProviders[secretsIndex]);
-            }
+            configProviders.Add(cfp);
+            configProviders.Remove(configProviders[secretsIndex]);
         }
+    }
 
-        #region Dump
-        public static IDictionary<string, string> Dump(this IConfiguration source)
+    #region Dump
+    public static IDictionary<string, string> Dump(this IConfiguration source)
+    {
+        ArgumentNullException.ThrowIfNull(source, nameof(source));
+        var result = new Dictionary<string, string>();
+        var configProviders = source.GetType().GetProperty("Providers").GetValue(source) as List<IConfigurationProvider>;
+        for (int ndx = 0; ndx < configProviders.Count; ndx++)
         {
-            source.CheckForNull(nameof(source));
-            var result = new Dictionary<string, string>();
-            var configProviders = source.GetType().GetProperty("Providers").GetValue(source) as List<IConfigurationProvider>;
-            for (int ndx = 0; ndx < configProviders.Count; ndx++)
+            if (configProviders[ndx] is ChainedConfigurationProvider cp)
             {
-                if (configProviders[ndx] is ChainedConfigurationProvider)
+                var configType = cp.GetType().GetField("_config", BindingFlags.Instance | BindingFlags.NonPublic);
+                var configs = (ConfigurationRoot)configType.GetValue(cp);
+                foreach (var config in configs.Providers)
                 {
-                    var cp = (ChainedConfigurationProvider)configProviders[ndx];
-                    var configType = cp.GetType().GetField("_config", BindingFlags.Instance | BindingFlags.NonPublic);
-                    var configs = (ConfigurationRoot)configType.GetValue(cp);
-                    foreach (var config in configs.Providers)
+                    if (config is ChainedConfigurationProvider provider)
                     {
-                        if (config is ChainedConfigurationProvider)
-                        {
-                            result.MergeDictionary(HandleChainedProvider((ChainedConfigurationProvider)config));
-                        }
-                        else
-                        {
-                            var tmp = config.AsProvider();
-                            if (tmp != null)
-                            {
-                                result.MergeDictionary(ParseProvider(tmp));
-                            }
-                        }
+                        result.MergeDictionary(HandleChainedProvider(provider));
                     }
-                }
-                else
-                {
-                    if (configProviders[ndx].GetType().GetProperty("Source") != null)
+                    else
                     {
-                       var tmp = configProviders[ndx].AsProvider();
+                        var tmp = config.AsProvider();
                         if (tmp != null)
                         {
                             result.MergeDictionary(ParseProvider(tmp));
@@ -202,89 +179,100 @@ namespace RK.HotRS.ToolsCore.Extensions
                     }
                 }
             }
-            return result;
-        }
-
-        private static IDictionary<string, string> HandleChainedProvider(ChainedConfigurationProvider provider)
-        {
-            var result = new Dictionary<string, string>();
-            var cp = (ChainedConfigurationProvider) provider;
-            var configType = cp.GetType().GetField("_config", BindingFlags.Instance | BindingFlags.NonPublic);
-            var configs = (ConfigurationRoot)configType.GetValue(cp);
-            foreach (var config in configs.Providers)
+            else
             {
-                if (config is ChainedConfigurationProvider) //handle multiple chained configurations with a resursive call
+                if (configProviders[ndx].GetType().GetProperty("Source") != null)
                 {
-                    result.MergeDictionary(HandleChainedProvider((ChainedConfigurationProvider)config));
-                }
-                else
-                {
-                    var tmp = config.AsProvider();
+                    var tmp = configProviders[ndx].AsProvider();
                     if (tmp != null)
                     {
-                        var workingDictionary = ParseProvider(tmp);
-                        result.MergeDictionary(workingDictionary);
+                        result.MergeDictionary(ParseProvider(tmp));
                     }
                 }
             }
-            return result;
         }
+        return result;
+    }
 
-        [SuppressMessage("Design", "CA1031:Do not catch general exception types", Justification = "There is nothing to do if the type cannot be converted. The calling method must handle a null return.")]
-        private static ConfigurationProvider AsProvider(this IConfigurationProvider sourceConfig)
+    private static IDictionary<string, string> HandleChainedProvider(ChainedConfigurationProvider provider)
+    {
+        var result = new Dictionary<string, string>();
+        var cp = (ChainedConfigurationProvider) provider;
+        var configType = cp.GetType().GetField("_config", BindingFlags.Instance | BindingFlags.NonPublic);
+        var configs = (ConfigurationRoot)configType.GetValue(cp);
+        foreach (var config in configs.Providers)
         {
-            try
-            {                
-                return (ConfigurationProvider)sourceConfig;
-            }
-            catch 
+            if (config is ChainedConfigurationProvider provider1) //handle multiple chained configurations with a resursive call
             {
-                return null;
+                result.MergeDictionary(HandleChainedProvider(provider1));
             }
-        }
-
-        private static IDictionary<string, string> ParseProvider(ConfigurationProvider provider)
-        {
-            provider.CheckForNull(nameof(provider));
-            var result = new Dictionary<string, string>();
-            var dataType = provider.GetType().GetProperty("Data", BindingFlags.Instance | BindingFlags.NonPublic);
-            var dataItems = (IDictionary<string, string>)dataType.GetValue(provider);
-            foreach (var dataItem in dataItems)
+            else
             {
-                if (result.ContainsKey(dataItem.Key))
+                var tmp = config.AsProvider();
+                if (tmp != null)
                 {
-                    var item = result[dataItem.Key] = dataItem.Value;
+                    var workingDictionary = ParseProvider(tmp);
+                    result.MergeDictionary(workingDictionary);
                 }
-                else
-                    result.Add(dataItem.Key, dataItem.Value);
             }
-            return result;
         }
+        return result;
+    }
 
-        private static void MergeDictionary(this IDictionary<string, string> oldItems, IDictionary<string, string> newItems)
+    //[SuppressMessage("Design", "CA1031:Do not catch general exception types", Justification = "There is nothing to do if the type cannot be converted. The calling method must handle a null return.")]
+    private static ConfigurationProvider AsProvider(this IConfigurationProvider sourceConfig)
+    {
+        try
+        {                
+            return (ConfigurationProvider)sourceConfig;
+        }
+        catch 
         {
-            foreach (var item in newItems)
-            {
-                if (oldItems.ContainsKey(item.Key))
-                    oldItems[item.Key] = item.Value;
-                else
-                    oldItems.Add(item.Key, item.Value);
-            }
+            return null;
         }
-        #endregion
     }
 
-    [ExcludeFromCodeCoverage]
-    public sealed class ConfigItem
+    private static IDictionary<string, string> ParseProvider(ConfigurationProvider provider)
     {
-        public string Path { get; set; }
-        public KeepWhich KeepWhich { get; set; }
+        ArgumentNullException.ThrowIfNull(provider, nameof(provider));
+        var result = new Dictionary<string, string>();
+        var dataType = provider.GetType().GetProperty("Data", BindingFlags.Instance | BindingFlags.NonPublic);
+        var dataItems = (IDictionary<string, string>)dataType.GetValue(provider);
+        foreach (var dataItem in dataItems)
+        {
+            if (result.ContainsKey(dataItem.Key))
+            {
+                _ = result[dataItem.Key] = dataItem.Value;
+            }
+            else
+                result.Add(dataItem.Key, dataItem.Value);
+        }
+        return result;
     }
 
-    public enum KeepWhich
+    private static void MergeDictionary(this IDictionary<string, string> oldItems, IDictionary<string, string> newItems)
     {
-        First,
-        Last
+        foreach (var item in newItems)
+        {
+            if (oldItems.ContainsKey(item.Key))
+                oldItems[item.Key] = item.Value;
+            else
+                oldItems.Add(item.Key, item.Value);
+        }
     }
+    #endregion
+}
+
+[ExcludeFromCodeCoverage]
+public sealed class ConfigItem
+{
+    public string Path { get; set; }
+    public KeepWhich KeepWhich { get; set; }
+}
+
+public enum KeepWhich
+{
+    First,
+    Last
 }
 
