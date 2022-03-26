@@ -1,0 +1,22 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+
+<!--
+	You will need these settings in the web app or service to enable transfer of large files.
+	Include them with the deployed site/service. For .net Standard and .net Core proejcts
+	they might be the ONLY entries in the web.config. You may even not have a web.config
+	to start with.
+-->
+
+<configuration>
+	<system.webServer>
+		<security>
+			<requestFiltering>
+				<requestLimits maxAllowedContentLength="2147483648"/>
+			</requestFiltering>
+		</security>
+	</system.webServer>
+	<system.web>
+		<httpRuntime maxRequestLength="1048576" />
+	</system.web>
+
+</configuration>

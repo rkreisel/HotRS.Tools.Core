@@ -1,0 +1,1597 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>RK.HotRS.ToolsCore</name>
+    </assembly>
+    <members>
+        <member name="T:RK.HotRS.ToolsCore.Attributes.DisableFormValueModelBindingAttribute">
+            <summary>
+            Provides an atribute to disable form value model binding when using the file upload method
+            </summary>
+        </member>
+        <member name="M:RK.HotRS.ToolsCore.Attributes.DisableFormValueModelBindingAttribute.OnResourceExecuting(Microsoft.AspNetCore.Mvc.Filters.ResourceExecutingContext)">
+            <summary>
+            Intercepts the OnResourceExecuting method 
+            </summary>
+            <param name="context"></param>
+        </member>
+        <member name="M:RK.HotRS.ToolsCore.Attributes.DisableFormValueModelBindingAttribute.OnResourceExecuted(Microsoft.AspNetCore.Mvc.Filters.ResourceExecutedContext)">
+            <summary>
+            Intercepts the OnResourceExecuted method
+            </summary>
+            <param name="context"></param>
+        </member>
+        <member name="T:RK.HotRS.ToolsCore.Attributes.GenerateAntiforgeryTokenCookieForAjaxAttribute">
+            <summary>
+            Defines an AnitForgeryToken cookie attribute
+            </summary>
+        </member>
+        <member name="M:RK.HotRS.ToolsCore.Attributes.GenerateAntiforgeryTokenCookieForAjaxAttribute.OnActionExecuted(Microsoft.AspNetCore.Mvc.Filters.ActionExecutedContext)">
+            <summary>
+            Overrides the OnActionExecuted method to generate an anti forgery token
+            </summary>
+            <param name="context"></param>
+        </member>
+        <member name="M:RK.HotRS.ToolsCore.ConsoleApp.ConsoleAppHelpers.CloseIfNotAborted(System.Int32)">
+            <summary>
+            Pauses execution of the application for n seconds (default 60), to allow the user to abort the shutdown.
+            Usage:
+                CloseIfNotAborted();
+                CloseIfNotAborted(n);
+                
+            Execution of the code will continue after the method completes.
+            </summary>
+            <param name="seconds"></param>
+        </member>
+        <member name="T:RK.HotRS.ToolsCore.Exceptions.RKToolsException">
+            <summary>
+            Custom exception class for internal errors.
+            </summary>
+        </member>
+        <member name="P:RK.HotRS.ToolsCore.Exceptions.RKToolsException.Method">
+            <summary>
+            Holds the name of the method throwing the error
+            </summary>
+        </member>
+        <member name="P:RK.HotRS.ToolsCore.Exceptions.RKToolsException.ErrorDetails">
+            <summary>
+            Holds a stirng list of additional details (preferrably user-friendly)
+            </summary>
+        </member>
+        <member name="M:RK.HotRS.ToolsCore.Exceptions.RKToolsException.#ctor">
+            <summary>
+            Clone of Exception
+            </summary>
+        </member>
+        <member name="M:RK.HotRS.ToolsCore.Exceptions.RKToolsException.#ctor(System.String)">
+            <summary>
+            Clone of Exception
+            </summary>
+            <param name="message"></param>
+        </member>
+        <member name="M:RK.HotRS.ToolsCore.Exceptions.RKToolsException.#ctor(System.String,System.Exception)">
+            <summary>
+            Clone of Exception
+            </summary>
+            <param name="message"></param>
+            <param name="innerException"></param>
+        </member>
+        <member name="M:RK.HotRS.ToolsCore.Exceptions.RKToolsException.#ctor(System.Runtime.Serialization.SerializationInfo,System.Runtime.Serialization.StreamingContext)">
+            <summary>
+            Clone of Exception
+            </summary>
+            <param name="info"></param>
+            <param name="context"></param>
+        </member>
+        <member name="M:RK.HotRS.ToolsCore.Exceptions.RKToolsException.#ctor(System.String,System.String,System.Exception)">
+            <summary>
+            Clone of Exception, adding Method
+            </summary>
+            <param name="message">The error message</param>
+            <param name="method">The name of the module where the error occured</param>
+            <param name="innerException">The optional inner exception</param>
+        </member>
+        <member name="M:RK.HotRS.ToolsCore.Exceptions.RKToolsException.#ctor(System.String,System.String,System.Collections.Generic.IList{System.String},System.Exception)">
+            <summary>
+            Clone of Exception, adding Method and ErrorDetails
+            </summary>
+            <param name="message">The error message</param>
+            <param name="method">The name of the module where the error occured</param>
+            <param name="errorDetails">A list of strings with user supplied details</param>
+            <param name="innerException">The optional inner exception</param>
+        </member>
+        <member name="M:RK.HotRS.ToolsCore.Exceptions.RKToolsException.#ctor(System.String,System.Collections.Generic.IList{System.String},System.Exception)">
+            <summary>
+            Clone of Exception, adding ErrorDetails
+            </summary>
+            <param name="message">The error message</param>
+            <param name="errorDetails">A list of strings with user supplied details</param>
+            <param name="innerException">The optional inner exception</param>
+        </member>
+        <member name="M:RK.HotRS.ToolsCore.Extensions.AssemblyExtensions.GetTextFileFromAssembly(System.Reflection.Assembly,System.String)">
+            <summary>
+            Returns a string with the contents of the embedded file. Call with Assembly.GetExecutingAssembly().GetTextFileFromAssembly(filename)
+            </summary>
+            <param name="asm">The executing assembly - must be a concrete instance (i.e. Assembly.GetExecutingAssembly()</param>
+            <param name="filename">The (case-sensitive) name of the file to locate.</param>
+            <returns>A string or an exception.</returns>
+        </member>
+        <member name="T:RK.HotRS.ToolsCore.Extensions.CollectionExtensions">
+            <summary>
+            Provides custom extensions to a <see cref="T:System.Collections.Generic.List`1">generic List</see>
+            </summary>
+        </member>
+        <member name="M:RK.HotRS.ToolsCore.Extensions.CollectionExtensions.IsNullOrEmpty``1(System.Collections.Generic.IEnumerable{``0})">
+            <summary>
+            Returns true true if the List is empty or null.
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="source"></param>
+            <returns>True or False</returns>
+        </member>
+        <member name="T:RK.HotRS.ToolsCore.Extensions.ConfigurationExtensions">
+            <summary>
+            Three extension methods to manage a populated Configuration instance.
+            </summary>
+        </member>
+        <member name="M:RK.HotRS.ToolsCore.Extensions.ConfigurationExtensions.CleanUpJSONConfigs(Microsoft.Extensions.Configuration.IConfiguration,RK.HotRS.ToolsCore.Extensions.KeepWhich)">
+            <summary>
+            Deletes duplicate references to config files
+            </summary>
+            <param name="source">A populated IConfiguration instance</param>
+            <param name="keepWhich">An enum to tell the method which instance of config file to keep. Default = first</param>
+        </member>
+        <member name="M:RK.HotRS.ToolsCore.Extensions.ConfigurationExtensions.CleanUpJSONConfigs(Microsoft.Extensions.Configuration.IConfiguration,System.Collections.Generic.IList{RK.HotRS.ToolsCore.Extensions.ConfigItem})">
+            <summary>
+            Deletes instances of config sources that are found in the list of items.
+            </summary>
+            <param name="source">A populated IConfiguration instance</param>
+            <param name="items">A list of items to remove from the config sources.</param>
+        </member>
+        <member name="M:RK.HotRS.ToolsCore.Extensions.ConfigurationExtensions.PreferUserSecrets(Microsoft.Extensions.Configuration.IConfiguration)">
+            <summary>
+            If present in the set of configuration sources, user secrets is moved to the end,  
+            thus overriding any other configurations (including those from the YAML files).
+            </summary>
+            <param name="source"></param>
+        </member>
+        <member name="T:RK.HotRS.ToolsCore.Extensions.EnumExtensions">
+            <summary>
+            Provides exensions and methods for Enums
+            </summary>
+        </member>
+        <member name="M:RK.HotRS.ToolsCore.Extensions.EnumExtensions.GetEnumDescription``1(``0,System.Boolean,System.Boolean)">
+            <summary>
+            Returns the value of the Description attribute for the given enum value.
+            </summary>
+            <param name="useDisplayIfNoDesc">Returns the value of the Display attribute. Throws an exception if not present.</param>
+            <param name="useDefaultIfNoDescOrDisplay">Returns the default value if the Display attribute is not present.</param>
+            <typeparam name="T"></typeparam>
+            <param name="value"></param>
+        </member>
+        <member name="M:RK.HotRS.ToolsCore.Extensions.EnumExtensions.GetDataType``1(``0)">
+            <summary>
+            Returns the DataType specified in the [DataType} attribute, or DataType.Text if none was specified.
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="value"></param>
+            <returns></returns>
+        </member>
+        <member name="M:RK.HotRS.ToolsCore.Extensions.EnumExtensions.GetValueFromDescription``1(``0,System.String)">
+            <summary>
+            Returns the Enum value based on the value of the description attribute.
+            Throws an exception if the search value is not found on the Description attribute of any member of the enum.
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="value"></param>
+            <param name="description">The value to be used in the search.</param>
+        </member>
+        <member name="T:RK.HotRS.ToolsCore.Extensions.EnumExtensions.Enum`1">
+            <summary>
+            Provides additional methods for Enums
+            </summary>
+            <typeparam name="T"></typeparam>
+        </member>
+        <member name="M:RK.HotRS.ToolsCore.Extensions.EnumExtensions.Enum`1.AsList(System.Boolean)">
+            <summary>
+            Generates a generic List of strings from the values in an Enum
+            
+            Usage:
+            new Enum<typeparamref name="T"/>().AsList(true);
+            </summary>
+            <param name="useDescriptionIfAvailable">Defaults to False. If set to true this method will return the value of 
+            any [Description] attribute (or the base enum value if there is no [Desciption] attribute).</param>
+            <returns>A generic List of strings.</returns>
+        </member>
+        <member name="T:RK.HotRS.ToolsCore.Extensions.EPPlusExtensions">
+            <summary>
+            Provides extensions to the EPPlus package.
+            </summary>
+        </member>
+        <member name="M:RK.HotRS.ToolsCore.Extensions.EPPlusExtensions.GetValidByteArray(OfficeOpenXml.ExcelPackage,System.String)">
+            <summary>
+            Ensures the byte array is a valid Excel file.
+            This extension address a bug in EPPlus wherein a file, written from an EPPlus package object
+            throws errors when opened in Excel. (but the file has no discernable errors)
+            </summary>
+            <param name="package">An EPPlus package object</param>
+            <param name="workingPath">A directory path where the code will temporarily write the file.</param>
+            <returns>A byte array version of the Excel content.</returns>
+        </member>
+        <member name="M:RK.HotRS.ToolsCore.Extensions.EPPlusExtensions.LastPopulatedColumnInRow(OfficeOpenXml.ExcelWorksheet,System.Int32)">
+            <summary>
+            Returns the column number of the last populated column in a row.
+            Note: For performance reasons, the row is searched from left to 
+            right and returns when it encounters the first empty cell. 
+            </summary>
+            <param name="sheet"></param>
+            <param name="searchRow"></param>
+            <returns></returns>
+        </member>
+        <member name="M:RK.HotRS.ToolsCore.Extensions.EPPlusExtensions.FirstEmptyRow(OfficeOpenXml.ExcelWorksheet,System.Int32)">
+            <summary>
+            Returns the row number of the first row where all columns are empty.
+            Note: For performance reasons the worksheet is searched top to bottom
+            beginning at the row specified in <paramref name="beginWithRow"/> and
+            returns when the searched row has no columns that are populated.
+            Note: The columns searched are limited to the "used" columns as defined
+            by the Worksheet.Dimensions.Column value;
+            </summary>
+            <param name="sheet"></param>
+            <param name="beginWithRow"></param>
+            <returns></returns>
+        </member>
+        <member name="M:RK.HotRS.ToolsCore.Extensions.EPPlusExtensions.FirstRowWithEmptyColumn(OfficeOpenXml.ExcelWorksheet,System.Int32)">
+            <summary>		
+            Returns the row number of the first row where at least one column is empty.
+            Note: For performance reasons the worksheet is searched top to bottom
+            beginning at the row specified in <paramref name="beginWithRow"/> and
+            returns when the searched row has any empty column.
+            Note: The columns searched are limited to the "used" columns as defined
+            by the Worksheet.Dimensions.Column value;
+            </summary>
+            <param name="sheet"></param>
+            <param name="beginWithRow"></param>
+            <returns></returns>
+        </member>
+        <member name="M:RK.HotRS.ToolsCore.Extensions.EPPlusExtensions.RowHasData(OfficeOpenXml.ExcelWorksheet,System.Int32,System.Int32,System.Boolean)">
+            <summary>
+            
+            </summary>
+            <param name="sheet">The Worksheet to be searched</param>
+            <param name="row">The Row in the Worksheet to be searched.</param>
+            <param name="maxCols">The maximum number of columns to search. Defaults to 100, can go to 16384.
+            Consider using "sheet.Dimension.Columns" to reduce the nummber of columns searched.</param>
+            <param name="blankSameAsNull">Consider an empty string as a null (ie the column is empty). Defaults = true.</param>
+            <returns></returns>
+        </member>
+        <member name="M:RK.HotRS.ToolsCore.Extensions.EPPlusExtensions.FirstDataRow(OfficeOpenXml.ExcelWorksheet,System.Int32,System.Int32,System.Int32,System.Boolean)">
+            <summary>
+            Returns the index of the first row with data
+            </summary>
+            <param name="sheet">The Worksheet to be searched</param>
+            <param name="startRow">Start evaluating rows with this one.</param>
+            <param name="stopRow"> Stop evaluating rows after this row.Defaults to 5, can go to 1,048,576.</param>
+            <param name="maxCols"> The maximum number of columns to search. Defaults to 100, can go to 16384.
+            Consider using "sheet.Dimension.Columns" to reduce the nummber of columns searched.</param>
+            <param name="blankSameAsNull">Consider an empty string as a null (ie the column is empty). Defaults = true.</param>
+            <returns>The index of the first row that has data.</returns>
+        </member>
+        <member name="M:RK.HotRS.ToolsCore.Extensions.ExcelExtensions.ToDataSet(OfficeOpenXml.ExcelPackage)">
+            <summary>
+            
+            </summary>
+            <param name="package"></param>
+            <returns></returns>
+        </member>
+        <member name="M:RK.HotRS.ToolsCore.Extensions.ExcelExtensions.ToDataTable(OfficeOpenXml.ExcelPackage)">
+            <summary>
+            
+            </summary>
+            <param name="package"></param>
+            <returns></returns>
+        </member>
+        <member name="M:RK.HotRS.ToolsCore.Extensions.ExcelExtensions.ToDataTableEx(OfficeOpenXml.ExcelPackage,System.String,System.String,System.Boolean,System.Boolean)">
+            <summary>
+            
+            </summary>
+            <param name="package">An EP Plus "package".</param>
+            <param name="sheetName">By default, this method assumes the target table data is in the first worksheet in the workbook. Specify any other sheet by name here, to process it instead.</param>
+            <param name="rangeName">The name of an existing range in the workbook/worksheet</param>
+            <param name="includeBlankRows">Blank rows are excluded by default. Change this to true if you want them.</param>
+            <param name="transformHeaders">Convert headers to lowercase and removed spaces and convert tick marks (') to ('')</param>
+            <returns></returns>
+        </member>
+        <member name="M:RK.HotRS.ToolsCore.Extensions.ExcelExtensions.ToList``1(OfficeOpenXml.ExcelWorksheet,System.Collections.Generic.Dictionary{System.String,System.String})">
+            <summary>
+            
+            </summary>
+            <param name="worksheet"></param>
+            <param name="map"></param>
+            <typeparam name="T"></typeparam>
+            <returns></returns>
+            <exception cref="T:System.ArgumentException"></exception>
+        </member>
+        <member name="M:RK.HotRS.ToolsCore.Extensions.ExcelExtensions.ListToExcel``1(OfficeOpenXml.ExcelWorksheet,System.Collections.Generic.IList{``0},System.Boolean)">
+            <summary>
+            
+            </summary>
+            <param name="workSheet"></param>
+            <param name="contentList"></param>
+            <param name="addHeadingAsPerList"></param>
+            <typeparam name="T"></typeparam>
+            <returns></returns>
+        </member>
+        <member name="M:RK.HotRS.ToolsCore.Extensions.ExcelExtensions.ToList``1(OfficeOpenXml.ExcelWorksheet,System.Collections.Specialized.OrderedDictionary)">
+            <summary>
+            
+            </summary>
+            <param name="worksheet"></param>
+            <param name="map"></param>
+            <typeparam name="T"></typeparam>
+            <returns></returns>
+            <exception cref="T:System.ArgumentException"></exception>
+            <exception cref="T:System.ComponentModel.DataAnnotations.ValidationException"></exception>
+        </member>
+        <member name="M:RK.HotRS.ToolsCore.Extensions.ExcelExtensions.HasExpectedColumns(OfficeOpenXml.ExcelWorksheet,System.Collections.Generic.Dictionary{System.String,System.String})">
+            <summary>
+            
+            </summary>
+            <param name="worksheet"></param>
+            <param name="map"></param>
+            <returns></returns>
+            <exception cref="T:System.ComponentModel.DataAnnotations.ValidationException"></exception>
+        </member>
+        <member name="M:RK.HotRS.ToolsCore.Extensions.ExcelExtensions.SetNamedRangeValue(OfficeOpenXml.ExcelWorkbook,System.String,System.String,System.Boolean)">
+            <summary>
+            Sets the value of a single cell named range
+            </summary>
+            <param name="workbook">An ExcelWorkbook object</param>
+            <param name="targetName">The name of the cell (single cell named ranges only) to update.</param>
+            <param name="newValue">The new value</param>
+            <param name="throwExceptionIfMissing">Default is false.</param>
+            <returns></returns>
+        </member>
+        <member name="M:RK.HotRS.ToolsCore.Extensions.ExcelExtensions.GetNamedRange(OfficeOpenXml.ExcelWorkbook,System.String)">
+            <summary>
+            Return an ExcelNamedRange object if it exists or null if not.
+            This extension method avoid the KeyNotFoundException if the requested named range is missing.
+            </summary>
+            <param name="workbook">An excelWorkbook object</param>
+            <param name="rangeName">The name of the range to return.</param>
+            <returns></returns>
+        </member>
+        <member name="T:RK.HotRS.ToolsCore.Extensions.ExcelMap">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="T:RK.HotRS.ToolsCore.Extensions.ExceptionExtensions">
+            <summary>
+            Extension Methods for Exceptions
+            </summary>
+        </member>
+        <member name="M:RK.HotRS.ToolsCore.Extensions.ExceptionExtensions.SetData``1(``0,System.Collections.Generic.IDictionary{System.String,System.String})">
+            <summary>
+            Adds user defined data (in the form of a key-value pair dictionary) to the exception.
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="source"></param>
+            <param name="data"></param>
+            <returns></returns>
+        </member>
+        <member name="M:RK.HotRS.ToolsCore.Extensions.ExceptionExtensions.SetHelpLink``1(``0,System.String)">
+            <summary>
+            Sets the HelpLink property of an exception.
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="source"></param>
+            <param name="helpLink"></param>
+            <returns></returns>
+        </member>
+        <member name="M:RK.HotRS.ToolsCore.Extensions.ExceptionExtensions.GetInnerExceptions(System.Exception)">
+            <summary>
+            Gets all the exceptions in an array
+            </summary>
+            <param name="ex"></param>
+            <returns>An array of exceptions</returns>
+        </member>
+        <member name="M:RK.HotRS.ToolsCore.Extensions.ExceptionExtensions.AllExceptionMessages``1(``0,System.Boolean)">
+            <summary>
+            Gets all the exception messages in one string
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="source"></param>
+            <param name="withCR"></param>
+            <returns></returns>
+        </member>
+        <member name="T:RK.HotRS.ToolsCore.Extensions.ObjectExtensions">
+            <summary>
+            Extensions to Object
+            </summary>
+        </member>
+        <member name="M:RK.HotRS.ToolsCore.Extensions.ObjectExtensions.ToByteArray(System.Object)">
+            <summary>
+            Converts an object to a byte array.
+            </summary>
+            <param name="source"></param>
+            <returns></returns>
+        </member>
+        <member name="M:RK.HotRS.ToolsCore.Extensions.ObjectExtensions.FromByteArray``1(System.Byte[])">
+            <summary>
+            Convert a byte array back to an object of type T
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="data"></param>
+            <returns></returns>
+        </member>
+        <member name="T:RK.HotRS.ToolsCore.Extensions.StringExtensions">
+            <summary>
+            Extensions to the string class.
+            </summary>
+        </member>
+        <member name="M:RK.HotRS.ToolsCore.Extensions.StringExtensions.ToNullableDateTime(System.String)">
+            <summary>
+            Returns a DateTime? with a value if TryParse is successful, otherwise a null DateTime?
+            </summary>
+            <param name="s"></param>
+            <returns></returns>
+        </member>
+        <member name="M:RK.HotRS.ToolsCore.Extensions.StringExtensions.ToNullableInt(System.String)">
+            <summary>
+            Returns a int? with a value if TryParse is successful, otherwise a null int?
+            </summary>
+            <param name="s"></param>
+        </member>
+        <member name="M:RK.HotRS.ToolsCore.Extensions.StringExtensions.AddCSVInjectionProtection(System.String)">
+            <summary>
+            Escapes the pipe character by prepending a backslash.
+            Useful for Excel file creation.
+            </summary>
+            <param name="source"></param>
+            <returns></returns>
+        </member>
+        <member name="M:RK.HotRS.ToolsCore.Extensions.StringExtensions.RemoveCSVInjectionProtection(System.String)">
+            <summary>
+            Removes the CSV injection protection added by AddCSVInjectionProtection
+            </summary>
+            <param name="source"></param>
+            <returns></returns>
+        </member>
+        <member name="M:RK.HotRS.ToolsCore.Extensions.StringExtensions.DateStringFromExcelDateString(System.String,System.String)">
+            <summary>
+            Parses a string from an Excel format date string
+            </summary>
+            <param name="source"></param>
+            <param name="format"></param>
+            <returns></returns>
+        </member>
+        <member name="M:RK.HotRS.ToolsCore.Extensions.StringExtensions.AppendListToString``1(System.String,System.Collections.Generic.List{``0},System.String)">
+            <summary>
+            Appends the values in a List to a string with the given prefix
+            </summary>
+            <typeparam name="T">A</typeparam>
+            <param name="source">A string</param>
+            <param name="list">A List of objects. The embedded ToString() method will be called to determine the string to append.</param>
+            <param name="prefix">The string to prepend to the strings extracted from the list. (This is string will be used in the string parameter of s String.Join() command.)</param>
+            <returns>A string with each value of the list formatted and appended to the original string.</returns>
+        </member>
+        <member name="T:RK.HotRS.ToolsCore.Extensions.PrivateMethodTestHelper">
+            <summary>
+            A class to implement a helper for unit testing private methods
+            </summary>
+        </member>
+        <member name="M:RK.HotRS.ToolsCore.Extensions.PrivateMethodTestHelper.GetPrivateMethod``1(``0,System.String)">
+            <summary>
+            Allows unit testing of a private method.
+            </summary>
+            <typeparam name="T">A Type</typeparam>
+            <param name="source">An instance of a class</param>
+            <param name="methodName">The method name to find.</param>
+            Usage:
+            var class2Test = // a instance of the class
+            var privateMethod = GetPrivateMethod(class2Test, "method2test");
+            var result = privateMethod.Invoke(class2Test, new object[] { /* array of objects matching the method signature of the method to test – or null if none*/ });
+            <returns>A MethodInfo object that can be used to execute a private method.</returns>
+        </member>
+        <member name="M:RK.HotRS.ToolsCore.Extensions.PrivateMethodTestHelper.GetPrivateMethodAsync``1(``0,System.String)">
+            <summary>
+            Allows unit testing of a private async method.
+            </summary>
+            <typeparam name="T">A Type</typeparam>
+            <param name="source">An instance of a class</param>
+            <param name="methodName">The method name to find.</param>
+            Usage:
+            var class2Test = // a instance of the class
+            var privateMethod = GetPrivateMethod(class2Test, "method2test");
+            var result = privateMethod.Invoke(class2Test,  });
+            var result = (dynamic) Task.Run(() => privateMethod.Invoke(this.SystemUnderTest, new object[] { /* array of objects matching the method signature of the method to test – or null if none*/)).Result;
+            <returns>A MethodInfo object that can be used to execute an async private method.</returns>
+        </member>
+        <member name="T:RK.HotRS.ToolsCore.Extensions.ValidationErrorExtensions">
+            <summary>
+            Extensions to the list of ValidationResults returned from Validate()
+            </summary>
+        </member>
+        <member name="M:RK.HotRS.ToolsCore.Extensions.ValidationErrorExtensions.FormatErrors(System.Collections.Generic.IList{System.ComponentModel.DataAnnotations.ValidationResult},System.String,System.Boolean,System.Boolean)">
+            <summary>
+            Formats the error messages into a string uding the specified delimier and optional line feed.
+            </summary>
+            <param name="source">A list of ValidationResult objects.</param>
+            <param name="delimiter">The value to be used to separate messages.</param>
+            <param name="useLineFeed">rue or False</param>
+            <param name="includeMemberNames">Adds teh values of MemberNames from the error object.</param>
+            <returns>A formatted string of error messages.</returns>
+        </member>
+        <member name="T:RK.HotRS.ToolsCore.Helpers.Azure.AzureBlobStorageHelper">
+            <summary>
+            A set of helper methods for managing Azure blob storage
+            </summary>
+        </member>
+        <member name="M:RK.HotRS.ToolsCore.Helpers.Azure.AzureBlobStorageHelper.GetDownloadableFileFromStorage(System.String,System.String,System.String,System.String,System.String)">
+            <summary>
+            This gets a file with all the needed information to create a FileResult stream in the controller.  
+            That is: the file memory stream, the file mime type, the file name.
+            </summary>
+            <param name="accountName">Name of the storage account.</param>
+            <param name="accountKey">The key on the storage account.</param>
+            <param name="containerName">The container the file exist in.</param>
+            <param name="fileName">The file name.</param>
+            <param name="filePath">The path to the file.</param>
+            <returns>The file memory stream, the file mime type, the file name packaged in a FileDownload object.</returns>
+        </member>
+        <member name="M:RK.HotRS.ToolsCore.Helpers.Azure.AzureBlobStorageHelper.UploadFileToStorage(System.String,System.String,System.String,System.IO.Stream,System.String,System.String,System.Boolean)">
+            <summary>
+            
+            </summary>
+            <param name="accountName">Name of the storage account.</param>
+            <param name="accountKey">The key on the storage account.</param>
+            <param name="containerName">The container the file exist in.</param>
+            <param name="fileStream">A Stream containing the file to store.</param>
+            <param name="fileName">A name for the file.</param>
+            <param name="filePath">The optional path in which to store the file.</param>
+            <param name="returnEmptyStringOnFailure">True or False</param>
+            <returns>The unique key for the stored blob.</returns>
+        </member>
+        <member name="M:RK.HotRS.ToolsCore.Helpers.Azure.AzureBlobStorageHelper.AddToBlobStorage(System.String,System.String,System.String,System.String,System.String,System.String)">
+            <summary>
+            This method accepts a string and places it into Blob storage
+            </summary>
+            <param name="accountName">The name of the storage account used.</param>
+            <param name="accountKey">The key on the storage account.</param>
+            <param name="containerName">The container to use.</param>
+            <param name="content">The value in insert.</param>
+            <param name="fileName">The name of the "file" to add.</param>
+            <param name="filePath">The optional additional "path" for the "file".</param>
+            <returns>The unique key of he blob that was stored.</returns>
+        </member>
+        <member name="M:RK.HotRS.ToolsCore.Helpers.Azure.AzureBlobStorageHelper.GetFromBlobStorage(System.String,System.String,System.String,System.String,System.String)">
+            <summary>
+            This method pulls a string from blob storage
+            </summary>
+            <param name="accountName">The name of the storage account used.</param>
+            <param name="accountKey">The key on the storage account.</param>
+            <param name="containerName">The container to use.</param>
+            <param name="blobKey">The key identifying the blob to pull.</param>
+            <param name="filePath">The hierarchical location where the object should be found. (Optional: defaults to an empy string.)</param>
+            <returns>A string</returns>
+        </member>
+        <member name="M:RK.HotRS.ToolsCore.Helpers.Azure.AzureBlobStorageHelper.DeleteFromBlobStorage(System.String,System.String,System.String,System.String,System.String)">
+            <summary>
+            Deletes a blob from storage
+            </summary>
+            <param name="accountName">The name of the storage account used.</param>
+            <param name="accountKey">The key on the storage account.</param>
+            <param name="containerName">The container to use.</param>
+            <param name="blobKey">The key identifying the blob to delete.</param>
+            <param name="filePath">The hierarchical location where the object should be found. (Optional: defaults to an empy string.</param>
+            <returns></returns>
+        </member>
+        <member name="M:RK.HotRS.ToolsCore.Helpers.Azure.AzureBlobStorageHelper.DeleteFileFromStorage(System.String,System.String,System.String,System.String,System.String)">
+            <summary>
+            Delete a file from storage
+            </summary>
+            <param name="accountName">The name of the storage account used.</param>
+            <param name="accountKey">The key on the storage account.</param>
+            <param name="containerName">The container to use.</param>
+            <param name="fileName"></param>
+            <param name="filePath"></param>
+            <returns>The key of the deleted blob.</returns>
+        </member>
+        <member name="M:RK.HotRS.ToolsCore.Helpers.Azure.AzureBlobStorageHelper.FileExistsInStorage(System.String,System.String,System.String,System.String,System.String)">
+            <summary>
+            Determines if a file exists in blob storage
+            </summary>
+            <param name="accountName">The name of the storage account used.</param>
+            <param name="accountKey">The key on the storage account.</param>
+            <param name="containerName">The container to use.</param>
+            <param name="fileName"></param>
+            <param name="filePath"></param>
+            <returns>True or False</returns>
+        </member>
+        <member name="T:RK.HotRS.ToolsCore.Helpers.Azure.FileDownload">
+            <summary>
+            POCO object describing a file to download
+            </summary>
+        </member>
+        <member name="P:RK.HotRS.ToolsCore.Helpers.Azure.FileDownload.MemoryStream">
+            <summary>
+            The file content as a MemoryStream
+            </summary>
+        </member>
+        <member name="P:RK.HotRS.ToolsCore.Helpers.Azure.FileDownload.MimeType">
+            <summary>
+            The THML mime type
+            </summary>
+        </member>
+        <member name="P:RK.HotRS.ToolsCore.Helpers.Azure.FileDownload.FileName">
+            <summary>
+            The name of the file
+            </summary>
+        </member>
+        <member name="P:RK.HotRS.ToolsCore.Helpers.Azure.FileDownload.FileExtension">
+            <summary>
+            The exension of the file
+            </summary>
+        </member>
+        <member name="P:RK.HotRS.ToolsCore.Helpers.Azure.FileDownload.FullFileName">
+            <summary>
+            A calculated method to return the full filename
+            </summary>
+        </member>
+        <member name="T:RK.HotRS.ToolsCore.Helpers.Azure.IAzureBlobStorageHelper">
+            <summary>
+            An interface for the Azure Blob Storage Helper (to enable mocking in unit tests)
+            </summary>
+        </member>
+        <member name="M:RK.HotRS.ToolsCore.Helpers.Azure.IAzureBlobStorageHelper.GetDownloadableFileFromStorage(System.String,System.String,System.String,System.String,System.String)">
+            <summary>
+            Retrieves a file from storage
+            </summary>
+            <param name="accountName">The name of the blob storage account</param>
+            <param name="accountKey">he key for the blob storage account</param>
+            <param name="containerName">The name for the container in which to place the content</param>
+            <param name="fileName">The name of the item which will be retrieved from storage</param>
+            <param name="filePath">An optional "sub folder" in which the content should be found</param>
+            <returns></returns>
+        </member>
+        <member name="M:RK.HotRS.ToolsCore.Helpers.Azure.IAzureBlobStorageHelper.UploadFileToStorage(System.String,System.String,System.String,System.IO.Stream,System.String,System.String,System.Boolean)">
+            <summary>
+            Places a file into storage
+            </summary>
+            <param name="accountName">The name of the blob storage account</param>
+            <param name="accountKey">he key for the blob storage account</param>
+            <param name="containerName">The name for the container in which to place the content</param>
+            <param name="fileStream">The content to be stored</param>
+            <param name="fileName">The name of the item which will be placed into storage</param>
+            <param name="filePath">An optional "sub folder" in which to place he content</param>
+            <param name="returnEmptyStringOnFailure">Optional (default = true). If true an empty string is returned if an exception is encountered. 
+            Otherwise, the exception is rethrown. </param>
+            <returns></returns>
+        </member>
+        <member name="M:RK.HotRS.ToolsCore.Helpers.Azure.IAzureBlobStorageHelper.AddToBlobStorage(System.String,System.String,System.String,System.String,System.String,System.String)">
+            <summary>
+            Adds a generic object to Blob storage
+            </summary>
+            <param name="accountName">The name of the blob storage account</param>
+            <param name="accountKey">he key for the blob storage account</param>
+            <param name="containerName">The name for the container in which to place the content</param>
+            <param name="content">The conent to add</param>
+            <param name="fileName">The name of the item which will be placed into storage</param>
+            <param name="filePath">An optional "sub folder" in which to place he content</param>
+            <returns></returns>
+        </member>
+        <member name="M:RK.HotRS.ToolsCore.Helpers.Azure.IAzureBlobStorageHelper.GetFromBlobStorage(System.String,System.String,System.String,System.String,System.String)">
+            <summary>
+            Retrieves a blob from storage.
+            </summary>
+            <param name="accountName">The name of the blob storage account</param>
+            <param name="accountKey">he key for the blob storage account</param>
+            <param name="containerName">The name for the container in which to place the content</param>
+            <param name="blobKey">The key of the blob to retreive"</param>
+            <param name="filePath">The hierarchical location where the object should be found. (Optional: defaults to an empy string.</param>
+            <returns>An object</returns>
+        </member>
+        <member name="M:RK.HotRS.ToolsCore.Helpers.Azure.IAzureBlobStorageHelper.DeleteFromBlobStorage(System.String,System.String,System.String,System.String,System.String)">
+            <summary>
+            Removes a blob from storage
+            </summary>
+            <param name="accountName">The name of the blob storage account</param>
+            <param name="accountKey">he key for the blob storage account</param>
+            <param name="containerName">The name for the container in which to place the content</param>
+            <param name="blobKey">The key of the object to delete</param>
+            <param name="filePath">The hierarchical location where the object should be found. (Optional: defaults to an empy string.</param>
+            <returns></returns>
+        </member>
+        <member name="M:RK.HotRS.ToolsCore.Helpers.Azure.IAzureBlobStorageHelper.DeleteFileFromStorage(System.String,System.String,System.String,System.String,System.String)">
+            <summary>
+            Delete a file from storage
+            </summary>
+            <param name="accountName">The name of the storage account used.</param>
+            <param name="accountKey">The key on the storage account.</param>
+            <param name="containerName">The container to use.</param>
+            <param name="fileName"></param>
+            <param name="filePath"></param>
+            <returns>The key of the deleted blob.</returns>
+        </member>
+        <member name="M:RK.HotRS.ToolsCore.Helpers.Azure.IAzureBlobStorageHelper.FileExistsInStorage(System.String,System.String,System.String,System.String,System.String)">
+            <summary>
+            Determines if a file exists in blob storage
+            </summary>
+            <param name="accountName">The name of the storage account used.</param>
+            <param name="accountKey">The key on the storage account.</param>
+            <param name="containerName">The container to use.</param>
+            <param name="fileName"></param>
+            <param name="filePath"></param>
+            <returns>True or False</returns>
+        </member>
+        <member name="T:RK.HotRS.ToolsCore.Helpers.FileUpload.FileUploadHelper">
+            <summary>
+            Part of the helper class for the file uploading
+            </summary>
+        </member>
+        <member name="M:RK.HotRS.ToolsCore.Helpers.FileUpload.FileUploadHelper.UploadAsync(Microsoft.AspNetCore.Http.HttpContext,Microsoft.AspNetCore.Http.Features.FormOptions,System.String)">
+            <summary>
+            Uploads a file contained in the HTTP message.
+            This helper was created using input from <para>&#160;</para>
+            https://docs.microsoft.com/en-us/aspnet/core/mvc/models/file-uploads?view=aspnetcore-2.2#uploading-large-files-with-streaming and
+            https://docs.microsoft.com/en-us/aspnet/core/mvc/models/file-uploads?view=aspnetcore-3.1<para />
+            If you get HTTP 404.13 errors it means the file is too large. The default maximum size is roughly 28.5mb.
+            It can be changed in the web.config file:<para />
+            &lt;system.webServer&gt;<para />
+                &lt;security&gt;<para />
+                    &lt;requestFiltering&gt;<para />
+                        &lt;!-- This will handle requests up to 50MB --&gt;<para />
+                        &lt;requestLimits maxAllowedContentLength = "52428800" /&gt;<para />
+                    &lt;/requestFiltering &gt;<para />
+                &lt;/security &gt;<para />
+            &lt;/system.webServer &gt;<para />
+            </summary>
+            <param name="context">The HTTP Context which includes the file</param>
+            <param name="_defaultFormOptions">A formoptions object. Usually a simple new FormOptions() will suffice</param>
+            <param name="fileStorePath">The physical path were the file should be written. Note that you may want to 
+            implement some sort of cleanup method to keep this folder from becomming too large.</param>
+            <returns>A string with the location of the uploaded file.</returns>
+        </member>
+        <member name="M:RK.HotRS.ToolsCore.Helpers.FileUpload.FileUploadHelper.UploadSmallFileAsync(Microsoft.AspNetCore.Http.IFormFile,System.String)">
+            <summary>
+            Upload a file (4mb or less) using  FormFile object.
+            </summary>
+            <param name="file">IFromFile object</param>
+            <param name="landingPath">Where to put the file. (must be an existing path to which the caller has permission to write</param>
+            <returns></returns>
+        </member>
+        <member name="M:RK.HotRS.ToolsCore.Helpers.FileUpload.FileUploadHelper.GetEncoding(Microsoft.AspNetCore.WebUtilities.MultipartSection)">
+            <summary>
+            Determines the encoding type of the MultipartSection
+            </summary>
+            <param name="section"></param>
+            <returns></returns>
+        </member>
+        <member name="T:RK.HotRS.ToolsCore.Helpers.FileUpload.IFileUploadHelper">
+            <summary>
+            Interface for FileUploadHelper
+            </summary>
+        </member>
+        <member name="M:RK.HotRS.ToolsCore.Helpers.FileUpload.IFileUploadHelper.GetEncoding(Microsoft.AspNetCore.WebUtilities.MultipartSection)">
+            <summary>
+            Determines the encoding type of the MultipartSection
+            </summary>
+            <param name="section"></param>
+            <returns></returns>
+        </member>
+        <member name="M:RK.HotRS.ToolsCore.Helpers.FileUpload.IFileUploadHelper.UploadAsync(Microsoft.AspNetCore.Http.HttpContext,Microsoft.AspNetCore.Http.Features.FormOptions,System.String)">
+            <summary>
+            Uploads a file contained in the HTTP message
+            </summary>
+            <param name="context">The HTTP Context which includes the file</param>
+            <param name="defaultFormOptions">A formoptions object. Usually a simple new FormOptions() will suffice</param>
+            <param name="fileStorePath">The pyhsical path were the file shoudl be written. Note that you may want to 
+            implement some sort of cleanup method to keep this folder from becomming too large.</param>
+            <returns>A string with the location of the uploaded file.</returns>
+        </member>
+        <member name="T:RK.HotRS.ToolsCore.Helpers.FileUpload.MultipartRequestHelper">
+            <summary>    /// MultipartRequestHeader object    /// </summary>    
+        </member>
+        <member name="M:RK.HotRS.ToolsCore.Helpers.FileUpload.MultipartRequestHelper.GetBoundary(Microsoft.Net.Http.Headers.MediaTypeHeaderValue,System.Int32)">
+            <summary>        
+            Returns a string segment        
+            </summary>
+            <param name="contentType"></param>        
+            <param name="lengthLimit"></param>        
+            <returns></returns>        
+            
+        </member>
+        <member name="M:RK.HotRS.ToolsCore.Helpers.FileUpload.MultipartRequestHelper.IsMultipartContentType(System.String)">
+            <summary>        
+            Determines if the content is a multipart item        
+            </summary>        
+            <param name="contentType"></param>        
+            <returns></returns>        
+        </member>
+        <member name="M:RK.HotRS.ToolsCore.Helpers.FileUpload.MultipartRequestHelper.HasFormDataContentDisposition(Microsoft.Net.Http.Headers.ContentDispositionHeaderValue)">
+            <summary>        
+            Determines if the content is form-data        
+            </summary>        
+            <param name="contentDisposition"></param>        
+            <returns></returns>        
+        </member>
+        <member name="M:RK.HotRS.ToolsCore.Helpers.FileUpload.MultipartRequestHelper.HasFileContentDisposition(Microsoft.Net.Http.Headers.ContentDispositionHeaderValue)">
+            <summary>        
+            Determines if the content is a file.        
+            </summary>        
+            <param name="contentDisposition"></param>        
+            <returns></returns>        
+        </member>
+        <member name="T:RK.HotRS.ToolsCore.Helpers.HttpRequestHelper.FileContent">
+            <summary>
+            Part of the helper class for the file uploading
+            </summary>
+        </member>
+        <member name="M:RK.HotRS.ToolsCore.Helpers.HttpRequestHelper.FileContent.#ctor(System.String,System.String)">
+            <summary>
+            Combines multiple parts of a file upload into a single object
+            </summary>
+            <param name="filePath"></param>
+            <param name="apiParamName"></param>
+        </member>
+        <member name="T:RK.HotRS.ToolsCore.Helpers.HttpRequestHelper.HttpRequestBuilder">
+            <summary>
+            A builder for HTTP requests
+            </summary>
+        </member>
+        <member name="P:RK.HotRS.ToolsCore.Helpers.HttpRequestHelper.HttpRequestBuilder.Method">
+            <summary>
+            The Http method (Put. Post, etc)
+            </summary>
+        </member>
+        <member name="P:RK.HotRS.ToolsCore.Helpers.HttpRequestHelper.HttpRequestBuilder.RequestUri">
+            <summary>
+            A URI pointing to the method to call
+            </summary>
+        </member>
+        <member name="P:RK.HotRS.ToolsCore.Helpers.HttpRequestHelper.HttpRequestBuilder.Content">
+            <summary>
+            The content to send
+            </summary>
+        </member>
+        <member name="P:RK.HotRS.ToolsCore.Helpers.HttpRequestHelper.HttpRequestBuilder.BearerToken">
+            <summary>
+            A Bearer Token
+            </summary>
+        </member>
+        <member name="P:RK.HotRS.ToolsCore.Helpers.HttpRequestHelper.HttpRequestBuilder.AcceptHeader">
+            <summary>
+            The AcceptHeader
+            </summary>
+        </member>
+        <member name="P:RK.HotRS.ToolsCore.Helpers.HttpRequestHelper.HttpRequestBuilder.Timeout">
+             <summary>
+             The timeout to use. 
+            Note: Set this ONLY once
+             </summary>
+        </member>
+        <member name="P:RK.HotRS.ToolsCore.Helpers.HttpRequestHelper.HttpRequestBuilder.CancellationToken">
+            <summary>
+            A  Cancellation token (optional)
+            </summary>
+        </member>
+        <member name="P:RK.HotRS.ToolsCore.Helpers.HttpRequestHelper.HttpRequestBuilder.HttpCompletionOption">
+            <summary>
+            A completion optipon
+            </summary>
+        </member>
+        <member name="P:RK.HotRS.ToolsCore.Helpers.HttpRequestHelper.HttpRequestBuilder.MaxResponseSize">
+            <summary>
+            Maximum sice of the response object
+            </summary>
+        </member>
+        <member name="P:RK.HotRS.ToolsCore.Helpers.HttpRequestHelper.HttpRequestBuilder.Client">
+            <summary>
+            The HttpClient
+            </summary>
+        </member>
+        <member name="M:RK.HotRS.ToolsCore.Helpers.HttpRequestHelper.HttpRequestBuilder.#ctor(System.Net.Http.HttpClient)">
+            <summary>
+            Constructor
+            </summary>
+            <param name="client"></param>
+        </member>
+        <member name="M:RK.HotRS.ToolsCore.Helpers.HttpRequestHelper.HttpRequestBuilder.Reset">
+            <summary>
+            A method to reset the object
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:RK.HotRS.ToolsCore.Helpers.HttpRequestHelper.HttpRequestBuilder.SetMethod(System.Net.Http.HttpMethod)">
+            <summary>
+            Sets the Method parameter
+            </summary>
+            <param name="method"></param>
+            <returns></returns>
+        </member>
+        <member name="M:RK.HotRS.ToolsCore.Helpers.HttpRequestHelper.HttpRequestBuilder.SetRequestUri(System.Uri)">
+            <summary>
+            Sets the RequestUri
+            </summary>
+            <param name="requestUri"></param>
+            <returns></returns>
+        </member>
+        <member name="M:RK.HotRS.ToolsCore.Helpers.HttpRequestHelper.HttpRequestBuilder.SetContent(System.Net.Http.HttpContent)">
+            <summary>
+            Set the Content
+            </summary>
+            <param name="content"></param>
+            <returns></returns>
+        </member>
+        <member name="M:RK.HotRS.ToolsCore.Helpers.HttpRequestHelper.HttpRequestBuilder.SetBearerToken(System.String)">
+            <summary>
+            Set the BearerToken
+            </summary>
+            <param name="bearerToken"></param>
+            <returns></returns>
+        </member>
+        <member name="M:RK.HotRS.ToolsCore.Helpers.HttpRequestHelper.HttpRequestBuilder.SetAcceptHeader(System.String)">
+            <summary>
+            Set the AcceptHeader
+            </summary>
+            <param name="acceptHeader"></param>
+            <returns></returns>
+        </member>
+        <member name="M:RK.HotRS.ToolsCore.Helpers.HttpRequestHelper.HttpRequestBuilder.SetTimeout(System.Nullable{System.TimeSpan})">
+            <summary>
+            Set the Timeout
+            </summary>
+            <param name="timeout"></param>
+            <returns></returns>
+        </member>
+        <member name="M:RK.HotRS.ToolsCore.Helpers.HttpRequestHelper.HttpRequestBuilder.SetCancellationToken(System.Nullable{System.Threading.CancellationToken})">
+            <summary>
+            Set the CancellationToken
+            </summary>
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="M:RK.HotRS.ToolsCore.Helpers.HttpRequestHelper.HttpRequestBuilder.SetHttpCompletionOption(System.Nullable{System.Net.Http.HttpCompletionOption})">
+            <summary>
+            Set the HttpCompletion
+            </summary>
+            <param name="httpCompletionToken"></param>
+            <returns></returns>
+        </member>
+        <member name="M:RK.HotRS.ToolsCore.Helpers.HttpRequestHelper.HttpRequestBuilder.SetMaxResponseSize(System.Nullable{System.Int64})">
+            <summary>
+            Set the max response size
+            </summary>
+            <param name="value"></param>
+            <returns></returns>
+        </member>
+        <member name="M:RK.HotRS.ToolsCore.Helpers.HttpRequestHelper.HttpRequestBuilder.SendAsync">
+            <summary>
+            The primary method that executes the call.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="T:RK.HotRS.ToolsCore.Helpers.HttpRequestHelper.HttpRequestFactory">
+            <summary>
+            Builds and executes an HTTPRequest.
+            The first parameter is always an HttpRequestBuilder. If it is null, a new HtpClient will be created for the call.
+            If it is not null, then the existing HttpClient will be used. 
+            
+            Each method accepts the same 5 optional parameters. If nulled or left unspecified, default values will be used. For everything
+            except AcceptHeader and Timeout, the defaults are nulls. 
+            Acceptheader defaults to "application/json"
+            Timeout defaults to new TimeSpan(0, 0, 15) - ie 15 seconds
+            
+            In most cases these methods can be called with just the required parameters. 
+            For instance: 
+                Get(uri) or 
+                Post(uri, dataobject)
+            </summary>
+        </member>
+        <member name="P:RK.HotRS.ToolsCore.Helpers.HttpRequestHelper.HttpRequestFactory.Builder">
+            <summary>
+            Provides access to the Builder
+            </summary>
+        </member>
+        <member name="M:RK.HotRS.ToolsCore.Helpers.HttpRequestHelper.HttpRequestFactory.#ctor(System.Net.Http.HttpClient)">
+            <summary>
+            Constructor
+            </summary>
+            <param name="client"></param>
+        </member>
+        <member name="M:RK.HotRS.ToolsCore.Helpers.HttpRequestHelper.HttpRequestFactory.GetAsync(System.Uri,System.Nullable{System.Net.Http.HttpCompletionOption},System.Nullable{System.Threading.CancellationToken},System.String,System.String,System.Nullable{System.TimeSpan},System.Nullable{System.Int64})">
+            <summary>
+            Encapsulates and execute a Get call
+            </summary>
+            <param name="requestUri">The location of the endpoint.</param>
+            <param name="completionOption">(Optional) An HtpCompletionOption - default: null</param>
+            <param name="cancellationToken">(Optional) A CancellationToken -  default: null</param>
+            <param name="bearerToken">(Optional) A string representing the BearerToken - default: null</param>
+            <param name="acceptHeader">(Optional) A string representing the accepted data type - default: "application/json"</param>
+            <param name="timeout">(Optional) A timeout value - default: 15 seconds</param>
+            <param name="maxResponseSize">(Optional) A response content size  default: null</param>
+            <returns>HttpResponseMessage</returns>
+        </member>
+        <member name="M:RK.HotRS.ToolsCore.Helpers.HttpRequestHelper.HttpRequestFactory.PostAsync(System.Uri,System.Object,System.Nullable{System.Net.Http.HttpCompletionOption},System.Nullable{System.Threading.CancellationToken},System.String,System.String,System.Nullable{System.TimeSpan},System.Nullable{System.Int64})">
+            <summary>
+            Encapsulates the Post call
+            </summary>
+            <param name="requestUri">The location of the endpoint.</param>
+            <param name="value">The data object to Post</param>
+            <param name="completionOption">(Optional) An HtpCompletionOption - default: null</param>
+            <param name="cancellationToken">(Optional) A CancellationToken -  default: null</param>
+            <param name="bearerToken">(Optional) A string representing the BearerToken - default: null</param>
+            <param name="acceptHeader">(Optional) A string representing the accepted data type - default: "application/json"</param>
+            <param name="timeout">(Optional) A timeout value - default: 15 seconds</param>
+            <param name="maxResponseSize">(Optional) A response content size  default: null</param>
+            <returns>HttpResponseMessage</returns>
+        </member>
+        <member name="M:RK.HotRS.ToolsCore.Helpers.HttpRequestHelper.HttpRequestFactory.PutAsync(System.Uri,System.Object,System.Nullable{System.Net.Http.HttpCompletionOption},System.Nullable{System.Threading.CancellationToken},System.String,System.String,System.Nullable{System.TimeSpan},System.Nullable{System.Int64})">
+            <summary>
+            Encapsulates a Put call 
+            </summary>
+            <param name="requestUri">The location of the endpoint.</param>
+            <param name="value">The data object to Put</param>
+            <param name="completionOption">(Optional) An HtpCompletionOption - default: null</param>
+            <param name="cancellationToken">(Optional) A CancellationToken -  default: null</param>
+            <param name="bearerToken">(Optional) A string representing the BearerToken - default: null</param>
+            <param name="acceptHeader">(Optional) A string representing the accepted data type - default: "application/json"</param>
+            <param name="timeout">(Optional) A timeout value - default: 15 seconds</param>
+            <param name="maxResponseSize">(Optional) A response content size  default: null</param>
+            <returns>HttpResponseMessage</returns>
+        </member>
+        <member name="M:RK.HotRS.ToolsCore.Helpers.HttpRequestHelper.HttpRequestFactory.PatchAsync(System.Uri,System.Object,System.Nullable{System.Net.Http.HttpCompletionOption},System.Nullable{System.Threading.CancellationToken},System.String,System.String,System.Nullable{System.TimeSpan},System.Nullable{System.Int64})">
+            <summary>
+            Encapsulates a Patch call
+            </summary>
+            <param name="requestUri">The location of the endpoint.</param>
+            <param name="value">The data object to Patch</param>
+            <param name="completionOption">(Optional) An HtpCompletionOption - default: null</param>
+            <param name="cancellationToken">(Optional) A CancellationToken -  default: null</param>
+            <param name="bearerToken">(Optional) A string representing the BearerToken - default: null</param>
+            <param name="acceptHeader">(Optional) A string representing the accepted data type - default: "application/json"</param>
+            <param name="timeout">(Optional) A timeout value - default: 15 seconds</param>
+            <param name="maxResponseSize">(Optional) A response content size  default: null</param>
+            <returns>HttpResponseMessage</returns>
+        </member>
+        <member name="M:RK.HotRS.ToolsCore.Helpers.HttpRequestHelper.HttpRequestFactory.DeleteAsync(System.Uri,System.Nullable{System.Net.Http.HttpCompletionOption},System.Nullable{System.Threading.CancellationToken},System.String,System.String,System.Nullable{System.TimeSpan},System.Nullable{System.Int64})">
+            <summary>
+            Encapsulates a Delete call
+            </summary>
+            <param name="requestUri">The location of the endpoint.</param>
+            <param name="completionOption">(Optional) An HtpCompletionOption - default: null</param>
+            <param name="cancellationToken">(Optional) A CancellationToken -  default: null</param>
+            <param name="bearerToken">(Optional) A string representing the BearerToken - default: null</param>
+            <param name="acceptHeader">(Optional) A string representing the accepted data type - default: "application/json"</param>
+            <param name="timeout">(Optional) A timeout value - default: 15 seconds</param>
+            <param name="maxResponseSize">(Optional) A response content size  default: null</param>
+            <returns>HttpResponseMessage</returns>
+        </member>
+        <member name="T:RK.HotRS.ToolsCore.Helpers.HttpRequestHelper.HttpResponseExtensions">
+            <summary>
+            Extensions for the HTTPResponse class
+            </summary>
+        </member>
+        <member name="M:RK.HotRS.ToolsCore.Helpers.HttpRequestHelper.HttpResponseExtensions.ContentAsType``1(System.Net.Http.HttpResponseMessage)">
+            <summary>
+            Convert content into the desired type
+            </summary>
+            <typeparam name="T">The desired type</typeparam>
+            <param name="response"></param>
+            <returns>An object of the desired type</returns>
+        </member>
+        <member name="M:RK.HotRS.ToolsCore.Helpers.HttpRequestHelper.HttpResponseExtensions.ContentAsJson(System.Net.Http.HttpResponseMessage)">
+            <summary>
+            Converts the content into JSON
+            </summary>
+            <param name="response"></param>
+            <returns>A JSON string</returns>
+        </member>
+        <member name="M:RK.HotRS.ToolsCore.Helpers.HttpRequestHelper.HttpResponseExtensions.ContentAsString(System.Net.Http.HttpResponseMessage)">
+            <summary>
+            Converts the content into a string
+            </summary>
+            <param name="response"></param>
+            <returns>A string</returns>
+        </member>
+        <member name="M:RK.HotRS.ToolsCore.Helpers.HttpRequestHelper.HttpResponseExtensions.SetCommonProperties(RK.HotRS.ToolsCore.Helpers.HttpRequestHelper.HttpRequestBuilder,System.String,System.String,System.Nullable{System.Threading.CancellationToken},System.Nullable{System.Net.Http.HttpCompletionOption},System.Nullable{System.TimeSpan},System.Nullable{System.Int64})">
+            <summary>
+            Sets the common properties of the class
+            </summary>
+            <param name="source"></param>
+            <param name="acceptHeader"></param>
+            <param name="bearerToken"></param>
+            <param name="cancellationToken"></param>
+            <param name="completionOption"></param>
+            <param name="timeout"></param>
+            <param name="maxResponseSize"></param>
+            <returns>An the provided HTTPBuilder object with all the properties set</returns>
+        </member>
+        <member name="T:RK.HotRS.ToolsCore.Helpers.HttpRequestHelper.IHttpRequestFactory">
+            <summary>
+            Interface for the HttpRequestFactory
+            </summary>
+        </member>
+        <member name="P:RK.HotRS.ToolsCore.Helpers.HttpRequestHelper.IHttpRequestFactory.Builder">
+            <summary>
+            A Builder object
+            </summary>
+        </member>
+        <member name="M:RK.HotRS.ToolsCore.Helpers.HttpRequestHelper.IHttpRequestFactory.DeleteAsync(System.Uri,System.Nullable{System.Net.Http.HttpCompletionOption},System.Nullable{System.Threading.CancellationToken},System.String,System.String,System.Nullable{System.TimeSpan},System.Nullable{System.Int64})">
+            <summary>
+            Implements the Delete call
+            </summary>
+            <param name="requestUri">The Uri to call</param>
+            <param name="completionOption">The (optional) CompletionOption</param>
+            <param name="cancellationToken">The (optional) CancellationToken</param>
+            <param name="bearerToken">The (optional) BearerToken</param>
+            <param name="acceptHeader">The (optional) AcceptHeader</param>
+            <param name="timeout">The (optional) Timeou</param>
+            <param name="maxResponseSize">The (optional) MaxResponseSize </param>
+            <returns></returns>
+        </member>
+        <member name="M:RK.HotRS.ToolsCore.Helpers.HttpRequestHelper.IHttpRequestFactory.GetAsync(System.Uri,System.Nullable{System.Net.Http.HttpCompletionOption},System.Nullable{System.Threading.CancellationToken},System.String,System.String,System.Nullable{System.TimeSpan},System.Nullable{System.Int64})">
+            <summary>
+            Implements the Get call
+            </summary>
+            <param name="requestUri">The Uri to call</param>
+            <param name="completionOption">The (optional) CompletionOption</param>
+            <param name="cancellationToken">The (optional) CancellationToken</param>
+            <param name="bearerToken">The (optional) BearerToken</param>
+            <param name="acceptHeader">The (optional) AcceptHeader</param>
+            <param name="timeout">The (optional) Timeou</param>
+            <param name="maxResponseSize">The (optional) MaxResponseSize </param>
+            <returns></returns>
+        </member>
+        <member name="M:RK.HotRS.ToolsCore.Helpers.HttpRequestHelper.IHttpRequestFactory.PatchAsync(System.Uri,System.Object,System.Nullable{System.Net.Http.HttpCompletionOption},System.Nullable{System.Threading.CancellationToken},System.String,System.String,System.Nullable{System.TimeSpan},System.Nullable{System.Int64})">
+            <summary>
+            Implements the Patch call
+            </summary>
+            <param name="requestUri">The Uri to call</param>
+            <param name="value">The data to pass in</param>
+            <param name="completionOption">The (optional) CompletionOption</param>
+            <param name="cancellationToken">The (optional) CancellationToken</param>
+            <param name="bearerToken">The (optional) BearerToken</param>
+            <param name="acceptHeader">The (optional) AcceptHeader</param>
+            <param name="timeout">The (optional) Timeou</param>
+            <param name="maxResponseSize">The (optional) MaxResponseSize </param>
+            <returns></returns>
+        </member>
+        <member name="M:RK.HotRS.ToolsCore.Helpers.HttpRequestHelper.IHttpRequestFactory.PostAsync(System.Uri,System.Object,System.Nullable{System.Net.Http.HttpCompletionOption},System.Nullable{System.Threading.CancellationToken},System.String,System.String,System.Nullable{System.TimeSpan},System.Nullable{System.Int64})">
+            <summary>
+            Implements the Post call
+            </summary>
+            <param name="requestUri">The Uri to call</param>
+            <param name="value">The data to pass in</param>
+            <param name="completionOption">The (optional) CompletionOption</param>
+            <param name="cancellationToken">The (optional) CancellationToken</param>
+            <param name="bearerToken">The (optional) BearerToken</param>
+            <param name="acceptHeader">The (optional) AcceptHeader</param>
+            <param name="timeout">The (optional) Timeou</param>
+            <param name="maxResponseSize">The (optional) MaxResponseSize </param>
+            <returns></returns>
+        </member>
+        <member name="M:RK.HotRS.ToolsCore.Helpers.HttpRequestHelper.IHttpRequestFactory.PutAsync(System.Uri,System.Object,System.Nullable{System.Net.Http.HttpCompletionOption},System.Nullable{System.Threading.CancellationToken},System.String,System.String,System.Nullable{System.TimeSpan},System.Nullable{System.Int64})">
+            <summary>
+            Implements the Put call
+            </summary>
+            <param name="requestUri">The Uri to call</param>
+            <param name="value">The data to pass in</param>
+            <param name="completionOption">The (optional) CompletionOption</param>
+            <param name="cancellationToken">The (optional) CancellationToken</param>
+            <param name="bearerToken">The (optional) BearerToken</param>
+            <param name="acceptHeader">The (optional) AcceptHeader</param>
+            <param name="timeout">The (optional) Timeou</param>
+            <param name="maxResponseSize">The (optional) MaxResponseSize </param>
+            <returns></returns>
+        </member>
+        <member name="T:RK.HotRS.ToolsCore.Helpers.HttpRequestHelper.JsonContent">
+            <summary>
+            A JSONContent object
+            </summary>
+        </member>
+        <member name="M:RK.HotRS.ToolsCore.Helpers.HttpRequestHelper.JsonContent.#ctor(System.Object)">
+            <summary>
+            Constructor
+            </summary>
+            <param name="value"></param>
+        </member>
+        <member name="M:RK.HotRS.ToolsCore.Helpers.HttpRequestHelper.JsonContent.#ctor(System.Object,System.String)">
+            <summary>
+            Constructor with media type override
+            </summary>
+            <param name="value"></param>
+            <param name="mediaType"></param>
+        </member>
+        <member name="T:RK.HotRS.ToolsCore.Helpers.HttpRequestHelper.MultipartRequestHelper">
+            <summary>
+            MultipartRequestHeader object
+            </summary>
+        </member>
+        <member name="M:RK.HotRS.ToolsCore.Helpers.HttpRequestHelper.MultipartRequestHelper.GetBoundary(Microsoft.Net.Http.Headers.MediaTypeHeaderValue,System.Int32)">
+            <summary>
+            Returns a string segment
+            </summary>
+            <param name="contentType"></param>
+            <param name="lengthLimit"></param>
+            <returns></returns>
+        </member>
+        <member name="M:RK.HotRS.ToolsCore.Helpers.HttpRequestHelper.MultipartRequestHelper.IsMultipartContentType(System.String)">
+            <summary>
+            Determines if the content is a multipart item
+            </summary>
+            <param name="contentType"></param>
+            <returns></returns>
+        </member>
+        <member name="M:RK.HotRS.ToolsCore.Helpers.HttpRequestHelper.MultipartRequestHelper.HasFormDataContentDisposition(Microsoft.Net.Http.Headers.ContentDispositionHeaderValue)">
+            <summary>
+            Determines if the content is form-data
+            </summary>
+            <param name="contentDisposition"></param>
+            <returns></returns>
+        </member>
+        <member name="M:RK.HotRS.ToolsCore.Helpers.HttpRequestHelper.MultipartRequestHelper.HasFileContentDisposition(Microsoft.Net.Http.Headers.ContentDispositionHeaderValue)">
+            <summary>
+            Determines if the content is a file.
+            </summary>
+            <param name="contentDisposition"></param>
+            <returns></returns>
+        </member>
+        <member name="T:RK.HotRS.ToolsCore.Helpers.HttpRequestHelper.PatchContent">
+            <summary>
+            PatchContent class
+            </summary>
+        </member>
+        <member name="M:RK.HotRS.ToolsCore.Helpers.HttpRequestHelper.PatchContent.#ctor(System.Object)">
+            <summary>
+            Constructor
+            </summary>
+            <param name="value"></param>
+        </member>
+        <member name="T:RK.HotRS.ToolsCore.Helpers.Misc.DirectoryHelpers">
+            <summary>
+            Helpers for managing directories
+            </summary>
+        </member>
+        <member name="M:RK.HotRS.ToolsCore.Helpers.Misc.DirectoryHelpers.CleanUp(System.String,System.Int32)">
+            <summary>
+            Deletes files in folder older than X hours
+            </summary>
+            <param name="folder"></param>
+            <param name="hours"></param>
+        </member>
+        <member name="M:RK.HotRS.ToolsCore.Helpers.Misc.DirectoryHelpers.EnsurePathExists(System.String)">
+            <summary>
+            Checks for and, if necessary, creates a folder.
+            </summary>
+            <param name="path"></param>
+        </member>
+        <member name="T:RK.HotRS.ToolsCore.Helpers.Misc.EFCodeFirstHelpers">
+            <summary>
+            EF Core Code First Helper methods
+            </summary>
+        </member>
+        <member name="M:RK.HotRS.ToolsCore.Helpers.Misc.EFCodeFirstHelpers.RunCustomSql(System.Reflection.Assembly,Microsoft.EntityFrameworkCore.DbContext,System.String,System.Boolean)">
+            <summary>
+            Locates a sql file that is embedded in the assembly and executes it.
+            </summary>
+            <param name="containingAssembly">The assembly in which the sql can be found.</param>
+            <param name="context">A DbContext</param>
+            <param name="resourceName">The name of the resource. This will follow he pattern
+            assembyname.folder(s).filename</param>
+            <param name="ignoreErrors">If set to true exceptions will not abort the process. This 
+            is useful in cases where you do not care if the sql fails. For instance dropping a table 
+            when it does not exist in the first place.</param>
+        </member>
+        <member name="M:RK.HotRS.ToolsCore.Helpers.Misc.EFCodeFirstHelpers.RunCustomSql(System.Reflection.Assembly,Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder,System.String,System.Boolean)">
+            <summary>
+            Locates a sql file that is embedded in the assembly and executes it.
+            </summary>
+            <param name="containingAssembly">The assembly in which the sql can be found.</param>
+            <param name="builder">A MigrationContext</param>
+            <param name="resourceName">The name of the resource. This will follow he pattern
+            assembyname.folder(s).filename</param>
+            <param name="ignoreErrors">If set to true exceptions will not abort the process. This 
+            is useful in cases where you do not care if the sql fails. For instance dropping a table 
+            when it does not exist in the first place.</param>
+        </member>
+        <member name="T:RK.HotRS.ToolsCore.Helpers.Misc.ReflectionHelpers">
+            <summary>
+            Miscellaneous Reflection helpers and extensions
+            </summary>
+        </member>
+        <member name="M:RK.HotRS.ToolsCore.Helpers.Misc.ReflectionHelpers.GetCurrentMethod">
+            <summary>
+            Returns the executing method name
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:RK.HotRS.ToolsCore.Helpers.Office.ExcelHelpers.GetExcelColumnName(System.Int32)">
+             <summary>
+            
+             </summary>
+             <param name="columnNumber"></param>
+             <returns></returns>
+        </member>
+        <member name="M:RK.HotRS.ToolsCore.Helpers.Office.ExcelHelpers.SetRange(OfficeOpenXml.ExcelNamedRange,System.Int64)">
+             <summary>
+            
+             </summary>
+             <param name="range"></param>
+             <param name="length"></param>
+             <returns></returns>
+        </member>
+        <member name="T:RK.HotRS.ToolsCore.Helpers.Office.OfficeProperty">
+            <summary>
+            Class to hold Office Property values extracted from the xml
+            </summary>
+        </member>
+        <member name="T:RK.HotRS.ToolsCore.Middleware.GlobalErrorHandler.GlobalExceptionMiddleware">
+            <summary>
+            Provides a Global handler for uncaught exceptions.
+            </summary>
+        </member>
+        <member name="M:RK.HotRS.ToolsCore.Middleware.GlobalErrorHandler.GlobalExceptionMiddleware.#ctor(Microsoft.AspNetCore.Http.RequestDelegate,RK.HotRS.ToolsCore.Middleware.GlobalErrorHandler.GlobalExceptionHandlerOptions,Microsoft.Extensions.Logging.ILoggerFactory)">
+            <summary>
+            
+            </summary>
+            <param name="next"></param>
+            <param name="loggerFactory"></param>
+            <param name="options"></param>
+        </member>
+        <member name="M:RK.HotRS.ToolsCore.Middleware.GlobalErrorHandler.GlobalExceptionMiddleware.Invoke(Microsoft.AspNetCore.Http.HttpContext)">
+            <summary>
+            
+            </summary>
+            <param name="context"></param>
+            <returns></returns>
+        </member>
+        <member name="T:RK.HotRS.ToolsCore.Middleware.GlobalErrorHandler.GlobalExceptionMiddlewareExtensions">
+            <summary>
+            Extension method used to add the middleware to the HTTP request pipeline. 
+            </summary>
+        </member>
+        <member name="M:RK.HotRS.ToolsCore.Middleware.GlobalErrorHandler.GlobalExceptionMiddlewareExtensions.UseGlobalExceptionMiddleware(Microsoft.AspNetCore.Builder.IApplicationBuilder,System.Action{RK.HotRS.ToolsCore.Middleware.GlobalErrorHandler.GlobalExceptionHandlerOptions})">
+            <summary>
+            Implementation:
+            app.UseGlobalExceptionMiddleware(options => 
+            	{
+            		options.ContentType = "text.json";
+                    options.StatusCode = HttpStatusCode.InternalServerError;
+                    options.FullDetail = false;
+                    options.IncludeData = false;
+                    options.IncludeHelpLink = false;
+                    options.IncludeHResult = false;
+                    options.IncludeInnerException = false;
+                    options.IncludeSource = false;
+                    options.IncludeStackTrace = false;
+                 });
+            </summary>
+            <param name="builder"></param>
+            <param name="configureOptions"></param>
+            <returns></returns>
+        </member>
+        <member name="T:RK.HotRS.ToolsCore.Middleware.GlobalErrorHandler.GlobalExceptionHandlerOptions">
+            <summary>
+            A class to hold parameters to be passed to the GlobalExceptionHandler constuctor
+            </summary>
+        </member>
+        <member name="P:RK.HotRS.ToolsCore.Middleware.GlobalErrorHandler.GlobalExceptionHandlerOptions.ContentType">
+            <summary>
+            One of the standard Http Content Type strings
+            (e.g. 'text/json')
+            </summary>
+        </member>
+        <member name="P:RK.HotRS.ToolsCore.Middleware.GlobalErrorHandler.GlobalExceptionHandlerOptions.StatusCode">
+            <summary>
+            One of the standard Http Status Codes
+            </summary>
+        </member>
+        <member name="P:RK.HotRS.ToolsCore.Middleware.GlobalErrorHandler.GlobalExceptionHandlerOptions.FullDetail">
+            <summary>
+            If true then entire exception is displayed, otherwise only the Selected properties are displayed
+            </summary>
+        </member>
+        <member name="P:RK.HotRS.ToolsCore.Middleware.GlobalErrorHandler.GlobalExceptionHandlerOptions.IncludeData">
+            <summary>
+            If true  then Data property of the exception is displayed.
+            Default = false
+            Note: Only valid if FullDetail is false.
+            </summary>
+        </member>
+        <member name="P:RK.HotRS.ToolsCore.Middleware.GlobalErrorHandler.GlobalExceptionHandlerOptions.IncludeHelpLink">
+            <summary>
+            If true  then HelpLink property of the exception is displayed.
+            Default = false
+            Note: Only valid if FullDetail is false.
+            </summary>
+        </member>
+        <member name="P:RK.HotRS.ToolsCore.Middleware.GlobalErrorHandler.GlobalExceptionHandlerOptions.IncludeHResult">
+            <summary>
+            If true  then HResult property of the exception is displayed.
+            Default = false
+            Note: Only valid if FullDetail is false.
+            </summary>
+        </member>
+        <member name="P:RK.HotRS.ToolsCore.Middleware.GlobalErrorHandler.GlobalExceptionHandlerOptions.IncludeInnerException">
+            <summary>
+            If true  then InnerException property of the exception is displayed.
+            Default = false
+            Note: Only valid if FullDetail is false.
+            </summary>
+        </member>
+        <member name="P:RK.HotRS.ToolsCore.Middleware.GlobalErrorHandler.GlobalExceptionHandlerOptions.IncludeSource">
+            <summary>
+            If true  then Source property of the exception is displayed.
+            Default = false
+            Note: Only valid if FullDetail is false.
+            </summary>
+        </member>
+        <member name="P:RK.HotRS.ToolsCore.Middleware.GlobalErrorHandler.GlobalExceptionHandlerOptions.IncludeStackTrace">
+            <summary>
+            If true  then StackTrace property of the exception is displayed.
+            Default = false
+            Note: Only valid if FullDetail is false.
+            </summary>
+        </member>
+        <member name="M:RK.HotRS.ToolsCore.Middleware.GlobalErrorHandler.GlobalExceptionHandlerOptions.#ctor">
+            <summary>
+            Default constructor.
+            </summary>
+        </member>
+        <member name="T:RK.HotRS.ToolsCore.Middleware.GlobalErrorHandler.IGlobalExceptionExceptionMiddleware">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:RK.HotRS.ToolsCore.Middleware.GlobalErrorHandler.IGlobalExceptionExceptionMiddleware.Invoke(Microsoft.AspNetCore.Http.HttpContext)">
+            <summary>
+            
+            </summary>
+            <param name="context"></param>
+            <returns></returns>
+        </member>
+        <member name="T:RK.HotRS.ToolsCore.Middleware.SwaggerTools.FormFileParameter">
+            <summary>    
+            Enable handling file uploads for IFormFile types via swagger.    
+            </summary>    
+        </member>
+        <member name="M:RK.HotRS.ToolsCore.Middleware.SwaggerTools.FormFileParameter.Apply(Microsoft.OpenApi.Models.OpenApiOperation,Swashbuckle.AspNetCore.SwaggerGen.OperationFilterContext)">
+            <summary>
+            Apply the file upload in Swagger        
+            </summary>        
+            <param name="operation">The operation<see cref="T:Microsoft.OpenApi.Models.OpenApiOperation"/></param>        
+            <param name="context">The context<see cref="T:Swashbuckle.AspNetCore.SwaggerGen.OperationFilterContext"/></param>     
+        </member>
+        <member name="T:RK.HotRS.ToolsCore.Properties.Resources">
+            <summary>
+              A strongly-typed resource class, for looking up localized strings, etc.
+            </summary>
+        </member>
+        <member name="P:RK.HotRS.ToolsCore.Properties.Resources.ResourceManager">
+            <summary>
+              Returns the cached ResourceManager instance used by this class.
+            </summary>
+        </member>
+        <member name="P:RK.HotRS.ToolsCore.Properties.Resources.Culture">
+            <summary>
+              Overrides the current thread's CurrentUICulture property for all
+              resource lookups using this strongly typed resource class.
+            </summary>
+        </member>
+        <member name="P:RK.HotRS.ToolsCore.Properties.Resources.ARGUEMENTNOTPROVIDED">
+            <summary>
+              Looks up a localized string similar to Argument not provided.
+            </summary>
+        </member>
+        <member name="P:RK.HotRS.ToolsCore.Properties.Resources.CANNOTHANDLECHAINEDCONFIGURATIONS">
+            <summary>
+              Looks up a localized string similar to The CleanupJsonConfig extension cannot handle Chained configurations..
+            </summary>
+        </member>
+        <member name="P:RK.HotRS.ToolsCore.Properties.Resources.COLUMNSINUNEXPECTEDORDER">
+            <summary>
+              Looks up a localized string similar to Columns in unexpected order.
+            </summary>
+        </member>
+        <member name="P:RK.HotRS.ToolsCore.Properties.Resources.FILENAMENOTINCONTENTDISPOSITION">
+            <summary>
+              Looks up a localized string similar to Filename was not found the the Content-Disposition.
+            </summary>
+        </member>
+        <member name="P:RK.HotRS.ToolsCore.Properties.Resources.FORMDATA">
+            <summary>
+              Looks up a localized string similar to form-data.
+            </summary>
+        </member>
+        <member name="P:RK.HotRS.ToolsCore.Properties.Resources.METHODNAMECANNOTBENULL">
+            <summary>
+              Looks up a localized string similar to MethodName cannot be null or whitespace.
+            </summary>
+        </member>
+        <member name="P:RK.HotRS.ToolsCore.Properties.Resources.MISSINGCONTETETYPEBOUNDARY">
+            <summary>
+              Looks up a localized string similar to Missing content-type boundary..
+            </summary>
+        </member>
+        <member name="P:RK.HotRS.ToolsCore.Properties.Resources.NOUNOBFUSCATE">
+            <summary>
+              Looks up a localized string similar to There is no way to &apos;unobfuscate&apos; a value, therefore there is no reason to implement the ReadJson method..
+            </summary>
+        </member>
+        <member name="P:RK.HotRS.ToolsCore.Properties.Resources.NULLPARAMETER">
+            <summary>
+              Looks up a localized string similar to Parameter is null.
+            </summary>
+        </member>
+        <member name="P:RK.HotRS.ToolsCore.Properties.Resources.OBFUSCATED">
+            <summary>
+              Looks up a localized string similar to Obfuscated.
+            </summary>
+        </member>
+        <member name="P:RK.HotRS.ToolsCore.Properties.Resources.OBJNOTPROVIDEDTOENUM">
+            <summary>
+              Looks up a localized string similar to Object provided is not an Enum..
+            </summary>
+        </member>
+        <member name="P:RK.HotRS.ToolsCore.Properties.Resources.RESPONSEALREADYSTARTED">
+            <summary>
+              Looks up a localized string similar to The response has already started, the http status code middleware will not be executed..
+            </summary>
+        </member>
+        <member name="P:RK.HotRS.ToolsCore.Properties.Resources.TYPENOTINASSEMBLY">
+            <summary>
+              Looks up a localized string similar to The type of the given value is not an enumeration..
+            </summary>
+        </member>
+        <member name="T:RK.HotRS.ToolsCore.Utilities.JSON.ObfuscatedPropertyResolver">
+            <summary>
+            Provides a property resolver to hide the vale of the target property.
+            Usage: var safeMsg = JsonConvert.SerializeObject(objectinstance, new JsonSerializerSettings() { ContractResolver = new ObfuscatedPropertyResolver(new[] { "an array names of properties to obfuscate"}) });
+            </summary>
+        </member>
+        <member name="T:RK.HotRS.ToolsCore.Utilities.JSON.PropertyRenameOrIgnoreSerializerContractResolver">
+            <summary>
+            Dynamically rename or ignore properties when serializing to JSON
+            Usage:
+                var jsonResolver = new PropertyIgnoreSerializerContractResolver();
+                jsonResolver.IgnoreProperty(typeof(Person), "Title");
+                jsonResolver.RenameProperty(typeof(Person), "FirstName", "firstName");
+            
+                var serializerSettings = new JsonSerializerSettings();
+                serializerSettings.ContractResolver = jsonResolver;
+            
+                var json = JsonConvert.SerializeObject(person, serializerSettings);
+            </summary>
+        </member>
+        <member name="M:RK.HotRS.ToolsCore.Utilities.JSON.PropertyRenameOrIgnoreSerializerContractResolver.#ctor">
+            <summary>
+            Constructor
+            </summary>
+        </member>
+        <member name="M:RK.HotRS.ToolsCore.Utilities.JSON.PropertyRenameOrIgnoreSerializerContractResolver.IgnoreProperty(System.Type,System.String[])">
+            <summary>
+            Ignores a property
+            </summary>
+            <param name="type"></param>
+            <param name="jsonPropertyNames"></param>
+        </member>
+        <member name="M:RK.HotRS.ToolsCore.Utilities.JSON.PropertyRenameOrIgnoreSerializerContractResolver.RenameProperty(System.Type,System.String,System.String)">
+            <summary>
+            Renames a property
+            </summary>
+            <param name="type"></param>
+            <param name="propertyName"></param>
+            <param name="newJsonPropertyName"></param>
+        </member>
+        <member name="M:RK.HotRS.ToolsCore.Utilities.JSON.PropertyRenameOrIgnoreSerializerContractResolver.CreateProperty(System.Reflection.MemberInfo,Newtonsoft.Json.MemberSerialization)">
+            <summary>
+            Overrides the CreateProperty method
+            </summary>
+            <param name="member"></param>
+            <param name="memberSerialization"></param>
+            <returns></returns>
+        </member>
+    </members>
+</doc>

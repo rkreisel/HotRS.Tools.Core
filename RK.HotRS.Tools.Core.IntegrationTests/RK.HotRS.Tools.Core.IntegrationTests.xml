@@ -1,0 +1,37 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>RK.HotRS.Tools.Core.IntegrationTests</name>
+    </assembly>
+    <members>
+        <member name="M:RK.HotRS.Tools.Core.IntegrationTests.Controllers.FileUploadAndAzureBlobStorageTestsController.UploadAnySizeFile(System.String)">
+            <summary>
+            Upload a file of any size. Note that the file MUST be provided in the HTTPContext so it cannot be 
+            specified in the parameters. Try testing via Postman.
+            </summary>
+            <param name="targetFolder"></param>
+            <returns></returns>
+        </member>
+        <member name="T:RK.HotRS.Tools.Core.IntegrationTests.Properties.Resources">
+            <summary>
+              A strongly-typed resource class, for looking up localized strings, etc.
+            </summary>
+        </member>
+        <member name="P:RK.HotRS.Tools.Core.IntegrationTests.Properties.Resources.ResourceManager">
+            <summary>
+              Returns the cached ResourceManager instance used by this class.
+            </summary>
+        </member>
+        <member name="P:RK.HotRS.Tools.Core.IntegrationTests.Properties.Resources.Culture">
+            <summary>
+              Overrides the current thread's CurrentUICulture property for all
+              resource lookups using this strongly typed resource class.
+            </summary>
+        </member>
+        <member name="P:RK.HotRS.Tools.Core.IntegrationTests.Properties.Resources.TYPENOTINASSEMBLY">
+            <summary>
+              Looks up a localized string similar to The type of the given value is not an enumeration..
+            </summary>
+        </member>
+    </members>
+</doc>
