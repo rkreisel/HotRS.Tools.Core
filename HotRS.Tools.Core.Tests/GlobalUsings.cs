@@ -1,0 +1,21 @@
+﻿global using HotRS.Tools.Core.Exceptions;
+global using HotRS.Tools.Core.Extensions;
+global using HotRS.Tools.Core.Helpers.Misc;
+global using HotRS.Tools.Core.Helpers.Office;
+global using HotRS.Tools.Core.Utilities.JSON;
+global using Microsoft.Extensions.Configuration;
+global using Microsoft.OpenApi.Models;
+global using Newtonsoft.Json;
+global using NUnit.Framework;
+global using Swashbuckle.AspNetCore.SwaggerGen;
+global using System;
+global using System.Collections.Generic;
+global using System.ComponentModel.DataAnnotations;
+global using System.Diagnostics;
+global using System.Diagnostics.CodeAnalysis;
+global using System.Globalization;
+global using System.IO;
+global using System.Linq;
+global using System.Reflection;
+global using static HotRS.Tools.Core.Extensions.EnumExtensions;
+
