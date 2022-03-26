@@ -1,0 +1,11 @@
+{
+  "StringValue": "This string",
+  "IntValue": 2147483647,
+  "DateTimeValue": "2019-08-08T03:41:24.8397411Z",
+  "EnumValue": 3,
+  "BoolValue": true,
+  "ListValue": [
+    "item1",
+    "item2"
+  ]
+}
