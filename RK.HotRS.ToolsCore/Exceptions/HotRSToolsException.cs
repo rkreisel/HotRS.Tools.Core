@@ -1,7 +1,7 @@
 ﻿namespace HotRS.Tools.Core.Exceptions;
 
 /// <summary>
-/// Custom exception class for internal errors.
+/// Custom exception class for internal HotRS errors.
 /// </summary>
 [ExcludeFromCodeCoverage]
 public class HotRSToolsException : Exception

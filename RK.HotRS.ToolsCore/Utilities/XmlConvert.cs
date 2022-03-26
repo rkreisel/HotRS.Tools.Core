@@ -1,16 +1,17 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics.CodeAnalysis;
-using System.IO;
-using System.Text;
-using System.Xml;
-using System.Xml.Serialization;
-
-namespace HotRS.Tools.Core.Utilities
+﻿namespace HotRS.Tools.Core.Utilities
 {
+	/// <summary>
+	/// Simplifies converting xml objects to and from a string
+	/// </summary>
 	[ExcludeFromCodeCoverage]
 	public static class XmlConverter
 	{
+		/// <summary>
+		/// Convert and XML object to a string
+		/// </summary>
+		/// <typeparam name="T">The type of the object to convert</typeparam>
+		/// <param name="dataObject">The object</param>
+		/// <returns>A string version of the XML  object</returns>
 		public static string SerializeObject<T>(T dataObject)
 		{
 			if (dataObject == null)
@@ -19,7 +20,7 @@ namespace HotRS.Tools.Core.Utilities
 			}
 			try
 			{
-                using StringWriter stringWriter = new System.IO.StringWriter();
+                using StringWriter stringWriter = new();
                 var serializer = new XmlSerializer(typeof(T));
                 serializer.Serialize(stringWriter, dataObject);
                 return stringWriter.ToString();
@@ -30,6 +31,12 @@ namespace HotRS.Tools.Core.Utilities
 			}
 		}
 
+		/// <summary>
+		/// Convert a stirng version of XML into an XML object
+		/// </summary>
+		/// <typeparam name="T">The target type</typeparam>
+		/// <param name="xml">The string version of he XML</param>
+		/// <returns>An XML object</returns>
 		public static T DeserializeObject<T>(string xml)
 			 where T : new()
 		{
