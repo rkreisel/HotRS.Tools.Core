@@ -6,7 +6,7 @@
 public static class ValidationErrorExtensions
 {
     /// <summary>
-    /// Formats the error messages into a string uding the specified delimier and optional line feed.
+    /// Formats the error messages into a string using the specified delimiter and optional line feed.
     /// </summary>
     /// <param name="source">A list of ValidationResult objects.</param>
     /// <param name="delimiter">The value to be used to separate messages.</param>
