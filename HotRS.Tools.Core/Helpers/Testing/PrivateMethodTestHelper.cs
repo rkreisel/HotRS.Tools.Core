@@ -3,6 +3,7 @@
 /// <summary>
 /// A class to implement a helper for unit testing private methods
 /// </summary>
+[ExcludeFromCodeCoverage]
 public static class PrivateMethodTestHelper
 {
 

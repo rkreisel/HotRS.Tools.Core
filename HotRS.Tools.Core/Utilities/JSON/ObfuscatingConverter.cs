@@ -1,5 +1,6 @@
 ﻿namespace HotRS.Tools.Core.Utilities.JSON;
 
+[ExcludeFromCodeCoverage]
 public class ObfuscatingConverter : JsonConverter<string>
 {
     public override string ReadJson(JsonReader reader, Type objectType, string existingValue, bool hasExistingValue, JsonSerializer serializer)

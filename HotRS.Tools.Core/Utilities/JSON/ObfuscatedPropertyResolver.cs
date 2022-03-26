@@ -4,6 +4,7 @@
 /// Provides a property resolver to hide the vale of the target property.
 /// Usage: var safeMsg = JsonConvert.SerializeObject(objectinstance, new JsonSerializerSettings() { ContractResolver = new ObfuscatedPropertyResolver(new[] { "an array names of properties to obfuscate"}) });
 /// </summary>
+[ExcludeFromCodeCoverage]
 public class ObfuscatedPropertyResolver : DefaultContractResolver
 {
     private readonly HashSet<string> ignoreProps;

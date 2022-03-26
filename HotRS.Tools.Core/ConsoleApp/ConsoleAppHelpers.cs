@@ -1,5 +1,6 @@
 ﻿namespace HotRS.Tools.Core.ConsoleApp;
 
+[ExcludeFromCodeCoverage]
 public static class ConsoleAppHelpers
 {
     /// <summary>

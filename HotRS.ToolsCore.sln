@@ -11,6 +11,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		README.md = README.md
 	EndProjectSection
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HotRS.Tools.Core.Tests", "HotRS.Tools.Core.Tests\HotRS.Tools.Core.Tests.csproj", "{C6EA77ED-9EAD-4143-8388-BE58E16D9367}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{69F42C77-B67D-4049-B207-341138C2DDA2}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{69F42C77-B67D-4049-B207-341138C2DDA2}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{69F42C77-B67D-4049-B207-341138C2DDA2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C6EA77ED-9EAD-4143-8388-BE58E16D9367}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C6EA77ED-9EAD-4143-8388-BE58E16D9367}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C6EA77ED-9EAD-4143-8388-BE58E16D9367}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C6EA77ED-9EAD-4143-8388-BE58E16D9367}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
