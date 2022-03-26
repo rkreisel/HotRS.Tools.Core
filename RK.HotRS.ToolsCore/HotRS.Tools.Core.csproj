@@ -32,6 +32,8 @@
 	
 	<ItemGroup>
 	  <Compile Remove="Extensions\LinqExtensions.cs" />
+	  <Compile Remove="Helpers\HttpRequestHelper\HttpRequestFactory.cs" />
+	  <Compile Remove="Helpers\HttpRequestHelper\IHttpRequestFactory.cs" />
 	</ItemGroup>
 	
 	<ItemGroup>

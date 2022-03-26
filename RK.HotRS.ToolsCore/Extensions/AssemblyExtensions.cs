@@ -2,13 +2,14 @@
 
 public static class AssemblyExtensions
 {
-		/// <summary>
-		/// Returns a string with the contents of the embedded file. Call with Assembly.GetExecutingAssembly().GetTextFileFromAssembly(filename)
-		/// </summary>
-		/// <param name="asm">The executing assembly - must be a concrete instance (i.e. Assembly.GetExecutingAssembly()</param>
-		/// <param name="filename">The (case-sensitive) name of the file to locate.</param>
-		/// <returns>A string or an exception.</returns>
-		public static string GetTextFileFromAssembly(this Assembly asm, string filename)
+    /// <summary>
+    /// Returns a string with the contents of the embedded file. 
+    /// Call with Assembly.GetExecutingAssembly().GetTextFileFromAssembly(filename)
+    /// </summary>
+    /// <param name="asm">The executing assembly - must be a concrete instance (i.e. Assembly.GetExecutingAssembly()</param>
+    /// <param name="filename">The (case-sensitive) name of the file to locate.</param>
+    /// <returns>A string or an exception.</returns>
+    public static string GetTextFileFromAssembly(this Assembly asm, string filename)
     {
         ArgumentNullException.ThrowIfNull(asm, nameof(asm));
         string result;

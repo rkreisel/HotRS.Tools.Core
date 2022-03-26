@@ -1,8 +1,17 @@
 ﻿namespace HotRS.Tools.Core.Helpers.Office;
 
+/// <summary>
+/// Class to provide helpers to retrieve properties from MS Office files.
+/// </summary>
 [ExcludeFromCodeCoverage]
 public class PropertyHelper
 {
+    /// <summary>
+    /// Extracts the "properties" from an Office file.
+    /// </summary>
+    /// <param name="fileName">The target file</param>
+    /// <returns>A List of "OrriceProperties" </returns>
+    /// <exception cref="ApplicationException"></exception>
     public IReadOnlyList<OfficeProperty> GetProperties(string fileName)
     {
         IReadOnlyList<ZipArchiveEntry> manifest = null;

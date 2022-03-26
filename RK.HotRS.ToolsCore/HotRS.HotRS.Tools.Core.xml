@@ -45,7 +45,7 @@
         </member>
         <member name="T:HotRS.Tools.Core.Exceptions.HotRSToolsException">
             <summary>
-            Custom exception class for internal errors.
+            Custom exception class for internal HotRS errors.
             </summary>
         </member>
         <member name="P:HotRS.Tools.Core.Exceptions.HotRSToolsException.Method">
@@ -110,7 +110,8 @@
         </member>
         <member name="M:HotRS.Tools.Core.Extensions.AssemblyExtensions.GetTextFileFromAssembly(System.Reflection.Assembly,System.String)">
             <summary>
-            Returns a string with the contents of the embedded file. Call with Assembly.GetExecutingAssembly().GetTextFileFromAssembly(filename)
+            Returns a string with the contents of the embedded file. 
+            Call with Assembly.GetExecutingAssembly().GetTextFileFromAssembly(filename)
             </summary>
             <param name="asm">The executing assembly - must be a concrete instance (i.e. Assembly.GetExecutingAssembly()</param>
             <param name="filename">The (case-sensitive) name of the file to locate.</param>
@@ -123,7 +124,7 @@
         </member>
         <member name="M:HotRS.Tools.Core.Extensions.CollectionExtensions.IsNullOrEmpty``1(System.Collections.Generic.IEnumerable{``0})">
             <summary>
-            Returns true true if the List is empty or null.
+            Returns true if the List is empty or null.
             </summary>
             <typeparam name="T"></typeparam>
             <param name="source"></param>
@@ -569,102 +570,6 @@
             </summary>
             <returns></returns>
         </member>
-        <member name="T:HotRS.Tools.Core.Helpers.HttpRequestHelper.HttpRequestFactory">
-            <summary>
-            Builds and executes an HTTPRequest.
-            The first parameter is always an HttpRequestBuilder. If it is null, a new HtpClient will be created for the call.
-            If it is not null, then the existing HttpClient will be used. 
-            
-            Each method accepts the same 5 optional parameters. If nulled or left unspecified, default values will be used. For everything
-            except AcceptHeader and Timeout, the defaults are nulls. 
-            Acceptheader defaults to "application/json"
-            Timeout defaults to new TimeSpan(0, 0, 15) - ie 15 seconds
-            
-            In most cases these methods can be called with just the required parameters. 
-            For instance: 
-                Get(uri) or 
-                Post(uri, dataobject)
-            </summary>
-        </member>
-        <member name="P:HotRS.Tools.Core.Helpers.HttpRequestHelper.HttpRequestFactory.Builder">
-            <summary>
-            Provides access to the Builder
-            </summary>
-        </member>
-        <member name="M:HotRS.Tools.Core.Helpers.HttpRequestHelper.HttpRequestFactory.#ctor(System.Net.Http.HttpClient)">
-            <summary>
-            Constructor
-            </summary>
-            <param name="client"></param>
-        </member>
-        <member name="M:HotRS.Tools.Core.Helpers.HttpRequestHelper.HttpRequestFactory.GetAsync(System.Uri,System.Nullable{System.Net.Http.HttpCompletionOption},System.Nullable{System.Threading.CancellationToken},System.String,System.String,System.Nullable{System.TimeSpan},System.Nullable{System.Int64})">
-            <summary>
-            Encapsulates and execute a Get call
-            </summary>
-            <param name="requestUri">The location of the endpoint.</param>
-            <param name="completionOption">(Optional) An HtpCompletionOption - default: null</param>
-            <param name="cancellationToken">(Optional) A CancellationToken -  default: null</param>
-            <param name="bearerToken">(Optional) A string representing the BearerToken - default: null</param>
-            <param name="acceptHeader">(Optional) A string representing the accepted data type - default: "application/json"</param>
-            <param name="timeout">(Optional) A timeout value - default: 15 seconds</param>
-            <param name="maxResponseSize">(Optional) A response content size  default: null</param>
-            <returns>HttpResponseMessage</returns>
-        </member>
-        <member name="M:HotRS.Tools.Core.Helpers.HttpRequestHelper.HttpRequestFactory.PostAsync(System.Uri,System.Object,System.Nullable{System.Net.Http.HttpCompletionOption},System.Nullable{System.Threading.CancellationToken},System.String,System.String,System.Nullable{System.TimeSpan},System.Nullable{System.Int64})">
-            <summary>
-            Encapsulates the Post call
-            </summary>
-            <param name="requestUri">The location of the endpoint.</param>
-            <param name="value">The data object to Post</param>
-            <param name="completionOption">(Optional) An HtpCompletionOption - default: null</param>
-            <param name="cancellationToken">(Optional) A CancellationToken -  default: null</param>
-            <param name="bearerToken">(Optional) A string representing the BearerToken - default: null</param>
-            <param name="acceptHeader">(Optional) A string representing the accepted data type - default: "application/json"</param>
-            <param name="timeout">(Optional) A timeout value - default: 15 seconds</param>
-            <param name="maxResponseSize">(Optional) A response content size  default: null</param>
-            <returns>HttpResponseMessage</returns>
-        </member>
-        <member name="M:HotRS.Tools.Core.Helpers.HttpRequestHelper.HttpRequestFactory.PutAsync(System.Uri,System.Object,System.Nullable{System.Net.Http.HttpCompletionOption},System.Nullable{System.Threading.CancellationToken},System.String,System.String,System.Nullable{System.TimeSpan},System.Nullable{System.Int64})">
-            <summary>
-            Encapsulates a Put call 
-            </summary>
-            <param name="requestUri">The location of the endpoint.</param>
-            <param name="value">The data object to Put</param>
-            <param name="completionOption">(Optional) An HtpCompletionOption - default: null</param>
-            <param name="cancellationToken">(Optional) A CancellationToken -  default: null</param>
-            <param name="bearerToken">(Optional) A string representing the BearerToken - default: null</param>
-            <param name="acceptHeader">(Optional) A string representing the accepted data type - default: "application/json"</param>
-            <param name="timeout">(Optional) A timeout value - default: 15 seconds</param>
-            <param name="maxResponseSize">(Optional) A response content size  default: null</param>
-            <returns>HttpResponseMessage</returns>
-        </member>
-        <member name="M:HotRS.Tools.Core.Helpers.HttpRequestHelper.HttpRequestFactory.PatchAsync(System.Uri,System.Object,System.Nullable{System.Net.Http.HttpCompletionOption},System.Nullable{System.Threading.CancellationToken},System.String,System.String,System.Nullable{System.TimeSpan},System.Nullable{System.Int64})">
-            <summary>
-            Encapsulates a Patch call
-            </summary>
-            <param name="requestUri">The location of the endpoint.</param>
-            <param name="value">The data object to Patch</param>
-            <param name="completionOption">(Optional) An HtpCompletionOption - default: null</param>
-            <param name="cancellationToken">(Optional) A CancellationToken -  default: null</param>
-            <param name="bearerToken">(Optional) A string representing the BearerToken - default: null</param>
-            <param name="acceptHeader">(Optional) A string representing the accepted data type - default: "application/json"</param>
-            <param name="timeout">(Optional) A timeout value - default: 15 seconds</param>
-            <param name="maxResponseSize">(Optional) A response content size  default: null</param>
-            <returns>HttpResponseMessage</returns>
-        </member>
-        <member name="M:HotRS.Tools.Core.Helpers.HttpRequestHelper.HttpRequestFactory.DeleteAsync(System.Uri,System.Nullable{System.Net.Http.HttpCompletionOption},System.Nullable{System.Threading.CancellationToken},System.String,System.String,System.Nullable{System.TimeSpan},System.Nullable{System.Int64})">
-            <summary>
-            Encapsulates a Delete call
-            </summary>
-            <param name="requestUri">The location of the endpoint.</param>
-            <param name="completionOption">(Optional) An HtpCompletionOption - default: null</param>
-            <param name="cancellationToken">(Optional) A CancellationToken -  default: null</param>
-            <param name="bearerToken">(Optional) A string representing the BearerToken - default: null</param>
-            <param name="acceptHeader">(Optional) A string representing the accepted data type - default: "application/json"</param>
-            <param name="timeout">(Optional) A timeout value - default: 15 seconds</param>
-            <param name="maxResponseSize">(Optional) A response content size  default: null</param>
-            <returns>HttpResponseMessage</returns>
-        </member>
         <member name="T:HotRS.Tools.Core.Helpers.HttpRequestHelper.HttpResponseExtensions">
             <summary>
             Extensions for the HTTPResponse class
@@ -704,84 +609,6 @@
             <param name="timeout"></param>
             <param name="maxResponseSize"></param>
             <returns>An the provided HTTPBuilder object with all the properties set</returns>
-        </member>
-        <member name="T:HotRS.Tools.Core.Helpers.HttpRequestHelper.IHttpRequestFactory">
-            <summary>
-            Interface for the HttpRequestFactory
-            </summary>
-        </member>
-        <member name="P:HotRS.Tools.Core.Helpers.HttpRequestHelper.IHttpRequestFactory.Builder">
-            <summary>
-            A Builder object
-            </summary>
-        </member>
-        <member name="M:HotRS.Tools.Core.Helpers.HttpRequestHelper.IHttpRequestFactory.DeleteAsync(System.Uri,System.Nullable{System.Net.Http.HttpCompletionOption},System.Nullable{System.Threading.CancellationToken},System.String,System.String,System.Nullable{System.TimeSpan},System.Nullable{System.Int64})">
-            <summary>
-            Implements the Delete call
-            </summary>
-            <param name="requestUri">The Uri to call</param>
-            <param name="completionOption">The (optional) CompletionOption</param>
-            <param name="cancellationToken">The (optional) CancellationToken</param>
-            <param name="bearerToken">The (optional) BearerToken</param>
-            <param name="acceptHeader">The (optional) AcceptHeader</param>
-            <param name="timeout">The (optional) Timeou</param>
-            <param name="maxResponseSize">The (optional) MaxResponseSize </param>
-            <returns></returns>
-        </member>
-        <member name="M:HotRS.Tools.Core.Helpers.HttpRequestHelper.IHttpRequestFactory.GetAsync(System.Uri,System.Nullable{System.Net.Http.HttpCompletionOption},System.Nullable{System.Threading.CancellationToken},System.String,System.String,System.Nullable{System.TimeSpan},System.Nullable{System.Int64})">
-            <summary>
-            Implements the Get call
-            </summary>
-            <param name="requestUri">The Uri to call</param>
-            <param name="completionOption">The (optional) CompletionOption</param>
-            <param name="cancellationToken">The (optional) CancellationToken</param>
-            <param name="bearerToken">The (optional) BearerToken</param>
-            <param name="acceptHeader">The (optional) AcceptHeader</param>
-            <param name="timeout">The (optional) Timeou</param>
-            <param name="maxResponseSize">The (optional) MaxResponseSize </param>
-            <returns></returns>
-        </member>
-        <member name="M:HotRS.Tools.Core.Helpers.HttpRequestHelper.IHttpRequestFactory.PatchAsync(System.Uri,System.Object,System.Nullable{System.Net.Http.HttpCompletionOption},System.Nullable{System.Threading.CancellationToken},System.String,System.String,System.Nullable{System.TimeSpan},System.Nullable{System.Int64})">
-            <summary>
-            Implements the Patch call
-            </summary>
-            <param name="requestUri">The Uri to call</param>
-            <param name="value">The data to pass in</param>
-            <param name="completionOption">The (optional) CompletionOption</param>
-            <param name="cancellationToken">The (optional) CancellationToken</param>
-            <param name="bearerToken">The (optional) BearerToken</param>
-            <param name="acceptHeader">The (optional) AcceptHeader</param>
-            <param name="timeout">The (optional) Timeou</param>
-            <param name="maxResponseSize">The (optional) MaxResponseSize </param>
-            <returns></returns>
-        </member>
-        <member name="M:HotRS.Tools.Core.Helpers.HttpRequestHelper.IHttpRequestFactory.PostAsync(System.Uri,System.Object,System.Nullable{System.Net.Http.HttpCompletionOption},System.Nullable{System.Threading.CancellationToken},System.String,System.String,System.Nullable{System.TimeSpan},System.Nullable{System.Int64})">
-            <summary>
-            Implements the Post call
-            </summary>
-            <param name="requestUri">The Uri to call</param>
-            <param name="value">The data to pass in</param>
-            <param name="completionOption">The (optional) CompletionOption</param>
-            <param name="cancellationToken">The (optional) CancellationToken</param>
-            <param name="bearerToken">The (optional) BearerToken</param>
-            <param name="acceptHeader">The (optional) AcceptHeader</param>
-            <param name="timeout">The (optional) Timeou</param>
-            <param name="maxResponseSize">The (optional) MaxResponseSize </param>
-            <returns></returns>
-        </member>
-        <member name="M:HotRS.Tools.Core.Helpers.HttpRequestHelper.IHttpRequestFactory.PutAsync(System.Uri,System.Object,System.Nullable{System.Net.Http.HttpCompletionOption},System.Nullable{System.Threading.CancellationToken},System.String,System.String,System.Nullable{System.TimeSpan},System.Nullable{System.Int64})">
-            <summary>
-            Implements the Put call
-            </summary>
-            <param name="requestUri">The Uri to call</param>
-            <param name="value">The data to pass in</param>
-            <param name="completionOption">The (optional) CompletionOption</param>
-            <param name="cancellationToken">The (optional) CancellationToken</param>
-            <param name="bearerToken">The (optional) BearerToken</param>
-            <param name="acceptHeader">The (optional) AcceptHeader</param>
-            <param name="timeout">The (optional) Timeou</param>
-            <param name="maxResponseSize">The (optional) MaxResponseSize </param>
-            <returns></returns>
         </member>
         <member name="T:HotRS.Tools.Core.Helpers.HttpRequestHelper.JsonContent">
             <summary>
@@ -875,17 +702,55 @@
             </summary>
             <returns></returns>
         </member>
+        <member name="T:HotRS.Tools.Core.Helpers.Misc.ZipTools">
+            <summary>
+            Tools for zip files
+            </summary>
+        </member>
+        <member name="M:HotRS.Tools.Core.Helpers.Misc.ZipTools.GetManifest(System.String)">
+            <summary>
+            Read the zip file manifest
+            </summary>
+            <param name="fileName">The zip file name</param>
+            <returns>A list of items in the zip file</returns>
+        </member>
+        <member name="M:HotRS.Tools.Core.Helpers.Misc.ZipTools.ExtractFile(System.String,System.String)">
+            <summary>
+            Extract a single file from a Zip file.
+            </summary>
+            <param name="zipFileName">Teh zip File Name</param>
+            <param name="itemPathAndName">The full path to the desired file</param>
+            <returns>A memory stream which can be read to export the file.</returns>
+        </member>
+        <member name="T:HotRS.Tools.Core.Helpers.Office.ExcelHelpers">
+            <summary>
+            Excel tools
+            </summary>
+        </member>
         <member name="M:HotRS.Tools.Core.Helpers.Office.ExcelHelpers.GetExcelColumnName(System.Int32)">
-             <summary>
-            
-             </summary>
-             <param name="columnNumber"></param>
-             <returns></returns>
+            <summary>
+            Gets the "name" of a column from its ordinal number. Use this to get the alphabetic value of an integer coulmn number. For instance 27 will return "AA"
+            </summary>
+            <param name="columnNumber"></param>
+            <returns></returns>
         </member>
         <member name="T:HotRS.Tools.Core.Helpers.Office.OfficeProperty">
             <summary>
             Class to hold Office Property values extracted from the xml
             </summary>
+        </member>
+        <member name="T:HotRS.Tools.Core.Helpers.Office.PropertyHelper">
+            <summary>
+            Class to provide helpers to retrieve properties from MS Office files.
+            </summary>
+        </member>
+        <member name="M:HotRS.Tools.Core.Helpers.Office.PropertyHelper.GetProperties(System.String)">
+            <summary>
+            Extracts the "properties" from an Office file.
+            </summary>
+            <param name="fileName">The target file</param>
+            <returns>A List of "OrriceProperties" </returns>
+            <exception cref="T:System.ApplicationException"></exception>
         </member>
         <member name="T:HotRS.Tools.Core.Helpers.Testing.PrivateMethodTestHelper">
             <summary>
@@ -922,6 +787,7 @@
         <member name="T:HotRS.Tools.Core.Middleware.GlobalErrorHandler.GlobalExceptionMiddleware">
             <summary>
             Provides a Global handler for uncaught exceptions.
+            This was created for .net 3.0 and has probably been obsoleted by now.
             </summary>
         </member>
         <member name="M:HotRS.Tools.Core.Middleware.GlobalErrorHandler.GlobalExceptionMiddleware.#ctor(Microsoft.AspNetCore.Http.RequestDelegate,HotRS.Tools.Core.Middleware.GlobalErrorHandler.GlobalExceptionHandlerOptions,Microsoft.Extensions.Logging.ILoggerFactory)">
@@ -1034,7 +900,8 @@
         </member>
         <member name="T:HotRS.Tools.Core.Middleware.GlobalErrorHandler.IGlobalExceptionExceptionMiddleware">
             <summary>
-            
+            Provides a Global handler for uncaught exceptions.
+            This was created for .net 3.0 and has probably been obsoleted by now.
             </summary>
         </member>
         <member name="M:HotRS.Tools.Core.Middleware.GlobalErrorHandler.IGlobalExceptionExceptionMiddleware.Invoke(Microsoft.AspNetCore.Http.HttpContext)">
@@ -1184,6 +1051,27 @@
             <param name="member"></param>
             <param name="memberSerialization"></param>
             <returns></returns>
+        </member>
+        <member name="T:HotRS.Tools.Core.Utilities.XmlConverter">
+            <summary>
+            Simplifies converting xml objects to and from a string
+            </summary>
+        </member>
+        <member name="M:HotRS.Tools.Core.Utilities.XmlConverter.SerializeObject``1(``0)">
+            <summary>
+            Convert and XML object to a string
+            </summary>
+            <typeparam name="T">The type of the object to convert</typeparam>
+            <param name="dataObject">The object</param>
+            <returns>A string version of the XML  object</returns>
+        </member>
+        <member name="M:HotRS.Tools.Core.Utilities.XmlConverter.DeserializeObject``1(System.String)">
+            <summary>
+            Convert a stirng version of XML into an XML object
+            </summary>
+            <typeparam name="T">The target type</typeparam>
+            <param name="xml">The string version of he XML</param>
+            <returns>An XML object</returns>
         </member>
     </members>
 </doc>
