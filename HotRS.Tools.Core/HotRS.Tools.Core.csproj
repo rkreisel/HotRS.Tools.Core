@@ -9,7 +9,7 @@
 		<Description>Various tools,extensions, etc. for .Net Core Upgraded to core 6</Description>
 		<Copyright>Randy Kreisel 2022</Copyright>
 		<PackageTags>Core, extension, file upload, azure, helper, global exception handler json</PackageTags>
-		<PackageReleaseNotes>Added extension methods to test private methods</PackageReleaseNotes>
+		<PackageReleaseNotes>Initial Release</PackageReleaseNotes>
 		<PackageLicenseUrl></PackageLicenseUrl>
 	</PropertyGroup>
 
@@ -24,6 +24,9 @@
 	<PropertyGroup>
 		<PackageLicenseExpression>MIT</PackageLicenseExpression>
 		<NeutralLanguage>EN</NeutralLanguage>
+		<PackageProjectUrl>https://github.com/rkreisel/HotRS.Tools.Core</PackageProjectUrl>
+		<PackageReadmeFile>README.md</PackageReadmeFile>
+		<RepositoryType>git</RepositoryType>
 	</PropertyGroup>
 	
 	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
@@ -38,6 +41,10 @@
 	
 	<ItemGroup>
 	  <None Include="..\.editorconfig" Link=".editorconfig" />
+	  <None Include="..\README.md">
+	    <Pack>True</Pack>
+	    <PackagePath>\</PackagePath>
+	  </None>
 	</ItemGroup>
 
 	<ItemGroup>
