@@ -3,7 +3,7 @@
 	<PropertyGroup>
 		<TargetFramework>net6.0</TargetFramework>		
 		<GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-		<Version>1.0.0</Version>
+		<Version>1.0.0.2</Version>
 		<Authors>Randy Kreisel</Authors>
 		<Company>House on the Rock Software</Company>
 		<Description>Various tools,extensions, etc. for .Net Core Upgraded to core 6</Description>

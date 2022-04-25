@@ -34,17 +34,48 @@ public static class StringExtensionsTests
     }
 
     [Test]
+    public static void AddCSVInjectionTestNoSingleOrDouble()
+    {
+        var actual = "something with a | and a \\ in it".AddCSVInjectionProtection();
+        Assert.That(actual == @"something with a \| and a \ in it", Is.True);
+    }
+
+    [Test]
+    public static void AddCSVInjectionTestNull()
+    {
+        string input = null;
+        var actual = input.AddCSVInjectionProtection();
+        Assert.IsNull(actual);
+    }
+
+    [Test]
     public static void RemoveCSVInjectionTest()
     {
         var actual = @"something with a \| in it".RemoveCSVInjectionProtection();
         Assert.That(actual == @"something with a | in it", Is.True);
     }
 
+    //[Test]
+    //public static void RemoveCSVInjectionTestBoth()
+    //{
+    //    var actual = @"something with a \| and a \\| in it".RemoveCSVInjectionProtection();
+    //    Assert.That(actual == @"something with a | in it", Is.True);
+    //}
+
     [Test]
     public static void RemoveCSVInjectionTestDoubles()
     {
         var actual = @"something with a \| in it \|".RemoveCSVInjectionProtection();
         Assert.That(actual == @"something with a | in it |", Is.True);
+    }
+
+    [Test]
+    public static void DateStringFromExcelDateStringNull()
+    {
+        var targetPattern = CultureInfo.CurrentCulture.DateTimeFormat.ShortDatePattern;
+        string sourceDate = null;
+        var actual = sourceDate.DateStringFromExcelDateString();
+        Assert.IsNull (actual);
     }
 
     [Test]
@@ -63,6 +94,14 @@ public static class StringExtensionsTests
         var sourceDate = DateTime.Now;
         var actual = sourceDate.ToLongDateString().DateStringFromExcelDateString(targetPattern);
         Assert.That(actual == sourceDate.ToString(targetPattern), Is.True);
+    }
+    [Test]
+    public static void DateStringFromExcelDateStringMinimumDateReturnsNull()
+    {
+        var targetPattern = "MMM/dd/yyyy";
+        var sourceDate = "01/01/0001";
+        var actual = sourceDate.DateStringFromExcelDateString(targetPattern);
+        Assert.IsNull(actual);
     }
 
     [Test]
@@ -98,6 +137,38 @@ public static class StringExtensionsTests
         var sourceDate = DateTime.Now;
         // Note: 43611 is the Excel representation of May 26th, 2019
         Assert.Throws<FormatException>(() => "43362x".DateStringFromExcelDateString(targetPattern));
+    }
+
+    [Test]
+    public static void AppendListToStringNoPrefix()
+    {
+        string sourceString = string.Empty;
+        var elementList = new List<string>()
+        {
+            "Element 1",
+            "Element 2",
+            "Element 3"
+        };
+        var actual = sourceString.AppendListToString(elementList, null);
+        Assert.That(actual, Is.EqualTo("Element 1Element 2Element 3"));
+    }
+
+    [Test]
+    public static void AppendListToStringNullListReturnsSource()
+    {
+        string sourceString = "Beginning String";
+        List<string> elementList = null;
+        var actual = sourceString.AppendListToString(elementList, null);
+        Assert.That(actual, Is.EqualTo(sourceString));
+    }
+
+    [Test]
+    public static void AppendListToStringEmptyListReturnsSource()
+    {
+        string sourceString = "Beginning String";
+        var elementList = new List<string>();
+        var actual = sourceString.AppendListToString(elementList, null);
+        Assert.That(actual, Is.EqualTo(sourceString));
     }
 
     [Test]
@@ -140,5 +211,12 @@ public static class StringExtensionsTests
         };
         var actual = sourceString.AppendListToString(elementList, ": ");
         Assert.That(actual, Is.EqualTo("Beginning Element 1: Element 2: Element 3"));
+    }
+    [TestCase("1", ExpectedResult = 1)]
+    [TestCase(" ", ExpectedResult = null)]
+    [TestCase(null, ExpectedResult = null)]
+    public static int? ToNullableIntTests(string input)
+    {
+        return input.ToNullableInt();
     }
 }
