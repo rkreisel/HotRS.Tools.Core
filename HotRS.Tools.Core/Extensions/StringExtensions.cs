@@ -26,11 +26,7 @@ public static class StringExtensions
     /// <returns></returns>
     public static string AddCSVInjectionProtection(this string source)
     {
-        if (string.IsNullOrWhiteSpace(source))
-        {
-            return null;
-        }
-        return source.Replace("|", @"\|", StringComparison.InvariantCulture).Replace(@"\\", @"\", StringComparison.InvariantCulture);
+        return source?.Replace("|", @"\|", StringComparison.InvariantCulture).Replace(@"\\", @"\", StringComparison.InvariantCulture);
     }
 
     /// <summary>

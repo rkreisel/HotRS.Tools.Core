@@ -1,5 +1,5 @@
 # HotRS.Tools.Core
-Various tools and extensions for .Net Core (6)
+Various tools and extensions for .Net (6)
 
 Follow/Contribute:
 https://github.com/rkreisel/HotRS.Tools.Core

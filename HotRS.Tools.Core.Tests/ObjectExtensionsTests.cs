@@ -26,6 +26,27 @@ public static class ObjectExtensionsTests
     }
 
     [Test]
+    public static void CheckForNullObjectIsNullCustomMessageIsNull()
+    {
+        Dictionary<string, string> obj = null;
+        string customMessage = null;
+        Assert.That(() => obj.CheckForNull<HotRSToolsException>(nameof(obj), customMessage),
+            Throws.Exception.TypeOf<HotRSToolsException>()
+            .With.Message.EqualTo($"{nameof(obj)}{customMessage}"));
+    }
+
+    [Test]
+    public static void CheckForNullObjectIsNotNullCustomMessage()
+    {
+        Dictionary<string, string> obj = new Dictionary<string, string>();
+        var customMessage = "Custom null object message";
+        obj.CheckForNull<HotRSToolsException>(nameof(obj), customMessage);
+
+        //If obj is not null not error is thrown and variable is changed. So the Assert is not really necessary.
+        Assert.IsNotNull(obj);
+    }
+
+    [Test]
     public static void CheckForNullObjectIsNotNull()
     {
         Dictionary<string, string> obj = new ();

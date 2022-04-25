@@ -6,6 +6,7 @@
 public static class ObjectExtensions
 {
     [Obsolete("Use the new built-in ArgumentNullException.ThrowIfNull(o, paramName); instead")]
+    [ExcludeFromCodeCoverage]
     public static void CheckForNull(this object o, string paramName)
     {
         ArgumentNullException.ThrowIfNull(o, paramName);
@@ -23,7 +24,7 @@ public static class ObjectExtensions
         if (o == null)
         {
             var formattedMessage = string.IsNullOrWhiteSpace(message) ? paramName : $"{paramName} - {message}";
-            throw (T)Activator.CreateInstance(typeof(T), new object[] { $"{formattedMessage}" });
+            throw (T)Activator.CreateInstance(typeof(T), new object[] { formattedMessage });
         }
     }
 }
