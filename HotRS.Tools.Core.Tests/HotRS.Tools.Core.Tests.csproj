@@ -5,7 +5,11 @@
     <UserSecretsId>23fc1521-ec46-4c82-833a-9c8aeb87364c</UserSecretsId>
   </PropertyGroup>
 
-  <ItemGroup>
+	<PropertyGroup>
+		<RunSettingsFilePath>$(MSBuildProjectDirectory)\test.runsettings</RunSettingsFilePath>
+	</PropertyGroup>
+
+	<ItemGroup>
     <None Remove="TestData\TestData.json" />
   </ItemGroup>
 
