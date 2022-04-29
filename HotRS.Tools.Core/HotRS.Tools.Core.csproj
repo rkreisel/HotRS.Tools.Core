@@ -6,7 +6,7 @@
 		<Version>1.0.0.2</Version>
 		<Authors>Randy Kreisel</Authors>
 		<Company>House on the Rock Software</Company>
-		<Description>Various tools,extensions, etc. for .Net Core Upgraded to core 6</Description>
+		<Description>Various tools,extensions, etc. for .Net Core Upgraded to .Net 6</Description>
 		<Copyright>Randy Kreisel 2022</Copyright>
 		<PackageTags>Core, extension, file upload, azure, helper, global exception handler json</PackageTags>
 		<PackageReleaseNotes>Initial Release</PackageReleaseNotes>
