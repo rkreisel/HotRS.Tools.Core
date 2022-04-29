@@ -110,11 +110,7 @@ Included items must then not match any entries in the exclude list to remain inc
                         <!-- Match the path of the source files in which each method is defined: -->
                         <Sources>
                             <Exclude>
-                                <Source>.*\\*Resources*\\.*</Source>
-                                <Source>.*\\vctools\\.*</Source>
-                                <Source>.*\\public\\sdk\\.*</Source>
-                                <Source>.*\\microsoft sdks\\.*</Source>
-                                <Source>.*\\vc\\include\\.*</Source>
+                                <Source>.*\\*Resources*\\.*</Source>                                
                             </Exclude>
                         </Sources>
 
