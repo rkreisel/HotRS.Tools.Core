@@ -65,7 +65,6 @@ public static class StringExtensionsTests
     [Test]
     public static void DateStringFromExcelDateStringNull()
     {
-        var targetPattern = CultureInfo.CurrentCulture.DateTimeFormat.ShortDatePattern;
         string sourceDate = null;
         var actual = sourceDate.DateStringFromExcelDateString();
         Assert.IsNull (actual);

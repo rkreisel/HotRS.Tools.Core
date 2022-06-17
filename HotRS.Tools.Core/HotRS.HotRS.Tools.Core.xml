@@ -276,21 +276,6 @@
             </summary>
             <param name="s"></param>
         </member>
-        <member name="M:HotRS.Tools.Core.Extensions.StringExtensions.AddCSVInjectionProtection(System.String)">
-            <summary>
-            Escapes the pipe character by prepending a backslash.
-            Useful for Excel file creation.
-            </summary>
-            <param name="source"></param>
-            <returns></returns>
-        </member>
-        <member name="M:HotRS.Tools.Core.Extensions.StringExtensions.RemoveCSVInjectionProtection(System.String)">
-            <summary>
-            Removes the CSV injection protection added by AddCSVInjectionProtection
-            </summary>
-            <param name="source"></param>
-            <returns></returns>
-        </member>
         <member name="M:HotRS.Tools.Core.Extensions.StringExtensions.DateStringFromExcelDateString(System.String,System.String)">
             <summary>
             Parses a string from an Excel format date string
