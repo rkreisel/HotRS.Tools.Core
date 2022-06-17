@@ -1,0 +1,10 @@
+﻿using HotRS.Tools.Core.ConsoleApp;
+Console.WriteLine("Hello World!");
+ConsoleAppHelpers.CloseIfNotAborted();
+Console.WriteLine();
+ConsoleAppHelpers.CloseIfNotAborted(seconds: 10);
+Console.WriteLine();
+ConsoleAppHelpers.CloseIfNotAborted(targetKey: ConsoleKey.X);
+Console.WriteLine();
+ConsoleAppHelpers.CloseIfNotAborted(seconds: 10, targetKey: ConsoleKey.X);
+Console.WriteLine("Goodbye World!");

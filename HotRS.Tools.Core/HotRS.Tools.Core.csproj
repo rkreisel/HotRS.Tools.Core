@@ -3,10 +3,14 @@
 	<PropertyGroup>
 		<TargetFramework>net6.0</TargetFramework>		
 		<GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-		<Version>1.0.0.2</Version>
+		<Version>1.0.1.0</Version>
 		<Authors>Randy Kreisel</Authors>
 		<Company>House on the Rock Software</Company>
-		<Description>Various tools,extensions, etc. for .Net Core Upgraded to .Net 6</Description>
+		<Description>Various tools,extensions, etc. for .Net Core Upgraded to .Net 6.
+1.0.1.0 - BREAKING CHANGE:
+AddCSVInjectionProtection and RemoveCSVInjectionProtection have been combined into CSVInjectionProtection with an "action" parameter 
+
+Also enhanced CloseIfNotAborted to accept developer defined response key.</Description>
 		<Copyright>Randy Kreisel 2022</Copyright>
 		<PackageTags>Core, extension, file upload, azure, helper, global exception handler json</PackageTags>
 		<PackageReleaseNotes>Initial Release</PackageReleaseNotes>

@@ -18,24 +18,14 @@ public static class StringExtensions
     /// <param name="s"></param>
     public static int? ToNullableInt(this string s) => int.TryParse(s, out var i) ? i as int? : null;
 
-    /// <summary>
-    /// Escapes the pipe character by prepending a backslash.
-    /// Useful for Excel file creation.
-    /// </summary>
-    /// <param name="source"></param>
-    /// <returns></returns>
-    public static string AddCSVInjectionProtection(this string source)
+    public static string CSVInjectionProtection(this string source, CSVInjectionProtectionAction action)
     {
-        return source?.Replace("|", @"\|", StringComparison.InvariantCulture).Replace(@"\\", @"\", StringComparison.InvariantCulture);
+        if (action == CSVInjectionProtectionAction.Clear)
+           return source.Replace(@"\|", "|", StringComparison.InvariantCulture);
+        else 
+            return source?.Replace("|", @"\|", StringComparison.InvariantCulture).Replace(@"\\", @"\", StringComparison.InvariantCulture);        
     }
-
-    /// <summary>
-    /// Removes the CSV injection protection added by AddCSVInjectionProtection
-    /// </summary>
-    /// <param name="source"></param>
-    /// <returns></returns>
-    public static string RemoveCSVInjectionProtection(this string source) => source.Replace(@"\|", "|", StringComparison.InvariantCulture);
-
+    
     /// <summary>
     /// Parses a string from an Excel format date string
     /// </summary>
@@ -78,4 +68,9 @@ public static class StringExtensions
         return $"{source}{string.Join(prefix, list.ToArray())}";
     }
 
+    public enum CSVInjectionProtectionAction
+    {
+        Protect,
+        Clear
+    }
 }

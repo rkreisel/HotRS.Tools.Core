@@ -32,7 +32,7 @@
             </summary>
             <param name="context"></param>
         </member>
-        <member name="M:HotRS.Tools.Core.ConsoleApp.ConsoleAppHelpers.CloseIfNotAborted(System.Int32)">
+        <member name="M:HotRS.Tools.Core.ConsoleApp.ConsoleAppHelpers.CloseIfNotAborted(System.Int32,System.ConsoleKey)">
             <summary>
             Pauses execution of the application for n seconds (default 60), to allow the user to abort the shutdown.
             Usage:
@@ -41,7 +41,8 @@
                 
             Execution of the code will continue after the method completes.
             </summary>
-            <param name="seconds"></param>
+            <param name="seconds">The number of seconds to wait</param>
+            <param name="targetKey">Optional. Wait for specific key. Default = ESC</param>
         </member>
         <member name="T:HotRS.Tools.Core.Exceptions.HotRSToolsException">
             <summary>
@@ -274,21 +275,6 @@
             Returns a int? with a value if TryParse is successful, otherwise a null int?
             </summary>
             <param name="s"></param>
-        </member>
-        <member name="M:HotRS.Tools.Core.Extensions.StringExtensions.AddCSVInjectionProtection(System.String)">
-            <summary>
-            Escapes the pipe character by prepending a backslash.
-            Useful for Excel file creation.
-            </summary>
-            <param name="source"></param>
-            <returns></returns>
-        </member>
-        <member name="M:HotRS.Tools.Core.Extensions.StringExtensions.RemoveCSVInjectionProtection(System.String)">
-            <summary>
-            Removes the CSV injection protection added by AddCSVInjectionProtection
-            </summary>
-            <param name="source"></param>
-            <returns></returns>
         </member>
         <member name="M:HotRS.Tools.Core.Extensions.StringExtensions.DateStringFromExcelDateString(System.String,System.String)">
             <summary>

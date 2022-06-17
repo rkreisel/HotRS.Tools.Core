@@ -22,21 +22,21 @@ public static class StringExtensionsTests
     [Test]
     public static void AddCSVInjectionTest()
     {
-        var actual = "something with a | in it |".AddCSVInjectionProtection();
+        var actual = "something with a | in it |".CSVInjectionProtection(StringExtensions.CSVInjectionProtectionAction.Protect);
         Assert.That(actual == @"something with a \| in it \|", Is.True);
     }
 
     [Test]
     public static void AddCSVInjectionTestNoDouble()
     {
-        var actual = "something with a \\| in it \\|".AddCSVInjectionProtection();
+        var actual = "something with a \\| in it \\|".CSVInjectionProtection(StringExtensions.CSVInjectionProtectionAction.Protect);
         Assert.That(actual == @"something with a \| in it \|", Is.True);
     }
 
     [Test]
     public static void AddCSVInjectionTestNoSingleOrDouble()
     {
-        var actual = "something with a | and a \\ in it".AddCSVInjectionProtection();
+        var actual = "something with a | and a \\ in it".CSVInjectionProtection(StringExtensions.CSVInjectionProtectionAction.Protect);
         Assert.That(actual == @"something with a \| and a \ in it", Is.True);
     }
 
@@ -44,35 +44,27 @@ public static class StringExtensionsTests
     public static void AddCSVInjectionTestNull()
     {
         string input = null;
-        var actual = input.AddCSVInjectionProtection();
+        var actual = input.CSVInjectionProtection(StringExtensions.CSVInjectionProtectionAction.Protect);
         Assert.IsNull(actual);
     }
 
     [Test]
     public static void RemoveCSVInjectionTest()
     {
-        var actual = @"something with a \| in it".RemoveCSVInjectionProtection();
+        var actual = @"something with a \| in it".CSVInjectionProtection(StringExtensions.CSVInjectionProtectionAction.Clear);
         Assert.That(actual == @"something with a | in it", Is.True);
     }
-
-    //[Test]
-    //public static void RemoveCSVInjectionTestBoth()
-    //{
-    //    var actual = @"something with a \| and a \\| in it".RemoveCSVInjectionProtection();
-    //    Assert.That(actual == @"something with a | in it", Is.True);
-    //}
 
     [Test]
     public static void RemoveCSVInjectionTestDoubles()
     {
-        var actual = @"something with a \| in it \|".RemoveCSVInjectionProtection();
+        var actual = @"something with a \| in it \|".CSVInjectionProtection(StringExtensions.CSVInjectionProtectionAction.Clear);
         Assert.That(actual == @"something with a | in it |", Is.True);
     }
 
     [Test]
     public static void DateStringFromExcelDateStringNull()
     {
-        var targetPattern = CultureInfo.CurrentCulture.DateTimeFormat.ShortDatePattern;
         string sourceDate = null;
         var actual = sourceDate.DateStringFromExcelDateString();
         Assert.IsNull (actual);

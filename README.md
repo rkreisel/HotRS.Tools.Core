@@ -7,8 +7,9 @@ https://github.com/rkreisel/HotRS.Tools.Core
 ## Categories
 
 1. Console Application Helper
-   CloseIfNotAborted(int seconds = 60) - closes the application after the defined number of seconds if the user does not press a key.
-
+   CloseIfNotAborted(int seconds = 60, ConsoleKey targetKey = ConsoleKey.Escape) - closes the application after the defined number of seconds if the user does not press the defined key.
+   Defaults to 60 seconds and Escape key.
+   
 2. Extensions
 
    1. Assembly
@@ -84,14 +85,15 @@ https://github.com/rkreisel/HotRS.Tools.Core
       ```c#
       ToNullableDateTime(this string s)
       ToNullableInt(this string s) 
-      AddCSVInjectionProtection(this string source)
-      RemoveCSVInjectionProtection(this string source)
+      Deleted! - AddCSVInjectionProtection(this string source)
+      Deleted! - RemoveCSVInjectionProtection(this string source)
+      CSVInjectionProtection(this string source, CSVInjectionProtectionAction action)
       DateStringFromExcelDateString(this string source, string format = null)
       AppendListToString<T>(this string source, List<T> list, string prefix = ", ")
       ```
-
       
-
+      
+      
    8. ValidationError
       An extensions that formats the error messages into a string using the specified delimiter and optional line feed.
 
