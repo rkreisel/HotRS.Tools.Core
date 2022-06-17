@@ -24,7 +24,7 @@ public static class StringExtensions
     /// </summary>
     /// <param name="source"></param>
     /// <returns></returns>
-    public static string AddCSVInjectionProtection(this string source)
+    private static string AddCSVInjectionProtection(this string source)
     {
         return source?.Replace("|", @"\|", StringComparison.InvariantCulture).Replace(@"\\", @"\", StringComparison.InvariantCulture);
     }
@@ -34,8 +34,15 @@ public static class StringExtensions
     /// </summary>
     /// <param name="source"></param>
     /// <returns></returns>
-    public static string RemoveCSVInjectionProtection(this string source) => source.Replace(@"\|", "|", StringComparison.InvariantCulture);
+    private static string RemoveCSVInjectionProtection(this string source) => source.Replace(@"\|", "|", StringComparison.InvariantCulture);
 
+    public static string CSVInjectionProtection(this string source, CSVInjectionProtectionAction action) => action switch
+    {
+        CSVInjectionProtectionAction.Clear => source.RemoveCSVInjectionProtection(),
+        CSVInjectionProtectionAction.Protect => source.AddCSVInjectionProtection(),
+            _ => string.Empty
+    };
+    
     /// <summary>
     /// Parses a string from an Excel format date string
     /// </summary>
@@ -78,4 +85,9 @@ public static class StringExtensions
         return $"{source}{string.Join(prefix, list.ToArray())}";
     }
 
+    public enum CSVInjectionProtectionAction
+    {
+        Protect,
+        Clear
+    }
 }

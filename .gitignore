@@ -25,3 +25,5 @@
 /RK.HotRS.Tools.Core.IntegrationTests/obj/RK.HotRS.Tools.Core.IntegrationTests.csproj.nuget.dgspec.json
 /RK.HotRS.Tools.Core.IntegrationTests/obj/project.nuget.cache
 /RK.HotRS.Tools.Core.IntegrationTests/obj/project.assets.json
+/HotRS.Tools.Core.IntegrationTsts/bin/Debug/net6.0
+/HotRS.Tools.Core.IntegrationTsts/obj

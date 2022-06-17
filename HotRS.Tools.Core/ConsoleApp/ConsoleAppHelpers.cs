@@ -11,29 +11,32 @@ public static class ConsoleAppHelpers
     ///     
     /// Execution of the code will continue after the method completes.
     /// </summary>
-    /// <param name="seconds"></param>
-    public static void CloseIfNotAborted(int seconds = 60)
+    /// <param name="seconds">The number of seconds to wait</param>
+    /// <param name="targetKey">Optional. Wait for specific key. Default = ESC</param>
+    public static void CloseIfNotAborted(int seconds = 60, ConsoleKey targetKey = ConsoleKey.Escape)
     {
-        System.Console.WriteLine($"Application will close in {seconds} seconds unless a key is pressed.");
+        Console.WriteLine($"Application will close in {seconds} seconds unless {targetKey} is pressed.");
         var waitTill = DateTime.Now.AddSeconds(seconds);
         var abortClose = false;
         while (DateTime.Now < waitTill)
         {
-            if (System.Console.KeyAvailable)
+            if (Console.KeyAvailable)
             {
-                abortClose = true;
-                waitTill = DateTime.Now.AddSeconds(-1);
+                abortClose = Console.ReadKey(true).Key.Equals(targetKey);
+                if (abortClose)
+                    waitTill = DateTime.Now.AddSeconds(-1);
             }
-            System.Threading.Thread.Sleep(1000);
+            Thread.Sleep(250);
             var remainingSeconds = (int)(waitTill - DateTime.Now).TotalSeconds;
-            System.Console.Write("{0,4}\b\b\b\b", remainingSeconds);
+            Console.Write("{0,4}\b\b\b\b", remainingSeconds);
         }
         if (abortClose)
         {
-            System.Console.WriteLine($"Shutdown aborted.{Environment.NewLine}When you have finished reviewing the messages press 'ESC' to close the application.");
-            while (System.Console.ReadKey().Key != ConsoleKey.Escape)
+            Console.WriteLine($"Shutdown aborted.{Environment.NewLine}When you have finished reviewing the messages press 'ESC' to close the application.");
+            while (Console.ReadKey().Key != ConsoleKey.Escape)
             {
             }
         }
     }
 }
+
