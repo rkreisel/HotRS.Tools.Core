@@ -6,9 +6,25 @@ https://github.com/rkreisel/HotRS.Tools.Core
 
 ## Categories
 
-1. Console Application Helper
-   CloseIfNotAborted(int seconds = 60, ConsoleKey targetKey = ConsoleKey.Escape) - closes the application after the defined number of seconds if the user does not press the defined key.
-   Defaults to 60 seconds and Escape key.
+1. Console Application Helper(s) 
+   
+   1. ```C#
+      CloseIfNotAborted(int seconds = 60, ConsoleKey targetKey = ConsoleKey.Escape)
+      ```
+   
+      Closes the application after the defined number of seconds if the user does not press the defined key.
+   
+   2. ```C#
+      GetSingleKeyInputOrQuit(ConsoleKey? quitIfKey = null, bool onlyNumeric = false, bool promptUser = true)
+      ```
+   
+      Retrieves the first key pressed on the keyboard.
+   
+      Optionally exits the application if developer defined key is pressed. 
+   
+      Optionally restricts input to digits.
+   
+      Optionally prompts user as appropriate.
    
 2. Extensions
 

@@ -38,5 +38,48 @@ public static class ConsoleAppHelpers
             }
         }
     }
+
+    /// <summary>
+    /// Retrieves the first key pressed on the keyboard, Optionally exits the application if developer defined key (default is ESC) is pressed.
+    /// </summary>
+    /// <param name="quitIfKey">Developer defined key that will cause the application to exit. Default is null which bypasses this feature.</param>
+    /// <param name="onlyNumeric">Only returns numeric values. Reprompts the user as needed.</param>
+    /// <param name="promptUser">Informs the user of the defined "Quit" key, and reprompts if an alphabetic character is press when onlyNumeric is true. [default = true]</param>
+    /// <returns>ConsoleKeyInfo for the key that was pressed.</returns>
+    public static ConsoleKeyInfo GetSingleKeyInputOrQuit(ConsoleKey? quitIfKey = null, bool onlyNumeric = false, bool promptUser = true)
+    {
+        if (quitIfKey.HasValue && promptUser)
+        {
+            Console.WriteLine($"Press {quitIfKey} to quit.");
+        }
+        var done = false;
+        var input = Console.ReadKey();
+        while (!done)
+        {
+            if (quitIfKey.HasValue && input.Key == quitIfKey.Value)
+                Environment.Exit(0);
+            if (onlyNumeric)
+            {
+                if (char.IsDigit(input.KeyChar))
+                {
+                    done = true;
+                }
+                else
+                {
+                    if (promptUser)
+                    {
+                        Console.Write($"{Environment.NewLine}Numeric input required! Try Again.{Environment.NewLine}");
+                    }
+                    input = Console.ReadKey();
+                }
+            }
+            else
+            {
+                done = true;
+            }
+        }
+        return input;
+    }
+
 }
 
