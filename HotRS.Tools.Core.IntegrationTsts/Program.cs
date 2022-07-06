@@ -13,9 +13,11 @@ Console.WriteLine("Press any regular keyboard character other than 'X ('X' will 
 result = ConsoleAppHelpers.GetSingleKeyInputOrQuit(quitIfKey: ConsoleKey.X);
 Console.WriteLine($"{Environment.NewLine}Returned:[{result.Key}]");
 Console.WriteLine("Try alpabetic characters first. It should not return until you hit a number.");
-Console.WriteLine($"{Environment.NewLine}Returned:[{result.Key}]");
 result = ConsoleAppHelpers.GetSingleKeyInputOrQuit(onlyNumeric: true);
-Console.WriteLine($"{Environment.NewLine}Returned: {result.Key}");
+Console.WriteLine($"{Environment.NewLine}Returned:[{result.Key}]");
+Console.WriteLine("Try alpabetic characters first. It should not return until you hit a number. And you should see the overridden prompt");
+result = ConsoleAppHelpers.GetSingleKeyInputOrQuit(onlyNumeric: true, errorPrompt: "I said, enter a NUMBER bozo!");
+Console.WriteLine($"{Environment.NewLine}Returned:[{result.Key}]");
 Console.WriteLine("Try alpabetic characters first. It should not return until you hit a number. But you shoud NOT see any prompts.");
 result = ConsoleAppHelpers.GetSingleKeyInputOrQuit(onlyNumeric: true, promptUser: false);
 Console.WriteLine($"{Environment.NewLine}Returned: {result.Key}");
