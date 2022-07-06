@@ -45,8 +45,9 @@ public static class ConsoleAppHelpers
     /// <param name="quitIfKey">Developer defined key that will cause the application to exit. Default is null which bypasses this feature.</param>
     /// <param name="onlyNumeric">Only returns numeric values. Reprompts the user as needed.</param>
     /// <param name="promptUser">Informs the user of the defined "Quit" key, and reprompts if an alphabetic character is press when onlyNumeric is true. [default = true]</param>
+    /// <param name="errorPrompt">The prompt to display on error. [Numeric input required! Try Again.]</param>
     /// <returns>ConsoleKeyInfo for the key that was pressed.</returns>
-    public static ConsoleKeyInfo GetSingleKeyInputOrQuit(ConsoleKey? quitIfKey = null, bool onlyNumeric = false, bool promptUser = true)
+    public static ConsoleKeyInfo GetSingleKeyInputOrQuit(ConsoleKey? quitIfKey = null, bool onlyNumeric = false, bool promptUser = true, string errorPrompt = "Numeric input required! Try Again.")
     {
         if (quitIfKey.HasValue && promptUser)
         {
@@ -68,7 +69,7 @@ public static class ConsoleAppHelpers
                 {
                     if (promptUser)
                     {
-                        Console.Write($"{Environment.NewLine}Numeric input required! Try Again.{Environment.NewLine}");
+                        Console.Write($"{Environment.NewLine}{errorPrompt}{Environment.NewLine}");
                     }
                     input = Console.ReadKey();
                 }

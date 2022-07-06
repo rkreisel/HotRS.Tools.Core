@@ -3,10 +3,11 @@
 	<PropertyGroup>
 		<TargetFramework>net6.0</TargetFramework>		
 		<GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-		<Version>1.0.2.0</Version>
+		<Version>1.0.2.1</Version>
 		<Authors>Randy Kreisel</Authors>
 		<Company>House on the Rock Software</Company>
 		<Description>Various tools,extensions, etc. for .Net Core Upgraded to .Net 6.
+1.0.2.1 - Added developer defined prompt on error GetSingleKeyInputOrQuit
 1.0.2.0 - Added GetSingleKeyInputOrQuit
 1.0.1.0 - BREAKING CHANGE:
 AddCSVInjectionProtection and RemoveCSVInjectionProtection have been combined into CSVInjectionProtection with an "action" parameter 

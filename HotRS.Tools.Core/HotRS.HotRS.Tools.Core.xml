@@ -44,13 +44,14 @@
             <param name="seconds">The number of seconds to wait</param>
             <param name="targetKey">Optional. Wait for specific key. Default = ESC</param>
         </member>
-        <member name="M:HotRS.Tools.Core.ConsoleApp.ConsoleAppHelpers.GetSingleKeyInputOrQuit(System.Nullable{System.ConsoleKey},System.Boolean,System.Boolean)">
+        <member name="M:HotRS.Tools.Core.ConsoleApp.ConsoleAppHelpers.GetSingleKeyInputOrQuit(System.Nullable{System.ConsoleKey},System.Boolean,System.Boolean,System.String)">
             <summary>
             Retrieves the first key pressed on the keyboard, Optionally exits the application if developer defined key (default is ESC) is pressed.
             </summary>
             <param name="quitIfKey">Developer defined key that will cause the application to exit. Default is null which bypasses this feature.</param>
             <param name="onlyNumeric">Only returns numeric values. Reprompts the user as needed.</param>
             <param name="promptUser">Informs the user of the defined "Quit" key, and reprompts if an alphabetic character is press when onlyNumeric is true. [default = true]</param>
+            <param name="errorPrompt">The prompt to display on error. [Numeric input required! Try Again.]</param>
             <returns>ConsoleKeyInfo for the key that was pressed.</returns>
         </member>
         <member name="T:HotRS.Tools.Core.Exceptions.HotRSToolsException">
