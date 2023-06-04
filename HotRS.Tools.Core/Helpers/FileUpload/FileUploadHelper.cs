@@ -115,10 +115,8 @@ public class FileUploadHelper : IFileUploadHelper
         {
             throw new ApplicationException($"LandingPath {landingPath} not found.");
         }
-        using (var outputFile = File.Create(Path.Combine(landingPath, file.FileName)))
-        {
-            await file.OpenReadStream().CopyToAsync(outputFile).ConfigureAwait(false);
-        }
+        using var outputFile = File.Create(Path.Combine(landingPath, file.FileName));
+        await file.OpenReadStream().CopyToAsync(outputFile).ConfigureAwait(false);
         return true;
     }
 
