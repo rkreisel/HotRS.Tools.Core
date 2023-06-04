@@ -42,6 +42,7 @@ Also enhanced CloseIfNotAborted to accept developer defined response key.</Descr
 	  <Compile Remove="Extensions\LinqExtensions.cs" />
 	  <Compile Remove="Helpers\HttpRequestHelper\HttpRequestFactory.cs" />
 	  <Compile Remove="Helpers\HttpRequestHelper\IHttpRequestFactory.cs" />
+	  <Compile Remove="Helpers\Testing\HTTPMockerJson.cs" />
 	</ItemGroup>
 	
 	<ItemGroup>

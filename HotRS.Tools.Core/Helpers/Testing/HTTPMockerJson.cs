@@ -19,6 +19,7 @@ public static class HTTPMockerJson
     /// Second, create an instance of the HTTPMockerJson class that will return the desire string of JSON data.
     /// var mockedResult = new HTTPMickerJson(data) - optionally provide nonsuccess status codes and/or a different url)
     /// Note that providing a different url would only be useful if you were going to make an Assertion about the returned url.
+    /// Third, use the mocked instance when creating the instance of the class under test.
     /// <returns>HTTPClient which will, when executed, returns the string content of the json object.</returns>
 #pragma warning disable CS1998 // Async method lacks 'await' operators and will run synchronously
     public static async Task<HttpClient> HTTPMockedClient(
