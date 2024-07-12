@@ -43,6 +43,7 @@ Also enhanced CloseIfNotAborted to accept developer defined response key.</Descr
 	  <Compile Remove="Extensions\LinqExtensions.cs" />
 	  <Compile Remove="Helpers\HttpRequestHelper\HttpRequestFactory.cs" />
 	  <Compile Remove="Helpers\HttpRequestHelper\IHttpRequestFactory.cs" />
+	  <Compile Remove="Helpers\Testing\HTTPMockerJson.cs" />
 	</ItemGroup>
 	
 	<ItemGroup>
@@ -55,6 +56,7 @@ Also enhanced CloseIfNotAborted to accept developer defined response key.</Descr
 
 	<ItemGroup>
 		<PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="6.0.0" />
+		<PackageReference Include="Moq" Version="4.18.4" />
 		<PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
 		<PackageReference Include="Swashbuckle.AspNetCore.Swagger" Version="6.3.1" />
 		<PackageReference Include="Swashbuckle.AspNetCore.SwaggerGen" Version="6.3.1" />

@@ -942,5 +942,22 @@
             <param name="xml">The string version of he XML</param>
             <returns>An XML object</returns>
         </member>
+        <member name="M:SmartScanUITests.Helpers.HTTPMockerJson.HTTPMockedClient(System.Object,System.Net.HttpStatusCode,System.String,System.String)">
+            <summary>
+            Helper method to create an HTTPClient with a predefined JSON result
+            </summary>
+            <param name="jsonContentToReturn">The HTTPStatusCode to return. Defaults to Ok</param>
+            <param name="returnStatus">The desired data to return.</param>
+            <param name="reasonMessage">The failure reason if mocking a failed request.</param>
+            <param name="baseAddress"></param>
+            Usage:
+            First, create an object containing the data you wish to return.
+            Note that the object must be JSON serializable.
+            var data = new Whatever {Propert1 = "Hello", Property3 = "World"};
+            Second, create an instance of the HTTPMockerJson class that will return the desire string of JSON data.
+            var mockedResult = new HTTPMickerJson(data) - optionally provide nonsuccess status codes and/or a different url)
+            Note that providing a different url would only be useful if you were going to make an Assertion about the returned url.
+            <returns>HTTPClient which will, when executed, returns the string content of the json object.</returns>
+        </member>
     </members>
 </doc>
