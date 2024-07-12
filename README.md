@@ -15,7 +15,7 @@ https://github.com/rkreisel/HotRS.Tools.Core
       Closes the application after the defined number of seconds if the user does not press the defined key.
    
    2. ```C#
-      GetSingleKeyInputOrQuit(ConsoleKey? quitIfKey = null, bool onlyNumeric = false, bool promptUser = true)
+      ConsoleKeyInfo GetSingleKeyInputOrQuit(ConsoleKey? quitIfKey = null, bool onlyNumeric = false, bool promptUser = true, string errorPrompt = "Numeric input required! Try Again.")
       ```
    
       Retrieves the first key pressed on the keyboard.
