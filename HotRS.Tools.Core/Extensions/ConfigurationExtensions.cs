@@ -1,4 +1,6 @@
-﻿namespace HotRS.Tools.Core.Extensions;
+﻿using Microsoft.Extensions.Configuration.Json;
+
+namespace HotRS.Tools.Core.Extensions;
 
 /// <summary>
 /// Three extension methods to manage a populated Configuration instance.
@@ -154,77 +156,89 @@ public static class ConfigurationExtensions
     #region Dump
     public static IDictionary<string, string> Dump(this IConfiguration source)
     {
-        ArgumentNullException.ThrowIfNull(source, nameof(source));
-        var result = new Dictionary<string, string>();
-        var configProviders = source.GetType().GetProperty("Providers").GetValue(source) as List<IConfigurationProvider>;
-        for (int ndx = 0; ndx < configProviders.Count; ndx++)
-        {
-            if (configProviders[ndx] is ChainedConfigurationProvider cp)
-            {
-                var configType = cp.GetType().GetField("_config", BindingFlags.Instance | BindingFlags.NonPublic);
-                var configs = (ConfigurationRoot)configType.GetValue(cp);
-                foreach (var config in configs.Providers)
-                {
-                    if (config is ChainedConfigurationProvider provider)
-                    {
-                        result.MergeDictionary(HandleChainedProvider(provider));
-                    }
-                    else
-                    {
-                        var tmp = config.AsProvider();
-                        if (tmp != null)
-                        {
-                            result.MergeDictionary(ParseProvider(tmp));
-                        }
-                    }
-                }
-            }
-            else
-            {
-                if (configProviders[ndx].GetType().GetProperty("Source") != null)
-                {
-                    var tmp = configProviders[ndx].AsProvider();
-                    if (tmp != null)
-                    {
-                        result.MergeDictionary(ParseProvider(tmp));
-                    }
-                }
-            }
-        }
-        return result;
-    }
+        ArgumentNullException.ThrowIfNull(source);
 
-    private static IDictionary<string, string> HandleChainedProvider(ChainedConfigurationProvider provider)
-    {
-        var result = new Dictionary<string, string>();
-        var cp = (ChainedConfigurationProvider) provider;
-        var configType = cp.GetType().GetField("_config", BindingFlags.Instance | BindingFlags.NonPublic);
-        var configs = (ConfigurationRoot)configType.GetValue(cp);
-        foreach (var config in configs.Providers)
-        {
-            if (config is ChainedConfigurationProvider provider1) //handle multiple chained configurations with a resursive call
-            {
-                result.MergeDictionary(HandleChainedProvider(provider1));
-            }
-            else
-            {
-                var tmp = config.AsProvider();
-                if (tmp != null)
-                {
-                    var workingDictionary = ParseProvider(tmp);
-                    result.MergeDictionary(workingDictionary);
-                }
-            }
-        }
-        return result;
+        return source
+            .AsEnumerable()
+            .Where(x => x.Value != null)
+            .ToDictionary(
+                x => x.Key,
+                x => x.Value!,
+                StringComparer.OrdinalIgnoreCase);
     }
+    //public static IDictionary<string, string> Dump(this IConfiguration source)
+    //{
+    //    ArgumentNullException.ThrowIfNull(source, nameof(source));
+    //    var result = new Dictionary<string, string>();
+    //    var configProviders = source.GetType().GetProperty("Providers").GetValue(source) as List<IConfigurationProvider>;
+    //    for (int ndx = 0; ndx < configProviders.Count; ndx++)
+    //    {
+    //        if (configProviders[ndx] is ChainedConfigurationProvider cp)
+    //        {
+    //            var configType = cp.GetType().GetField("_config", BindingFlags.Instance | BindingFlags.NonPublic);
+    //            var configs = (ConfigurationRoot)configType.GetValue(cp);
+    //            foreach (var config in configs.Providers)
+    //            {
+    //                if (config is ChainedConfigurationProvider provider)
+    //                {
+    //                    result.MergeDictionary(HandleChainedProvider(provider));
+    //                }
+    //                else
+    //                {
+    //                    var tmp = config.AsProvider();
+    //                    if (tmp != null)
+    //                    {
+    //                        result.MergeDictionary(ParseProvider(tmp));
+    //                    }
+    //                }
+    //            }
+    //        }
+    //        else
+    //        {
+    //            if (configProviders[ndx].GetType().GetProperty("Source") != null)
+    //            {
+    //                var tmp = configProviders[ndx].AsProvider();
+    //                if (tmp != null)
+    //                {
+    //                    result.MergeDictionary(ParseProvider(tmp));
+    //                }
+    //            }
+    //        }
+    //    }
+    //    return result;
+    //}
+
+    //private static IDictionary<string, string> HandleChainedProvider(ChainedConfigurationProvider provider)
+    //{
+    //    var result = new Dictionary<string, string>();
+    //    var cp = (ChainedConfigurationProvider) provider;
+    //    var configType = cp.GetType().GetField("_config", BindingFlags.Instance | BindingFlags.NonPublic);
+    //    var configs = (ConfigurationRoot)configType.GetValue(cp);
+    //    foreach (var config in configs.Providers)
+    //    {
+    //        if (config is ChainedConfigurationProvider provider1) //handle multiple chained configurations with a resursive call
+    //        {
+    //            result.MergeDictionary(HandleChainedProvider(provider1));
+    //        }
+    //        else
+    //        {
+    //            var tmp = config.AsProvider();
+    //            if (tmp != null)
+    //            {
+    //                var workingDictionary = ParseProvider(tmp);
+    //                result.MergeDictionary(workingDictionary);
+    //            }
+    //        }
+    //    }
+    //    return result;
+    //}
 
     //[SuppressMessage("Design", "CA1031:Do not catch general exception types", Justification = "There is nothing to do if the type cannot be converted. The calling method must handle a null return.")]
-    private static ConfigurationProvider AsProvider(this IConfigurationProvider sourceConfig)
+    private static IConfigurationProvider AsProvider(this IConfigurationProvider sourceConfig)
     {
         try
         {                
-            return (ConfigurationProvider)sourceConfig;
+            return (IConfigurationProvider)sourceConfig;
         }
         catch 
         {

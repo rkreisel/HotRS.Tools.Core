@@ -23,7 +23,7 @@ public static class MultipartRequestHelper
             throw new ArgumentNullException(nameof(contentType));
         }
 
-        var boundary = HeaderUtilities.RemoveQuotes(contentType.Boundary).ToString();
+        var boundary = MNHH.HeaderUtilities.RemoveQuotes(contentType.Boundary).ToString();
         if (string.IsNullOrWhiteSpace(boundary))
         {
             throw new HotRSToolsException(Resources.MISSINGCONTETETYPEBOUNDARY);
