@@ -37,13 +37,13 @@ public class HotRSToolsException : Exception
 	public HotRSToolsException(string message, Exception innerException)
 		: base(message, innerException) { }
 
-	/// <summary>
-	/// Clone of Exception
-	/// </summary>
-	/// <param name="info"></param>
-	/// <param name="context"></param>
-	public HotRSToolsException(SerializationInfo info, StreamingContext context)
-		: base(info, context) { }
+	///// <summary>
+	///// Clone of Exception
+	///// </summary>
+	///// <param name="info"></param>
+	///// <param name="context"></param>
+	//public HotRSToolsException(SerializationInfo info, StreamingContext context)
+	//	: base(info, context) { }
 
 	/// <summary>
 	/// Clone of Exception, adding Method

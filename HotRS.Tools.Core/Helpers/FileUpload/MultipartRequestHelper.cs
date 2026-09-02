@@ -19,7 +19,7 @@ public static class MultipartRequestHelper
     public static string GetBoundary(MNHH.MediaTypeHeaderValue contentType, int lengthLimit)
     {
         if (contentType == null) { throw new ArgumentNullException(nameof(contentType)); }
-        var boundary = HeaderUtilities.RemoveQuotes(contentType.Boundary).ToString(); if (string.IsNullOrWhiteSpace(boundary))
+        var boundary = MNHH.HeaderUtilities.RemoveQuotes(contentType.Boundary).ToString(); if (string.IsNullOrWhiteSpace(boundary))
         {
             throw new InvalidDataException(Resources.MISSINGCONTETETYPEBOUNDARY);
         }
