@@ -47,13 +47,6 @@
 	</ItemGroup>
 	
 	<ItemGroup>
-	  <Compile Remove="Attributes\DisableFormValueModelBindingAttribute.cs" />
-	  <Compile Remove="Extensions\LinqExtensions.cs" />
-	  <Compile Remove="Helpers\HttpRequestHelper\HttpRequestFactory.cs" />
-	  <Compile Remove="Helpers\HttpRequestHelper\IHttpRequestFactory.cs" />
-	</ItemGroup>
-	
-	<ItemGroup>
 	  <None Include="..\.editorconfig" Link=".editorconfig" />
 	  <None Include="..\README.md">
 	    <Pack>True</Pack>
@@ -68,8 +61,6 @@
 		<PackageReference Include="Microsoft.Extensions.Configuration.Json" Version="10.0.11" />
 		<PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="10.0.11" />
 		<PackageReference Include="Newtonsoft.Json" Version="13.0.4" />
-		<!--<PackageReference Include="Swashbuckle.AspNetCore.Swagger" Version="6.3.1" />
-		<PackageReference Include="Swashbuckle.AspNetCore.SwaggerGen" Version="6.3.1" />-->
 	</ItemGroup>
 
 	<ItemGroup>
