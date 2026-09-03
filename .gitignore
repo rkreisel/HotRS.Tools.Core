@@ -29,3 +29,8 @@
 /HotRS.Tools.Core.IntegrationTsts/obj
 /.zzzvs
 /HotRS.Tools.Core.IntegrationTsts/bin/Debug/net10.0
+/HotRS.Tools.Core.IntegrationTsts/bin/Release/net10.0/HotRS.Tools.Core.dll
+/HotRS.Tools.Core.IntegrationTsts/bin/Release/net10.0/HotRS.Tools.Core.IntegrationTsts.exe
+/HotRS.Tools.Core.IntegrationTsts/bin/Release/net10.0/HotRS.Tools.Core.pdb
+/HotRS.Tools.Core.IntegrationTsts/bin/Release/net10.0/HotRS.Tools.Core.IntegrationTsts.pdb
+/HotRS.Tools.Core.IntegrationTsts/bin/Release/net10.0/HotRS.Tools.Core.IntegrationTsts.dll
