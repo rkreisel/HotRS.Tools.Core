@@ -305,6 +305,12 @@
             Part of the helper class for the file uploading
             </summary>
         </member>
+        <member name="M:HotRS.Tools.Core.Helpers.FileUpload.FileUploadHelper.ValidateLogsFolderExtension(System.String,System.String)">
+            <summary>
+            Rejects uploads into a "Logs" destination folder unless the file extension is one of
+            .txt, .log, or .zip.
+            </summary>
+        </member>
         <member name="M:HotRS.Tools.Core.Helpers.FileUpload.FileUploadHelper.UploadAsync(Microsoft.AspNetCore.Http.HttpContext,Microsoft.AspNetCore.Http.Features.FormOptions,System.String)">
             <summary>
             Uploads a file contained in the HTTP message.

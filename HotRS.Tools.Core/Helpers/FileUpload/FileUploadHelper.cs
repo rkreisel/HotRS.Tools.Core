@@ -9,6 +9,27 @@ namespace HotRS.Tools.Core.Helpers.FileUpload;
 [ExcludeFromCodeCoverage]
 public class FileUploadHelper : IFileUploadHelper
 {
+    private static readonly string[] LogsFolderAllowedExtensions = { ".txt", ".log", ".zip" };
+
+    /// <summary>
+    /// Rejects uploads into a "Logs" destination folder unless the file extension is one of
+    /// .txt, .log, or .zip.
+    /// </summary>
+    private static void ValidateLogsFolderExtension(string destinationPath, string fileName)
+    {
+        var folderName = Path.GetFileName(Path.TrimEndingDirectorySeparator(destinationPath));
+        if (!string.Equals(folderName, "Logs", StringComparison.OrdinalIgnoreCase))
+        {
+            return;
+        }
+
+        var extension = Path.GetExtension(fileName);
+        if (!LogsFolderAllowedExtensions.Contains(extension, StringComparer.OrdinalIgnoreCase))
+        {
+            throw new HotRSToolsException($"Files uploaded to the Logs folder must have one of the following extensions: {string.Join(", ", LogsFolderAllowedExtensions)}.");
+        }
+    }
+
     /// <summary>
     /// Uploads a file contained in the HTTP message.
     /// This helper was created using input from <para>&#160;</para>
@@ -58,6 +79,7 @@ public class FileUploadHelper : IFileUploadHelper
                     {
                         throw new InvalidDataException(Resources.FILENAMENOTINCONTENTDISPOSITION);
                     }
+                    ValidateLogsFolderExtension(fileStorePath, filename);
                     targetFilePath = Path.Combine(fileStorePath, filename);
                     using var targetStream = System.IO.File.Create(targetFilePath);
                     await section.Body.CopyToAsync(targetStream).ConfigureAwait(false);
@@ -116,6 +138,7 @@ public class FileUploadHelper : IFileUploadHelper
         {
             throw new ApplicationException($"LandingPath {landingPath} not found.");
         }
+        ValidateLogsFolderExtension(landingPath, file.FileName);
         using (var outputFile = File.Create(Path.Combine(landingPath, file.FileName)))
         {
             await file.OpenReadStream().CopyToAsync(outputFile).ConfigureAwait(false);

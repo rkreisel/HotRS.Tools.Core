@@ -3,11 +3,12 @@
 	<PropertyGroup>
 		<TargetFramework>net10.0</TargetFramework>		
 		<GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-		<Version>1.1.0.1</Version>
+		<Version>1.1.1.1</Version>
 		<Authors>Randy Kreisel</Authors>
 		<Company>House on the Rock Software</Company>
 		<Description>
 		  Various tools,extensions, etc. for .Net Core Upgraded to .Net 10.on 20260902
+		  1.1.1.0 - Added restriction on file upload to only allow certain file types and sizes.
 		  1.1.0.0 - Moved to .Net 10 - removed Swagger references and DisableFormValueModelBindingAttribute
 		  1.0.2.1 - Added developer defined prompt on error GetSingleKeyInputOrQuit
 		  1.0.2.0 - Added GetSingleKeyInputOrQuit
